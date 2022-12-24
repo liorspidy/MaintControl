@@ -4,12 +4,12 @@ import './Main.css';
 const Main = (props) => {
   return (
     <div>
-      <h1 className="title">Welcome to MainControl</h1>
-      <button className="loginButton">
-        <Link className="loginLink" to="login">
-          Login Page
-        </Link>
-      </button>
+      <h1 className="title">Welcome to MaintControl</h1>
+      {/* <button className="loginButton"> */}
+      <Link className="loginButton" to="login">
+        Login Page
+      </Link>
+      {/* </button> */}
     </div>
   );
 };

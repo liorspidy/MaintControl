@@ -9,11 +9,8 @@
     height: 3rem;
     border-radius: 5px;
     margin-top: 1rem;
-}
-
-.loginLink {
     text-decoration: none;
-    color: white;
+    padding: 0.6rem;
 }
 
 .title {
