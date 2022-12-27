@@ -15,5 +15,12 @@
 
 .title {
     margin-top: 5rem;
-    font-size: 5rem;
+    font-size: 4.5rem;
+}
+
+.mainP {
+    text-align: center;
+    width: 50rem;
+    margin: 50px auto;
+    font-size: 1.2rem;
 }

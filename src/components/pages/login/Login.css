@@ -72,6 +72,11 @@
     height: 2rem;
     border-radius: 5px;
     margin-top: 1rem;
+    cursor: pointer;
+}
+
+.loginButton:hover {
+    background-color: rgb(94, 94, 94);
 }
 
 .loginButton:active {
