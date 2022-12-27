@@ -2,6 +2,7 @@ import { useState } from 'react';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import './Login.css';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -37,24 +38,24 @@ const Login = () => {
 
   return (
     <div className="loginBox">
-      <form onSubmit={handleSubmit} className="form">
-        <label className="label" htmlFor="username">
+      <form onSubmit={handleSubmit} className="loginForm">
+        <label className="loginLabel" htmlFor="username">
           Username:
           <input
             id="username"
-            className="input"
+            className="loginInput"
             type="text"
             value={username}
             onChange={handleUsernameChange}
           />
         </label>
         <br />
-        <label className="label" htmlFor="pass">
+        <label className="loginLabel" htmlFor="pass">
           Password:
           <div className="passContent">
             <input
               id="pass"
-              className="input"
+              className="loginInput"
               type={showPassword ? 'text' : 'password'} // show text if showPassword is true, otherwise show password
               value={password}
               onChange={handlePasswordChange}
@@ -70,9 +71,9 @@ const Login = () => {
             )}
           </div>
         </label>
-        {error && <div className="error">{error}</div>}
+        {error && <div className="loginError">{error}</div>}
         <br />
-        <a href="/forgot">Forgot my password or username</a>
+        <Link to="/forgot">Forgot my password or username</Link>
         <br />
         <button className="loginButton" type="submit">
           Login

@@ -1,4 +1,4 @@
-.loginBox {
+.forgotBox {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -10,23 +10,22 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.loginForm {
+.forgotForm {
     margin: 0 auto;
     width: 50%;
     margin: 2rem auto;
     min-width: 20rem;
 }
 
-.loginLabel {
+.forgotLabel {
     font-size: 1.4rem;
     font-weight: bold;
     display: block;
     padding: 0 1rem;
     margin-bottom: 0.8rem;
-
 }
 
-.loginInput {
+.forgotInput {
     display: block;
     min-width: 100%;
     border: 1px solid #ccc;
@@ -39,51 +38,31 @@
     text-align: center;
 }
 
-.passContent {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    text-align: center;
-}
+.forgotResetButton {
 
-.eye {
-    margin-top: 0.8rem;
-    margin-left: 0.8rem;
-}
-
-.eyeOff {
-    margin-top: 0.8rem;
-    margin-left: 0.8rem;
-}
-
-.loginError {
-    color: red;
-    font-weight: bold;
-}
-
-.loginButton {
+    background-color: #4caf50;
     border: none;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
-    background-color: rgb(131, 131, 131);
     color: white;
     font-weight: bold;
     font-size: 1.2rem;
-    width: 5rem;
-    height: 2rem;
+    height: 3rem;
     border-radius: 5px;
     margin-top: 1rem;
 }
 
-.loginButton:active {
-    animation: 0.05s clicked forwards ease-in-out;
+.forgotResetButton:hover {
+    background-color: #3d8b40;
 }
 
-@keyframes clicked {
-    0% {
-        scale: 1;
-    }
+.forgotError {
+    margin-top: 10px;
+    color: red;
+    font-size: 14px;
+}
 
-    100% {
-        scale: 0.90;
-    }
+.forgotSuccess {
+    margin-top: 20px;
+    color: green;
+    font-size: 14px;
 }
