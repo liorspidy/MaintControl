@@ -13,14 +13,28 @@
     padding: 0.6rem;
 }
 
+.mainBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0 5rem;
+}
+
 .title {
     margin-top: 5rem;
     font-size: 4.5rem;
 }
 
+@media (max-width: 990px) {
+    .title {
+        font-size: 3rem;
+    }
+}
+
 .mainP {
     text-align: center;
-    width: 50rem;
+    max-width: 50rem;
     margin: 50px auto;
     font-size: 1.2rem;
 }
