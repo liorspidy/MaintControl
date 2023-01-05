@@ -25,25 +25,23 @@ const Header = (props) => {
         <MenuIcon className="Icon" />
         <div className="searchBarContent">
           <SearchIcon
-            className="Icon"
+            className="Icon searchIcon"
             onClick={(event) =>
               event.currentTarget.nextSibling.firstChild.focus()
             }
           />
-          <div className="searchBarContainer">
-            <TextField
-              className="searchBar"
-              id="outlined-basic"
-              label="Search"
-              variant="filled"
-              size="small"
-            />
-          </div>
+          <TextField
+            className="searchBar"
+            id="outlined-basic"
+            label="Search"
+            variant="filled"
+            size="small"
+          />
         </div>
       </div>
       <div className="pageName">{pageNameHandler(props.location)}</div>
       <div className="logoBox">
-        <Link to="/" className="logoLink">
+        <Link to="/">
           <img className="logo" src={Logo} alt="logo" />
         </Link>
       </div>

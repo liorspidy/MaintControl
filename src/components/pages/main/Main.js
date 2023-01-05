@@ -3,7 +3,7 @@ import './Main.css';
 
 const Main = (props) => {
   return (
-    <div className="mainBox">
+    <div>
       <h1 className="title">Welcome to MaintControl</h1>
       <div className="mainP">
         <p>
