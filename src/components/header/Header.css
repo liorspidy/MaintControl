@@ -2,18 +2,27 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 7rem;
     background-color: lightblue;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    width: 100%;
+    /* width of the header the width of the page at all time */
+    height: 7rem;
 }
 
 .logoBox {
     width: 25rem;
     height: 100%;
     display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.logoBox a {
+    display: flex;
+    width: 12rem;
+    height: 5rem;
     justify-content: center;
     align-items: center;
-    margin-left: 1rem;
 }
 
 .logo {
@@ -51,6 +60,7 @@
     background-color: white;
     padding: 0.25rem;
     margin-right: 1.5rem;
+    cursor: pointer;
 }
 
 .Icon:hover {
@@ -67,4 +77,51 @@
 
 .searchBar {
     width: 15rem;
+}
+
+@media (max-width: 900px) {
+    .header {
+        width: 100%;
+        height: auto;
+        /* flex-wrap: wrap-reverse; */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    /* .logo {
+        display: none;
+    } */
+
+    .logoBox {
+        scale: 1;
+        margin: 0.5rem 0;
+    }
+
+    .logoBox a {
+        display: flex;
+        width: 12rem;
+        height: 5rem;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .pageName {
+        font-size: 1.5rem;
+        margin: 1rem 0;
+        width: 20rem;
+    }
+
+    .searchBar {
+        width: 80%;
+    }
+
+    .Icon {
+        margin: 0.7rem;
+        scale: 1.5;
+    }
+
+    .Icon:hover {
+        scale: 1.7;
+    }
 }

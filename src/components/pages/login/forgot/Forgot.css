@@ -67,3 +67,9 @@
     color: green;
     font-size: 14px;
 }
+
+@media screen and (max-width: 900px) {
+    .forgotBox {
+        width: 80%;
+    }
+}

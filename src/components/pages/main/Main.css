@@ -14,13 +14,15 @@
 }
 
 .title {
-    margin-top: 5rem;
     font-size: 4.5rem;
+    max-width: 90%;
+    margin: 5rem auto;
 }
 
-.mainP {
+.mainP p {
     text-align: center;
     width: 50rem;
     margin: 50px auto;
     font-size: 1.2rem;
+    max-width: 90%;
 }

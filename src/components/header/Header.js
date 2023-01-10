@@ -4,6 +4,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import TextField from '@mui/material/TextField';
 import Logo from '../../images/logo.png';
 import { Link } from 'react-router-dom';
+import AccountMenu from '../menuComp/AccountMenu';
 
 const Header = (props) => {
   const pageNameHandler = (pageName) => {
@@ -14,6 +15,8 @@ const Header = (props) => {
         return 'Main Page';
       case 'forgot':
         return 'Password Reset';
+      case 'guides':
+        return 'Guides Page';
       default:
         return 'Unknown Page';
     }
@@ -22,7 +25,7 @@ const Header = (props) => {
   return (
     <div className="header">
       <div className="buttonsContent">
-        <MenuIcon className="Icon" />
+        <AccountMenu icon={MenuIcon} />
         <div className="searchBarContent">
           <SearchIcon
             className="Icon searchIcon"

@@ -1,4 +1,7 @@
 import { Link } from 'react-router-dom';
+import AddIcon from '@mui/icons-material/Add';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 import './Guides.css';
 
 const items = [
@@ -24,12 +27,26 @@ const Guides = () => {
       onClick={() => <Link to={`/guides/${item.id}`} id={item.id} />}
     >
       <h1>{item.name}</h1>
-      {/* <img className="guidebookIcon" src={GuideBook} alt="guidebook"/> */}
       <p>{item.description}</p>
     </div>
   ));
 
-  return <div className="items">{guidesList}</div>;
+  return (
+    <div>
+      <div className="guideButtons">
+        <div className="guideBtn">
+          <AddIcon className="addIcon" />
+        </div>
+        <div className="guideBtn">
+          <EditIcon className="editIcon" />
+        </div>
+        <div className="guideBtn">
+          <DeleteIcon className="deleteIcon" />
+        </div>
+      </div>
+      <div className="items">{guidesList}</div>
+    </div>
+  );
 };
 
 export default Guides;
