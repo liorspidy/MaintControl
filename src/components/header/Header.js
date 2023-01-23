@@ -8,6 +8,7 @@ import AccountMenu from '../menuComp/AccountMenu';
 
 const Header = (props) => {
   const pageNameHandler = (pageName) => {
+    console.log(pageName);
     switch (pageName) {
       case 'login':
         return 'Login Page';
@@ -17,6 +18,10 @@ const Header = (props) => {
         return 'Password Reset';
       case 'guides':
         return 'Guides Page';
+      case 'guides/addGuide':
+        return 'Add A Guide';
+      case 'guides/editGuide/*':
+        return 'Edit A Guide';
       default:
         return 'Unknown Page';
     }

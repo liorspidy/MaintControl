@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "name": "guide 1",
+        "description": "This is guide 1",
+        "file": ""
+    },
+    {
+        "id": 2,
+        "name": "guide 2",
+        "description": "This is guide 2",
+        "file": ""
+    },
+    {
+        "id": 3,
+        "name": "guide 3",
+        "description": "This is guide 3",
+        "file": ""
+    }
+]

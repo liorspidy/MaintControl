@@ -1,26 +1,31 @@
-import './EditGuide.css';
+import { useParams } from 'react-router-dom';
 import { useState } from 'react';
+import items from '../guides.json';
+import './EditGuide.css';
 
-const EditGuide = () =>
-{
-    const [guideName, setGuideName] = useState('');
-    const [guideDetails, setGuideDetails] = useState('');
-    const [guideFile, setGuideFile] = useState('');
-    const [error, setError] = useState('');
+const EditGuide = () => {
+  const { guideId } = useParams();
+  const guide = items.find((item) => item.id === parseInt(guideId));
+  const [guideName, setGuideName] = useState(guide ? guide.name : '');
+  const [guideDetails, setGuideDetails] = useState(
+    guide ? guide.description : ''
+  );
+  const [guideFile, setGuideFile] = useState('');
+  const [error, setError] = useState('');
 
-    const handleGuideNameChange = (event) => {
-        setGuideName(event.target.value);
-      };
-    
-    const handleGuideDetailsChange = (event) => {
-        setGuideDetails(event.target.value);
-      };
+  const handleGuideNameChange = (event) => {
+    setGuideName(event.target.value);
+  };
 
-    const handleGuideFileChange = (event) => {
-        setGuideFile(event.target.value);
-     };
+  const handleGuideDetailsChange = (event) => {
+    setGuideDetails(event.target.value);
+  };
 
-    const handleSubmit = (event) => {
+  const handleGuideFileChange = (event) => {
+    setGuideFile(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
     event.preventDefault();
     if (guideName.length === 0 && guideDetails.length === 0) {
       setError("Must enter Guide's name and details");
@@ -33,50 +38,47 @@ const EditGuide = () =>
       setError('');
     }
   };
-    
-   return (
-  <div className="addGuideBox">
-    <form onSubmit={handleSubmit} className="addGuideForm">
-      <label className="addGuideLabel" htmlFor="guideName">
-        Guide's name:
-        <input
-          id="guideName"
-          className="addGuideInput"
-          type="text"
-          value={guideName}
-          onChange={handleGuideNameChange}
-        />
-      </label>
-      <br />
-      <label className="addGuideLabel" htmlFor="guideDetails">
-        Guide's details:
+
+  return (
+    <div className="addGuideBox">
+      <form onSubmit={handleSubmit} className="addGuideForm">
+        <label className="addGuideLabel" htmlFor="guideName">
+          Guide's name:
+          <input
+            id="guideName"
+            className="addGuideInput"
+            type="text"
+            value={guideName}
+            onChange={handleGuideNameChange}
+          />
+        </label>
+        <label className="addGuideLabel" htmlFor="guideDetails">
+          Guide's details:
           <input
             id="guideDetails"
             className="addGuideInput"
+            type="text"
             value={guideDetails}
             onChange={handleGuideDetailsChange}
           />
-      </label>
-      <br />
-      <label className="addGuideLabel" htmlFor="guideFile">
-        Insert file here: 
-        
-          <input type="file" 
-             id="guideFile"
-             className="guideFileInput"
-             value={guideFile}
-            onChange={handleGuideFileChange} 
+        </label>
+        <label className="addGuideLabel" htmlFor="guideFile">
+          Guide's file:
+          <input
+            id="guideFile"
+            className="guideFileInput"
+            type="file"
+            value={guideFile}
+            onChange={handleGuideFileChange}
           />
-      </label>
-      
-      {error && <div className="addGuideError">{error}</div>}
-      <br />
-      <button className="addGuideButton" type="submit">
-        Save
-      </button>
-    </form>
-  </div>
-);
+        </label>
+        <button className="addGuideBtn" type="submit">
+          Save
+        </button>
+      </form>
+      {error && <p className="addGuideError">{error}</p>}
+    </div>
+  );
 };
 
 export default EditGuide;
