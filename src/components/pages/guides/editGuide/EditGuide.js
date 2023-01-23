@@ -10,7 +10,7 @@ const EditGuide = () => {
   const [guideDetails, setGuideDetails] = useState(
     guide ? guide.description : ''
   );
-  const [guideFile, setGuideFile] = useState('');
+  const [guideFile, setGuideFile] = useState(guide ? guide.file : '');
   const [error, setError] = useState('');
 
   const handleGuideNameChange = (event) => {

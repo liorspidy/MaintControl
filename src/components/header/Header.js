@@ -8,7 +8,6 @@ import AccountMenu from '../menuComp/AccountMenu';
 
 const Header = (props) => {
   const pageNameHandler = (pageName) => {
-    console.log(pageName);
     switch (pageName) {
       case 'login':
         return 'Login Page';
