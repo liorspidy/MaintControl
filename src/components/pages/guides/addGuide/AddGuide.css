@@ -1,0 +1,96 @@
+.addGuideBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.addGuideForm {
+    margin: 0 auto;
+    width: 50%;
+    margin: 2rem auto;
+    min-width: 20rem;
+}
+
+.addGuideLabel {
+    font-size: 1.4rem;
+    font-weight: bold;
+    display: block;
+    padding: 0 1rem;
+    margin-bottom: 0.8rem;
+
+}
+
+.addGuideInput {
+    display: block;
+    min-width: 100%;
+    border: 1px solid #ccc;
+    height: 2rem;
+    margin: 0 auto;
+    margin-top: 0.8rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 0.5rem;
+    text-align: center;
+}
+
+
+.addGuideError {
+    color: red;
+    font-weight: bold;
+}
+
+.addGuideButton {
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+    background-color: rgb(131, 131, 131);
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+    width: 5rem;
+    height: 2rem;
+    border-radius: 5px;
+    margin-top: 1rem;
+    cursor: pointer;
+}
+
+.addGuideButton:hover {
+    background-color: rgb(94, 94, 94);
+}
+
+.addGuideButton:active {
+    animation: 0.05s clicked forwards ease-in-out;
+}
+
+.guideFileInput{
+    display: block;
+    min-width: 100%;
+    height: 3rem;
+    margin: 0 auto;
+    margin-top: 0.8rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 0.5rem;
+    text-align: center;
+}
+
+@keyframes clicked {
+    0% {
+        scale: 1;
+    }
+
+    100% {
+        scale: 0.90;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .addGuideBox {
+        width: 80%;
+    }
+}
