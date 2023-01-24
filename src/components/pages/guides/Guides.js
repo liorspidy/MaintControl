@@ -8,9 +8,18 @@ import './Guides.css';
 
 const Guides = () => {
   const [isEditable, setIsEditable] = useState(false);
+  const [isRemoving, setIsRemoving] = useState(false);
 
   const handleIsEditable = () => {
-    setIsEditable(!isEditable);
+    if (!isRemoving) {
+      setIsEditable(!isEditable);
+    }
+  };
+
+  const handleIsRemoving = () => {
+    if (!isEditable) {
+      setIsRemoving(!isRemoving);
+    }
   };
 
   const guidesList = isEditable
@@ -32,17 +41,18 @@ const Guides = () => {
   return (
     <div>
       <div className="guideButtons">
-        <div className="guideBtn">
-          <Link to="addGuide">
+        <Link to="addGuide">
+          <div className="guideBtn">
             <AddIcon className="addIcon" />
-          </Link>
-        </div>
+          </div>
+        </Link>
         <div className="guideBtn" onClick={handleIsEditable}>
           {isEditable && <EditIcon className="editIconEditOn" />}
           {!isEditable && <EditIcon className="editIconEditOff" />}
         </div>
-        <div className="guideBtn">
-          <DeleteIcon className="deleteIcon" />
+        <div className="guideBtn" onClick={handleIsRemoving}>
+          {isRemoving && <DeleteIcon className="deleteIconRemovingOn" />}
+          {!isRemoving && <DeleteIcon className="deleteIconRemovingOff" />}
         </div>
       </div>
       <div className="items">{guidesList}</div>
