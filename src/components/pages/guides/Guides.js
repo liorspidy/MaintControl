@@ -31,8 +31,17 @@ const Guides = () => {
           </div>
         </Link>
       ))
+    : !isRemoving
+    ? items.map((item) => (
+        <Link to={`/guides/details/${item.id}`} key={item.id}>
+          <div className="guideContainer">
+            <h1>{item.name}</h1>
+            <p>{item.description}</p>
+          </div>
+        </Link>
+      ))
     : items.map((item) => (
-        <div className="guideContainer">
+        <div className="guideContainer" key={item.id}>
           <h1>{item.name}</h1>
           <p>{item.description}</p>
         </div>

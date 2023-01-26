@@ -3,10 +3,13 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import './Login.css';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [companyId, setCompanyId] = useState('');
+
   const [showPassword, setShowPassword] = useState(false); // new state to track whether to show or hide the password
   const [error, setError] = useState('');
 
@@ -16,6 +19,10 @@ const Login = () => {
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
+  };
+
+  const handleCompanyIdChange = (event) => {
+    setCompanyId(event.target.value);
   };
 
   const handleShowPassword = () => {
@@ -32,6 +39,18 @@ const Login = () => {
       setError('Username must be at least 4 characters');
     } else {
       // submit the form
+      console.log('submitted!');
+      axios
+        .post('http://localhost:9000/login', {
+          username,
+          password,
+        })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
       setError('');
     }
   };
@@ -71,6 +90,18 @@ const Login = () => {
             )}
           </div>
         </label>
+        <br />
+        <label className="loginLabel" htmlFor="companyId">
+          Company ID:
+          <input
+            id="companyId"
+            className="loginInput"
+            type="text"
+            value={companyId}
+            onChange={handleCompanyIdChange}
+          />
+        </label>
+        <br />
         {error && <div className="loginError">{error}</div>}
         <br />
         <Link to="/forgot">Forgot my password or username</Link>
