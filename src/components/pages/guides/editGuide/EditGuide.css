@@ -37,6 +37,7 @@
     font-weight: bold;
     padding: 0.5rem;
     text-align: center;
+    width: 100%;
 }
 
 
@@ -112,5 +113,9 @@
 @media screen and (max-width: 900px) {
     .addGuideBox {
         width: 80%;
+    }
+
+    .addGuideForm {
+        min-width: 16rem;
     }
 }

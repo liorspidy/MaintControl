@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useState } from 'react';
 import items from '../guides.json';
 import './EditGuide.css';
@@ -72,9 +72,11 @@ const EditGuide = () => {
             onChange={handleGuideFileChange}
           />
         </label>
-        <button className="addGuideBtn" type="submit">
-          Save
-        </button>
+        <Link to="../guides">
+          <button className="addGuideBtn" type="submit">
+            Save
+          </button>
+        </Link>
       </form>
       {error && <p className="addGuideError">{error}</p>}
     </div>
