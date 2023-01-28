@@ -101,7 +101,6 @@ const Login = () => {
             onChange={handleCompanyIdChange}
           />
         </label>
-        <br />
         {error && <div className="loginError">{error}</div>}
         <br />
         <Link to="/forgot">Forgot my password or username</Link>

@@ -10,6 +10,10 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.forgotBox h3 {
+    width: 90%;
+}
+
 .forgotForm {
     margin: 0 auto;
     width: 50%;
@@ -36,6 +40,7 @@
     font-weight: bold;
     padding: 0.5rem;
     text-align: center;
+    width: 100%;
 }
 
 .forgotResetButton {
@@ -71,5 +76,9 @@
 @media screen and (max-width: 900px) {
     .forgotBox {
         width: 80%;
+    }
+
+    .forgotForm {
+        min-width: 15rem;
     }
 }

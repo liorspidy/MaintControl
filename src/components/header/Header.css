@@ -7,6 +7,9 @@
     width: 100%;
     /* width of the header the width of the page at all time */
     height: 7rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 .logoBox {
@@ -94,13 +97,13 @@
     } */
 
     .logoBox {
-        scale: 1;
+        scale: 0.8;
         margin: 0.5rem 0;
     }
 
     .logoBox a {
         display: flex;
-        width: 12rem;
+        width: 10rem;
         height: 5rem;
         justify-content: center;
         align-items: center;
@@ -110,6 +113,7 @@
         font-size: 1.5rem;
         margin: 1rem 0;
         width: 20rem;
+        display: none;
     }
 
     .searchBar {
@@ -123,5 +127,13 @@
 
     .Icon:hover {
         scale: 1.7;
+    }
+
+    .buttonsContent {
+        margin-left: 0.2rem;
+    }
+
+    .searchIcon {
+        height: 1rem;
     }
 }
