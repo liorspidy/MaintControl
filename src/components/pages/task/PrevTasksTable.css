@@ -1,0 +1,54 @@
+.tableHead {
+  position: sticky;
+  top: 0;
+}
+
+.prevTasksTable {
+  width: 100%;
+  overflow-y: auto;
+  height: 43vh;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+thead {
+  background-color: #1b1e23;
+  color: white;
+}
+
+th {
+  background-color: #1b1e23;
+  color: white;
+  text-align: center;
+  padding: 8px;
+}
+
+td {
+  text-align: center;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #d9d9d9;
+}
+
+td:first-child {
+  font-weight: bold;
+}
+
+td:last-child {
+  text-transform: capitalize;
+}
+
+td:nth-child(3) {
+  direction: ltr;
+  text-align: left;
+  max-width: 25rem;
+}

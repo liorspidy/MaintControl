@@ -1,0 +1,26 @@
+.mainBox {
+  display: flex;
+  flex-direction: row;
+  width: 50vw;
+  height: 45vh;
+}
+
+.mapsBox,
+.searchBox {
+  width: 50vw;
+}
+
+.mapsBox {
+  height: 45vh;
+}
+
+.taskPageBox {
+  display: flex;
+  flex-direction: column;
+}
+.mainMapsBox {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  height: 45vh;
+}
