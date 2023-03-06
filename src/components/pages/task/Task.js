@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import SearchBox from "./map/SearchBox";
 import Maps from "./map/Maps";
+import Map from "../../map/Map";
 import "./Task.css";
 import PrevTasksTable from "./PrevTasksTable";
 
@@ -21,7 +22,12 @@ const Task = (props) => {
           </div>
         </div>
         <div className="mapsBox">
-          <Maps
+          {/* <Maps
+            selectedPosition={selectedPosition}
+            locationName={locationName}
+            setLocationName={setLocationName}
+          /> */}
+         <Map
             selectedPosition={selectedPosition}
             locationName={locationName}
             setLocationName={setLocationName}
