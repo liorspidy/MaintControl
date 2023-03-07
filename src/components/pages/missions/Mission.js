@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Fab from '@mui/material/Fab';
 import NextWeekIcon from '@mui/icons-material/NextWeek';
+import WorkerSelector from './WorkerSelector';
 
 const Mission = (props) => {
   const [showDescription, setShowDescription] = useState(false);
@@ -29,10 +31,11 @@ const Mission = (props) => {
             {props.mission.title}
           </span>
         </div>
+        <WorkerSelector />
         <Link className="taskBtn" to={`/task/mission/${props.mission.id}`}>
-          <button className="MissionExpandButton" onClick={toggleDescription}>
+          <Fab size="small" color="info" aria-label="add">
             <NextWeekIcon />
-          </button>
+          </Fab>
         </Link>
       </label>
     </li>

@@ -23,7 +23,13 @@ export default function AccountMenu(props) {
   };
   return (
     <React.Fragment>
-      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          textAlign: 'center',
+        }}
+      >
         <Tooltip title="Menu">
           <props.icon
             className="Icon"
