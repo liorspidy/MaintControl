@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
   MapContainer,
   TileLayer,
@@ -7,21 +7,21 @@ import {
   useMapEvents,
   useMap,
   Circle,
-} from "react-leaflet";
-import "leaflet/dist/leaflet.css";
-import L from "leaflet";
+} from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
 
 const icon = L.icon({
-  iconUrl: "./placeholder.png",
+  iconUrl: `${window.location.origin}/placeholder.png`,
   iconSize: [38, 38],
-  shadowUrl: "marker-shadow.png",
+  shadowUrl: `${window.location.origin}/marker-shadow.png`,
   shadowSize: [38, 38],
   shadowAnchor: [10, 18],
 });
 
 const position = [51.505, -0.09];
 const position2 = [32.1098, 34.8382];
-const NOMINATIM_REVERSE_URL = "https://nominatim.openstreetmap.org/reverse";
+const NOMINATIM_REVERSE_URL = 'https://nominatim.openstreetmap.org/reverse';
 
 // ------------------------------------------------------
 
@@ -49,7 +49,7 @@ function ResetsCenterView(props) {
 const LocationMarker = (props) => {
   const fetchCurrentInfo = (latlng) => {
     const params = {
-      format: "json",
+      format: 'json',
       lat: latlng.lat,
       lon: latlng.lng,
       zoom: 18,
@@ -58,8 +58,8 @@ const LocationMarker = (props) => {
     const queryString = new URLSearchParams(params).toString();
 
     const requestOptions = {
-      method: "GET",
-      redirect: "follow",
+      method: 'GET',
+      redirect: 'follow',
     };
 
     fetch(`${NOMINATIM_REVERSE_URL}?${queryString}`, requestOptions)
@@ -97,10 +97,10 @@ const isMarkerInsideCircle = (
   // markerLatLng and circleCenterLatLng must be instance of L.latlng class.
   // you can create an instance like this L.latLng(lat, lng);
   if (markerLatLng.distanceTo(circleCenterLatLng) <= circleRadius) {
-    console.log("true");
+    console.log('true');
     return true;
   } else {
-    console.log("false");
+    console.log('false');
     return false;
   }
 };
@@ -115,7 +115,7 @@ export default function Maps(props) {
       center={{ lat: 32.0853, lng: 34.781769 }}
       zoom={11}
       scrollWheelZoom={true}
-      style={{ width: "100%", height: "100%" }}
+      style={{ width: '100%', height: '100%' }}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -129,7 +129,7 @@ export default function Maps(props) {
       </Marker>
       <Circle
         center={updatedLocation}
-        pathOptions={{ fillColor: "blue" }}
+        pathOptions={{ fillColor: 'blue' }}
         radius={100}
       />
       <LocationMarker
