@@ -1,30 +1,34 @@
-import "./Header.css";
-import MenuIcon from "@mui/icons-material/Menu";
-import SearchIcon from "@mui/icons-material/Search";
-import TextField from "@mui/material/TextField";
-import Logo from "../../images/logo.png";
-import { Link } from "react-router-dom";
-import AccountMenu from "../menuComp/AccountMenu";
+import './Header.css';
+import MenuIcon from '@mui/icons-material/Menu';
+import SearchIcon from '@mui/icons-material/Search';
+import TextField from '@mui/material/TextField';
+import Logo from '../../images/logo.png';
+import { Link } from 'react-router-dom';
+import AccountMenu from '../menuComp/AccountMenu';
 
 const Header = (props) => {
   const pageNameHandler = (pageName) => {
+    if (pageName.includes('task/mission')) {
+      return 'Task Page';
+    } else if (pageName.includes('guides/editGuide')) {
+      return 'Edit A Guide';
+    }
+
     switch (pageName) {
-      case "login":
-        return "Login Page";
-      case "":
-        return "Main Page";
-      case "forgot":
-        return "Password Reset";
-      case "task":
-        return "Task Page";
-      case "guides":
-        return "Guides Page";
-      case "guides/addGuide":
-        return "Add A Guide";
-      case "guides/editGuide/*":
-        return "Edit A Guide";
+      case 'login':
+        return 'Login Page';
+      case '':
+        return 'Main Page';
+      case 'forgot':
+        return 'Password Reset';
+      case 'missions':
+        return 'Daily Missions';
+      case 'guides':
+        return 'Guides Page';
+      case 'guides/addGuide':
+        return 'Add A Guide';
       default:
-        return "Unknown Page";
+        return 'Unknown Page';
     }
   };
 

@@ -1,0 +1,102 @@
+[
+    {
+        "id": 1,
+        "title": "Replace elevator cables",
+        "description": "Replace frayed cables in the elevators to prevent accidents and improve safety."
+    },
+    {
+        "id": 2,
+        "title": "Fix elevator doors",
+        "description": "Repair and adjust elevator doors to ensure smooth and safe operation."
+    },
+    {
+        "id": 3,
+        "title": "Upgrade elevator control system",
+        "description": "Upgrade the elevator control system to improve efficiency and reduce downtime."
+    },
+    {
+        "id": 4,
+        "title": "Clean and lubricate elevator parts",
+        "description": "Clean and lubricate elevator parts to prevent wear and tear and extend their lifespan."
+    },
+    {
+        "id": 5,
+        "title": "Install new elevator buttons",
+        "description": "Install new elevator buttons with braille and audio features to improve accessibility for disabled students and staff."
+    },
+    {
+        "id": 6,
+        "title": "Improve elevator lighting",
+        "description": "Upgrade elevator lighting to improve visibility and enhance the overall user experience."
+    },
+    {
+        "id": 7,
+        "title": "Replace damaged elevator flooring",
+        "description": "Replace damaged elevator flooring to prevent trips and falls."
+    },
+    {
+        "id": 8,
+        "title": "Install emergency phone system in elevators",
+        "description": "Install an emergency phone system in elevators for quick response in case of emergencies."
+    },
+    {
+        "id": 9,
+        "title": "Conduct regular elevator inspections",
+        "description": "Conduct regular elevator inspections to ensure compliance with safety regulations and identify issues before they become major problems."
+    },
+    {
+        "id": 10,
+        "title": "Train elevator technicians",
+        "description": "Train elevator technicians to keep up-to-date with the latest technologies and maintenance practices."
+    },
+    {
+        "id": 11,
+        "title": "Replace elevator cables",
+        "description": "Replace frayed cables in the elevators to prevent accidents and improve safety."
+    },
+    {
+        "id": 12,
+        "title": "Fix elevator doors",
+        "description": "Repair and adjust elevator doors to ensure smooth and safe operation."
+    },
+    {
+        "id": 13,
+        "title": "Upgrade elevator control system",
+        "description": "Upgrade the elevator control system to improve efficiency and reduce downtime."
+    },
+    {
+        "id": 14,
+        "title": "Clean and lubricate elevator parts",
+        "description": "Clean and lubricate elevator parts to prevent wear and tear and extend their lifespan."
+    },
+    {
+        "id": 15,
+        "title": "Install new elevator buttons",
+        "description": "Install new elevator buttons with braille and audio features to improve accessibility for disabled students and staff."
+    },
+    {
+        "id": 16,
+        "title": "Improve elevator lighting",
+        "description": "Upgrade elevator lighting to improve visibility and enhance the overall user experience."
+    },
+    {
+        "id": 17,
+        "title": "Replace damaged elevator flooring",
+        "description": "Replace damaged elevator flooring to prevent trips and falls."
+    },
+    {
+        "id": 18,
+        "title": "Install emergency phone system in elevators",
+        "description": "Install an emergency phone system in elevators for quick response in case of emergencies."
+    },
+    {
+        "id": 19,
+        "title": "Conduct regular elevator inspections",
+        "description": "Conduct regular elevator inspections to ensure compliance with safety regulations and identify issues before they become major problems."
+    },
+    {
+        "id": 20,
+        "title": "Train elevator technicians",
+        "description": "Train elevator technicians to keep up-to-date with the latest technologies and maintenance practices."
+    }
+]
