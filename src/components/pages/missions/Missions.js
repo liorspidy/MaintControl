@@ -5,11 +5,12 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import LocationCityIcon from "@mui/icons-material/LocationCity";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import TextRotateVerticalIcon from "@mui/icons-material/TextRotateVertical";
+import Button from "@mui/material/Button";
 import { useState } from "react";
 import "./Missions.css";
 
 const Missions = (props) => {
-  const [filter, setFilter] = useState("abc");
+  const [filter, setFilter] = useState("created_date");
 
   const handleFilter = (event, newFilter) => {
     if (newFilter !== null) {
@@ -37,7 +38,7 @@ const Missions = (props) => {
     <div className="MissionsTableBox">
       <div className="MissionsBtnsBox">
         <div className="Welcome">Welcome NAME,</div>
-        <div className="filters">
+        <div className="filtersBtns">
           <ToggleButtonGroup
             value={filter}
             exclusive
@@ -45,16 +46,19 @@ const Missions = (props) => {
             onChange={handleFilter}
             aria-label="set filter"
           >
+            <ToggleButton value="created_date" aria-label="filter by city">
+              <CalendarMonthIcon />
+            </ToggleButton>
             <ToggleButton value="abc" aria-label="filter alphabetically">
               <TextRotateVerticalIcon />
             </ToggleButton>
             <ToggleButton value="city" aria-label="filter by city">
               <LocationCityIcon />
             </ToggleButton>
-            <ToggleButton value="created_date" aria-label="filter by city">
-              <CalendarMonthIcon />
-            </ToggleButton>
           </ToggleButtonGroup>
+          <Button style={{ marginLeft: "1.2rem" }} variant="contained">
+            Save
+          </Button>
         </div>
       </div>
       <div className="MissionsTable">
