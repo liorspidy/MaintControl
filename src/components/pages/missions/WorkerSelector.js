@@ -1,25 +1,32 @@
-import { useState } from 'react';
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import { useState } from "react";
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
 export default function WorkerSelector() {
-  const [avilUser, setAvailUser] = useState('');
+  const [avilUser, setAvailUser] = useState("");
 
   const handleChange = (event) => {
     setAvailUser(event.target.value);
   };
 
   return (
-    <Box sx={{ minWidth: 220, marginLeft: 'auto' }}>
+    <Box
+      sx={{
+        minWidth: 220,
+        marginLeft: "auto",
+      }}
+    >
       <FormControl fullWidth>
-        <InputLabel id="available-users-select-label" sx={{ color: 'white' }}>
+        <InputLabel id="available-users-select-label" sx={{ color: "white" }}>
           Available Users
         </InputLabel>
         <Select
-          sx={{ color: 'white' }}
+          sx={{
+            color: "white",
+          }}
           labelId="available-users-select-label"
           id="available-users-select"
           value={avilUser}
