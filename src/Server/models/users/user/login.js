@@ -14,16 +14,19 @@ login = (data) => {
                         company_id=${data.company_id}`);
 
       userName = {}
+      role = ''
       result.then((answer) => {
           if (isUserExist(answer)) {
             userName = { userName: answer.rows[0].user_name }
+            role = answer.rows[0].role
+
             return generateAccessToken(userName)
           } else {
             reject({httpCode:401, answer:'Unauthorized'});
           }
         })
         .then((token) => {
-          resolve({httpCode:201, answer:token})
+          resolve({httpCode:201, answer:{token: token, role: role}})
         })
         .catch((err) => {
           reject(500, `Error generating token: ${err}`)
