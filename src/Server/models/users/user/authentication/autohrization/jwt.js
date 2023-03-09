@@ -3,10 +3,14 @@ const jwtSecretConfig = require("../../../../../config/JWTAuthoriztionConfig");
 
 generateAccessToken = (payload) => {
   return new Promise((resolve, reject) => {
-    jwt.sign(payload, jwtSecretConfig.secretKey, (err, token) => {
+    const options = {
+      expiresIn: '1h'
+    };
+
+    jwt.sign(payload, jwtSecretConfig.secretKey, options, (err, token) => {
       if (err) {
         reject(err);
-      } else {        
+      } else {
         resolve(token);
       }
     });
