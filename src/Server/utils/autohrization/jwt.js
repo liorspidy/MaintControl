@@ -18,25 +18,21 @@ generateAccessToken = (payload) => {
 }
 
 verifyToken = (req, res, next) => {
-  return new Promise((resolve, reject) => {
-    try {
-      const authHeader = req.headers['authorization']
-      const token = authHeader && authHeader.split(' ')[1]
-      if (token == null) {
-        reject({httpCode:401, answer:"Unauthorized"})
-      }
+  const authHeader = req.headers.authorization;
 
-      jwt.verify(token, jwtSecretConfig.secretKey, (err, user) => {
-        if (err) {
-          reject({httpCode:403, answer:"Forbidden"})
-        }
-        req.user = user
-        next()
-      })
-    } catch (error) {
-      reject(500, "Internal server error")
+  if (!authHeader) {
+    return res.status(401).json({ error: 'Missing authorization header' });
+  }
+
+  const token = authHeader.split(' ')[1];
+
+  jwt.verify(token, jwtSecretConfig.secretKey, (err, decodedToken) => {
+    if (err) {
+      return res.status(401).json({ error: 'Invalid or expired token' });
     }
-  })
+    req.user = decodedToken;
+    next();
+  });
 }
 
 module.exports = {
