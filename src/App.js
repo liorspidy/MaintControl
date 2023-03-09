@@ -12,6 +12,8 @@ import EditGuide from "./components/pages/guides/editGuide/EditGuide";
 import GuideDetails from "./components/pages/guides/GuideDetails";
 import CartProvider from "./store/CartProvider";
 import Admin from "./components/pages/admin/Admin";
+import Missions from "./components/pages/missions/Missions";
+import NewMission from "./components/pages/missions/NewMission";
 
 function App() {
   const location = useLocation().pathname.replace("/", "");
