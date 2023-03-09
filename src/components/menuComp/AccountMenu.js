@@ -73,6 +73,14 @@ export default function AccountMenu(props) {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
+
+
+        <Link className="link" to="/admin">
+          <MenuItem>
+            <Avatar />
+            Admin
+          </MenuItem>
+        </Link>
         <Link className="link" to="/guides">
           <MenuItem>
             <Avatar />
