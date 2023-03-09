@@ -3,11 +3,15 @@ const user = require('../../../models/users/user/index')
 module.exports = {
   signup: (req, res) => {
     user.signup(req.body)
-      .then((answer) => {
-        return res.status(200).json({});
+    .then((httpCode, answer) => {
+      return res.status(httpCode).json({
+        answer: answer
       })
-      .catch((error) => {
-        return res.status(400).json({});
-      });
+    })
+    .catch((httpCode, answer) => {
+      return res.status(httpCode).json({
+        error: answer
+      })
+    });
   }
 };

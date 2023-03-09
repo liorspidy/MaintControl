@@ -4,10 +4,14 @@ module.exports = {
   login: (req, res) => {
     user.login(req.body)
       .then((result) => {
-        return res.status(200).json({})
+        return res.status(result.httpCode).json({
+          answer: result.answer
+        })
       })
-      .catch((error) => {
-        return res.status(401).json({})
+      .catch((err) => {
+        return res.status(err.httpCode).json({
+          error: err.answer
+        })
       });
   }
 };
