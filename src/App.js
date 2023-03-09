@@ -25,6 +25,9 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="forgot" element={<Forgot />} />
           <Route path="task" element={<Task />} />
+          <Route path="task/mission/:missionid" element={<Task />} />
+          <Route path="missions" element={<Missions />} />
+          <Route path="missions/newMission" element={<NewMission />} />
           <Route path="guides" element={<Guides />} />
           <Route path="guides/addGuide" element={<AddGuide />} />
           <Route path="guides/editGuide/:guideId" element={<EditGuide />} />

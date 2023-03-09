@@ -48,7 +48,7 @@ const Guides = () => {
       ));
 
   return (
-    <div>
+    <div className="guideBox">
       <div className="guideButtons">
         <Link to="addGuide">
           <div className="guideBtn">

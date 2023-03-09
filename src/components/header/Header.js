@@ -8,6 +8,13 @@ import AccountMenu from "../menuComp/AccountMenu";
 
 const Header = (props) => {
   const pageNameHandler = (pageName) => {
+    if (pageName.includes("task/mission")) {
+      return "Task Page";
+    } else if (pageName.includes("guides/editGuide")) {
+      return "Edit A Guide";
+    } else if (pageName.includes("guides/details")) {
+      return "Guide details";
+    }
     switch (pageName) {
       case "login":
         return "Login Page";
@@ -15,8 +22,10 @@ const Header = (props) => {
         return "Main Page";
       case "forgot":
         return "Password Reset";
-      case "task":
-        return "Task Page";
+      case "missions":
+        return "Daily Missions";
+      case "missions/newMission":
+        return "Create A New Mission";
       case "guides":
         return "Guides Page";
       case "guides/addGuide":
@@ -41,13 +50,14 @@ const Header = (props) => {
               event.currentTarget.nextSibling.firstChild.focus()
             }
           />
-          <TextField
-            className="searchBar"
-            id="outlined-basic"
-            label="Search"
-            variant="filled"
-            size="small"
-          />
+          <div className="searchBar">
+            <TextField
+              id="outlined-basic"
+              label="Search"
+              variant="filled"
+              size="small"
+            />
+          </div>
         </div>
       </div>
       <div className="pageName">{pageNameHandler(props.location)}</div>

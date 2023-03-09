@@ -1,6 +1,6 @@
-import { useParams } from 'react-router-dom';
-import items from './guides.json';
-import { Link } from 'react-router-dom';
+import { useParams } from "react-router-dom";
+import items from "./guides.json";
+import { Link } from "react-router-dom";
 
 const GuideDetails = (props) => {
   const { guideId } = useParams();
@@ -8,8 +8,7 @@ const GuideDetails = (props) => {
 
   return (
     <div>
-      <h1>Guide details</h1>
-      <h3>Guide {guide.name}</h3>
+      <h3>{guide.name}</h3>
       <p>{guide.description}</p>
       <Link to="../guides">
         <button className="addGuideBtn">Back</button>

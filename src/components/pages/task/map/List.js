@@ -3,8 +3,6 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { List, ListItemIcon } from "@mui/material";
-import "./List.css";
-import { fontSize } from "@mui/system";
 
 export default function renderRow(props) {
   return (
@@ -20,12 +18,12 @@ export default function renderRow(props) {
               key={item.place_id}
               component="div"
               disablePadding
-              style={{ width: "50vw" }}
+              style={{ width: "45vw" }}
             >
               <ListItemButton>
                 <ListItemIcon>
                   <img
-                    src="./placeholder.png"
+                    src={`${window.location.origin}/placeholder.png`}
                     alt="Placeholder"
                     style={{ width: 38, height: 38 }}
                   />
