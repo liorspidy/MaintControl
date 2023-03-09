@@ -23,7 +23,13 @@ export default function AccountMenu(props) {
   };
   return (
     <React.Fragment>
-      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          textAlign: 'center',
+        }}
+      >
         <Tooltip title="Menu">
           <props.icon
             className="Icon"
@@ -73,7 +79,7 @@ export default function AccountMenu(props) {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <Link className="link" to="/guides">
+        <Link to="/guides">
           <MenuItem>
             <Avatar />
             Guides
@@ -82,6 +88,11 @@ export default function AccountMenu(props) {
         <MenuItem>
           <Avatar /> My account
         </MenuItem>
+        <Link to="/missions">
+          <MenuItem>
+            <Avatar /> Daily Missions
+          </MenuItem>
+        </Link>
         <Divider />
         <MenuItem>
           <ListItemIcon>

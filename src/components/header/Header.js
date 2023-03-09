@@ -8,6 +8,12 @@ import AccountMenu from '../menuComp/AccountMenu';
 
 const Header = (props) => {
   const pageNameHandler = (pageName) => {
+    if (pageName.includes('task/mission')) {
+      return 'Task Page';
+    } else if (pageName.includes('guides/editGuide')) {
+      return 'Edit A Guide';
+    }
+
     switch (pageName) {
       case 'login':
         return 'Login Page';
@@ -15,12 +21,12 @@ const Header = (props) => {
         return 'Main Page';
       case 'forgot':
         return 'Password Reset';
+      case 'missions':
+        return 'Daily Missions';
       case 'guides':
         return 'Guides Page';
       case 'guides/addGuide':
         return 'Add A Guide';
-      case 'guides/editGuide/*':
-        return 'Edit A Guide';
       default:
         return 'Unknown Page';
     }

@@ -5,7 +5,6 @@
     background-color: lightblue;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
     width: 100%;
-    /* width of the header the width of the page at all time */
     height: 7rem;
     position: sticky;
     top: 0;
