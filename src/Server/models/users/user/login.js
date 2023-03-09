@@ -1,9 +1,7 @@
 var Promise = require('promise');
 var db = require('../../../db/index');
 jwtSecretConfig = require('../../../config/JWTAuthoriztionConfig');
-const {
-  generateAccessToken
-} = require('../../../utils/autohrization/jwt');
+const { generateAccessToken } = require('../../../utils/autohrization/jwt');
 
 login = (data) => {
   return new Promise((resolve, reject) => {
@@ -29,10 +27,10 @@ login = (data) => {
           resolve({httpCode:201, answer:{token: token, role: role}})
         })
         .catch((err) => {
-          reject(500, `Error generating token: ${err}`)
+          reject({httpCode:500, answer:`Error generating token: ${err}`})
         })
     } catch (error) {
-      reject(500, "Internal server error");
+      reject({httpCode:500, answer: "Internal server error"});
     }
   })
 }
