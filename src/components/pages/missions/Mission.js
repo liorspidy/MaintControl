@@ -9,10 +9,29 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 const Mission = (props) => {
   const [showDescription, setShowDescription] = useState(false);
   const label = { inputProps: { "aria-label": "Mission Checkbox" } };
+
+  const formattedDate = new Date().getTime(); // Get the current date in milliseconds
+  const missionCreatedDate = new Date(props.mission.created_date).getTime(); // Get the mission's created date in milliseconds
+  // Calculate the number of days left
+  const pastDays =
+    Math.round((formattedDate - missionCreatedDate) / (1000 * 60 * 60 * 24)) <
+    9999
+      ? Math.round((formattedDate - missionCreatedDate) / (1000 * 60 * 60 * 24))
+      : "...";
+
   const arrowClass = showDescription ? "expansionArrow" : "expansionArrowUp";
   const toggleDescription = () => {
     setShowDescription(!showDescription);
   };
+
+  const UrgencyClass =
+    props.mission.urgency === "High"
+      ? "UrgencyHigh"
+      : props.mission.urgency === "Medium"
+      ? "UrgencyMed"
+      : props.mission.urgency === "Low"
+      ? "UrgencyLow"
+      : "Urgency";
 
   return (
     <li key={props.mission.id} className="MissionlistItem">
@@ -41,6 +60,15 @@ const Mission = (props) => {
             </div>
             <div className="filters">
               <div className="filterContent">
+                <span className="filterTitle">Urgency:</span>
+                <span
+                  className={UrgencyClass}
+                  style={{ fontSize: "1rem", color: "#fff" }}
+                >
+                  {props.mission.urgency}
+                </span>
+              </div>
+              <div className="filterContent">
                 <span className="filterTitle">City:</span>
                 <span
                   className="City"
@@ -56,6 +84,15 @@ const Mission = (props) => {
                   style={{ fontSize: "1rem", color: "#fff" }}
                 >
                   {props.mission.created_date}
+                </span>
+              </div>
+              <div className="filterContentPastDays">
+                <span className="filterTitle">Past Days:</span>
+                <span
+                  className="PastDays"
+                  style={{ fontSize: "1rem", color: "#fff" }}
+                >
+                  {pastDays}
                 </span>
               </div>
             </div>
