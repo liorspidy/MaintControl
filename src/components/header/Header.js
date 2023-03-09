@@ -12,8 +12,9 @@ const Header = (props) => {
       return "Task Page";
     } else if (pageName.includes("guides/editGuide")) {
       return "Edit A Guide";
+    } else if (pageName.includes("guides/details")) {
+      return "Guide details";
     }
-
     switch (pageName) {
       case "login":
         return "Login Page";

@@ -14,6 +14,7 @@ const AddressList = (props) => {
                   props.setSearchTerm(item.display_name);
                   props.setPicked(true);
                   props.setAddressVal(item.display_name);
+                  props.setFullAddress(item);
                 }}
               >
                 {item.display_name}

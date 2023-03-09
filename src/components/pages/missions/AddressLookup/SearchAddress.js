@@ -93,6 +93,7 @@ const SearchAddress = (props) => {
             setSearchTerm={setSearchTerm}
             setPicked={props.setPicked}
             setAddressVal={props.setAddressVal}
+            setFullAddress={props.setFullAddress}
           />
         </div>
       )}

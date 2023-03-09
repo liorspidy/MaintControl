@@ -79,7 +79,6 @@
 
 .searchBar {
   width: 15rem;
-  margin-left: 1rem;
 }
 
 @media (max-width: 900px) {

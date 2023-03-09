@@ -9,10 +9,11 @@ function NewMission() {
   const formattedDate = today.toISOString().substr(0, 10);
   const [picked, setPicked] = useState(false);
   const [addressVal, setAddressVal] = useState("");
+  const [fullAddress, setFullAddress] = useState("");
   const [missionData, setMissionData] = useState({
     title: "",
     address: "",
-    // city: "",
+    city: "",
     description: "",
     created_date: formattedDate,
     priority: "",
@@ -21,6 +22,9 @@ function NewMission() {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(picked, missionData);
+    console.log(fullAddress.address.city);
+    console.log(fullAddress.lat, fullAddress.lon);
+
     if (
       picked &&
       missionData.title &&
@@ -56,7 +60,11 @@ function NewMission() {
             required
           />
         </div>
-        <SearchAddress setPicked={setPicked} setAddressVal={setAddressVal} />
+        <SearchAddress
+          setPicked={setPicked}
+          setAddressVal={setAddressVal}
+          setFullAddress={setFullAddress}
+        />
         {/* <div className="form-group">
           <label htmlFor="city">City</label>
           <input
