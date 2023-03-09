@@ -1,9 +1,8 @@
-import * as React from 'react';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import { List, ListItemIcon } from '@mui/material';
-import './List.css';
+import * as React from "react";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemText from "@mui/material/ListItemText";
+import { List, ListItemIcon } from "@mui/material";
 
 export default function renderRow(props) {
   return (
@@ -19,7 +18,7 @@ export default function renderRow(props) {
               key={item.place_id}
               component="div"
               disablePadding
-              style={{ width: '50vw' }}
+              style={{ width: "45vw" }}
             >
               <ListItemButton>
                 <ListItemIcon>
@@ -31,7 +30,7 @@ export default function renderRow(props) {
                 </ListItemIcon>
                 <ListItemText
                   primary={item?.display_name}
-                  primaryTypographyProps={{ fontSize: '15px' }}
+                  primaryTypographyProps={{ fontSize: "15px" }}
                 />
               </ListItemButton>
             </ListItem>
