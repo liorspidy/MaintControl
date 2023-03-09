@@ -4,7 +4,6 @@ var db = require('../../../db/index');
 addUser = (data) => {
   return new Promise((resolve, reject) => {
     try {
-      console.log(`${data.user_name}`);
       result = db.query(`INSERT INTO dim_users (
              user_name,
 					   first_name,
