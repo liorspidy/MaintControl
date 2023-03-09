@@ -1,4 +1,4 @@
-const user = require('../../../models/users/user/index')
+const user = require('../../models/users/user/index')
 
 module.exports = {
   login: (req, res) => {

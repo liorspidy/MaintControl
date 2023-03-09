@@ -1,9 +1,9 @@
 var Promise = require('promise');
-var db = require('../../../../db/index');
-jwtSecretConfig = require('../../../../config/JWTAuthoriztionConfig');
+var db = require('../../../db/index');
+jwtSecretConfig = require('../../../config/JWTAuthoriztionConfig');
 const {
   generateAccessToken
-} = require('./autohrization/jwt');
+} = require('../../../utils/autohrization/jwt');
 
 login = (data) => {
   return new Promise((resolve, reject) => {

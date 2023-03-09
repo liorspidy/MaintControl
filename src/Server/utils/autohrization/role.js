@@ -1,11 +1,7 @@
 authorizeRole = (allowedRoles) => {
-  return new Promise((resolve, reject) => {
-    try {
-      
-    } catch (error) {
-      
-    }
-  })
+  return function(req, res, next) {
+    
+  }
 }
 
 //   return async function(req, res, next) {
