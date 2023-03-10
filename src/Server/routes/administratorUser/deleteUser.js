@@ -1,9 +1,15 @@
 const express = require('express');
 const deleteUserRouter = express.Router();
-const { verifyToken } = require('../../utils/autohrization/jwt');
+const administratorUserController = require('../../controllers/administratorUser/deleteUser');
+const {
+  verifyToken
+} = require('../../utils/autohrization/jwt');
+const {
+  authorizeRole
+} = require('../../utils/autohrization/role');
 
-deleteUserRouter.post('/deleteUser', verifyToken, (req, res) => {
-  // userController.login(req,res);
+deleteUserRouter.post('/deleteUser', verifyToken, authorizeRole(['administrator']), (req, res) => {
+  administratorUserController.deleteUser(req,res);
 });
 
 module.exports = deleteUserRouter

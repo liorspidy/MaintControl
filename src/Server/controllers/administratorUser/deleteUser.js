@@ -1,4 +1,4 @@
-// const user = require('../../models/users/user/index')
+const administratorUser = require('../../models/users/administratorUser/index')
 
 module.exports = {
   deleteUser: (req, res) => {
