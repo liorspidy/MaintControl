@@ -21,15 +21,24 @@ addUser = (data) => {
 						   '${data.phone}',
 						   '${data.role}',
 						   ${data.company_id})`);
-      
-      result.then(()=>{
-        resolve({httpCode: 200, answer: "Added user succesfuly"})
-      })
-      .catch((err) => {
-        reject({httpCode:500, answer:`Error during adding user: ${err}`})
-      })
+
+      result.then(() => {
+          resolve({
+            httpCode: 200,
+            answer: "Added user succesfuly"
+          })
+        })
+        .catch((err) => {
+          reject({
+            httpCode: 500,
+            answer: `Error during adding user: ${err}`
+          })
+        })
     } catch (error) {
-      reject({httpCode: 500, answer: "Internal server error"});
+      reject({
+        httpCode: 500,
+        answer: "Internal server error"
+      });
     }
   })
 }

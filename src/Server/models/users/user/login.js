@@ -1,7 +1,9 @@
 var Promise = require('promise');
 var db = require('../../../db/index');
 jwtSecretConfig = require('../../../config/JWTAuthoriztionConfig');
-const { generateAccessToken } = require('../../../utils/autohrization/jwt');
+const {
+  generateAccessToken
+} = require('../../../utils/autohrization/jwt');
 
 login = (data) => {
   return new Promise((resolve, reject) => {
@@ -11,26 +13,44 @@ login = (data) => {
                         password='${data.password}' AND
                         company_id=${data.company_id}`);
 
-      userName = {}
       role = ''
       result.then((answer) => {
           if (isUserExist(answer)) {
-            userName = { userName: answer.rows[0].user_name }
+            payload = {
+              userId: answer.rows[0].user_id,
+              userName: answer.rows[0].user_name,
+              companyId: answer.rows[0].company_id
+            }
             role = answer.rows[0].role
 
-            return generateAccessToken(userName)
+            return generateAccessToken(payload)
           } else {
-            reject({httpCode:401, answer:'Unauthorized'});
+            reject({
+              httpCode: 401,
+              answer: 'Unauthorized'
+            });
           }
         })
         .then((token) => {
-          resolve({httpCode:201, answer:{token: token, role: role}})
+          resolve({
+            httpCode: 201,
+            answer: {
+              token: token,
+              role: role
+            }
+          })
         })
         .catch((err) => {
-          reject({httpCode:500, answer:`Error generating token: ${err}`})
+          reject({
+            httpCode: 500,
+            answer: `Error generating token: ${err}`
+          })
         })
     } catch (error) {
-      reject({httpCode:500, answer: "Internal server error"});
+      reject({
+        httpCode: 500,
+        answer: "Internal server error"
+      });
     }
   })
 }
