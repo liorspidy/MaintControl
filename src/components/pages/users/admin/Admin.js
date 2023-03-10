@@ -5,7 +5,7 @@ const Admin = () => {
     return (
       
         <div className="adminButtons">
-        <Link className="admin-button btnAddUser" to="login">
+        <Link className="admin-button btnAddUser" to="addUser">
           Add a new user
         </Link>
 

@@ -11,9 +11,10 @@ import AddGuide from "./components/pages/guides/addGuide/AddGuide";
 import EditGuide from "./components/pages/guides/editGuide/EditGuide";
 import GuideDetails from "./components/pages/guides/GuideDetails";
 import CartProvider from "./store/CartProvider";
-import Admin from "./components/pages/admin/Admin";
+import Admin from "./components/pages/users/admin/Admin";
 import Missions from "./components/pages/missions/Missions";
 import NewMission from "./components/pages/missions/NewMission";
+import AddUser from "./components/pages/users/admin/addUser/AddUser";
 
 function App() {
   const location = useLocation().pathname.replace("/", "");
@@ -35,6 +36,7 @@ function App() {
           <Route path="guides/editGuide/:guideId" element={<EditGuide />} />
           <Route path="guides/details/:guideId" element={<GuideDetails />} />
           <Route path="admin" element={<Admin />} />
+          <Route path="admin/addUser" element={<AddUser />} />
         </Routes>
       </div>
     </CartProvider>
