@@ -11,6 +11,7 @@ import AddGuide from "./components/pages/guides/addGuide/AddGuide";
 import EditGuide from "./components/pages/guides/editGuide/EditGuide";
 import GuideDetails from "./components/pages/guides/GuideDetails";
 import CartProvider from "./store/CartProvider";
+import Admin from "./components/pages/admin/Admin";
 import Missions from "./components/pages/missions/Missions";
 import NewMission from "./components/pages/missions/NewMission";
 
@@ -33,6 +34,7 @@ function App() {
           <Route path="guides/addGuide" element={<AddGuide />} />
           <Route path="guides/editGuide/:guideId" element={<EditGuide />} />
           <Route path="guides/details/:guideId" element={<GuideDetails />} />
+          <Route path="admin" element={<Admin />} />
         </Routes>
       </div>
     </CartProvider>
