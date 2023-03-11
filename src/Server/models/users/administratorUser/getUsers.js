@@ -6,6 +6,7 @@ getUsers = (decodedToken, query) => {
     try {
       result = db.query(`SELECT * FROM dim_users
                          WHERE company_id = ${decodedToken.companyId}
+                         ORDER BY user_id
                          OFFSET ${query.OFFSET}
                          LIMIT ${query.LIMIT}`);
 

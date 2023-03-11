@@ -5,15 +5,15 @@ updateUser = (data, decodedToken) => {
   return new Promise((resolve, reject) => {
     try {
       result = db.query(`UPDATE dim_users 
-                         SET user_name = ${data.user_name},
-                            first_name = ${data.first_name},
-                            last_name = ${data.last_name},
-                            email = ${data.email},
-                            password = ${data.password},
-                            phone = ${data.phone},
-                            role = ${data.role} 
+                         SET user_name = '${data.user_name}',
+                            first_name = '${data.first_name}',
+                            last_name = '${data.last_name}',
+                            email = '${data.email}',
+                            password = '${data.password}',
+                            phone = '${data.phone}',
+                            role = '${data.role}' 
                             WHERE user_id = ${data.user_id} AND 
-                            compny_id = ${decodedToken.company_id}`);
+                            company_id = ${decodedToken.companyId}`);
 
       result.then(() => {
           resolve({
@@ -24,7 +24,7 @@ updateUser = (data, decodedToken) => {
         .catch((err) => {
           reject({
             httpCode: 500,
-            answer: `Error during deleting user: ${err}`
+            answer: `Error during updating user: ${err}`
           })
         })
     } catch (error) {
