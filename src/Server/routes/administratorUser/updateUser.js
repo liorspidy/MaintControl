@@ -8,7 +8,7 @@ const {
   authorizeRole
 } = require('../../utils/autohrization/role');
 
-updateUserRouter.put('/updateUser', verifyToken, authorizeRole(['administrator']), (req, res) => {
+updateUserRouter.put('/users/updateUser', verifyToken, authorizeRole(['administrator']), (req, res) => {
   administratorUserController.updateUser(req, res)
 });
 

@@ -1,5 +1,5 @@
 const express = require('express');
-const deleteUserRouter = express.Router();
+const getUsersRouter = express.Router();
 const administratorUserController = require('../../controllers/administratorUser/index');
 const {
   verifyToken
@@ -8,8 +8,8 @@ const {
   authorizeRole
 } = require('../../utils/autohrization/role');
 
-deleteUserRouter.delete('/users/deleteUser', verifyToken, authorizeRole(['administrator']), (req, res) => {
-  administratorUserController.deleteUser(req, res);
+getUsersRouter.get('/users/getUsers', verifyToken, authorizeRole(['administrator']), (req, res) => {
+  administratorUserController.getUsers(req, res)
 });
 
-module.exports = deleteUserRouter
+module.exports = getUsersRouter
