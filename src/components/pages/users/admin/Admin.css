@@ -1,11 +1,12 @@
 .adminButtons {
-    margin: 4rem;
+    margin: 4rem auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: lightblue;
     border-radius: 15px;
+    max-width: 80%;
 }
   
 .admin-button {

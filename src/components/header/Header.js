@@ -32,8 +32,10 @@ const Header = (props) => {
         return "Add A Guide";
       case "guides/editGuide/*":
         return "Edit A Guide";
-        case "admin":
-          return "Admin page";
+      case "admin":
+        return "Admin page";
+      case "admin/addUser":
+        return "Add a User";  
       default:
         return "Unknown Page";
     }
