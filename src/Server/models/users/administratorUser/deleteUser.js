@@ -4,7 +4,6 @@ var db = require('../../../db/index');
 deleteUser = (data) => {
   return new Promise((resolve, reject) => {
     try {
-      console.log(data);
       result = db.query(`DELETE FROM dim_users 
                          WHERE user_name = '${data.user_name}' AND
 						                   email = '${data.email}' AND

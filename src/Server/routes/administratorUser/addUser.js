@@ -1,6 +1,6 @@
 const express = require('express');
 const addUserRouter = express.Router();
-const administratorUserController = require('../../controllers/administratorUser/addUser');
+const administratorUserController = require('../../controllers/administratorUser/index');
 const {
   verifyToken
 } = require('../../utils/autohrization/jwt');
