@@ -4,8 +4,8 @@ authorizeRole = (allowedRoles) => {
   return (req, res, next) => {
     db.query(`SELECT role FROM dim_users 
               WHERE user_Id = ${req.user.userId} AND
-              user_name = '${req.user.userName}' AND
-              company_id = ${req.user.companyId}`)
+                    user_name = '${req.user.userName}' AND
+                    company_id = ${req.user.companyId}`)
       .then((result) => {
         if (result.rows.length === 0) {
           return res.status(401).json({

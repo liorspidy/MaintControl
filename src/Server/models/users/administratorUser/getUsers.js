@@ -1,10 +1,11 @@
 var Promise = require('promise');
 var db = require('../../../db/index');
 
-getUsers = (query) => {
+getUsers = (decodedToken, query) => {
   return new Promise((resolve, reject) => {
     try {
       result = db.query(`SELECT * FROM dim_users
+                         WHERE company_id = ${decodedToken.companyId}
                          OFFSET ${query.OFFSET}
                          LIMIT ${query.LIMIT}`);
 

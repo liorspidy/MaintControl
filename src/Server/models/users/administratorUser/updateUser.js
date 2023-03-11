@@ -1,21 +1,19 @@
 var Promise = require('promise');
 var db = require('../../../db/index');
 
-updateUser = (data) => {
+updateUser = (data, decodedToken) => {
   return new Promise((resolve, reject) => {
     try {
-      console.log(data);
-      console.log(query);
-      // result = db.query(`UPDATE dim_users 
-      //                    SET user_name = ${data.user_name},
-      //                       first_name,
-      //                       last_name,
-      //                       email,
-      //                       password,
-      //                       phone,
-      //                       role,
-      //                       company_id WHERE
-      //                       user_id = ${data.user_id}`);
+      result = db.query(`UPDATE dim_users 
+                         SET user_name = ${data.user_name},
+                            first_name = ${data.first_name},
+                            last_name = ${data.last_name},
+                            email = ${data.email},
+                            password = ${data.password},
+                            phone = ${data.phone},
+                            role = ${data.role} 
+                            WHERE user_id = ${data.user_id} AND 
+                            compny_id = ${decodedToken.company_id}`);
 
       result.then(() => {
           resolve({
