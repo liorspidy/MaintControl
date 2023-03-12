@@ -1,8 +1,8 @@
 import { useState } from "react";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { useNavigate } from "react-router-dom";
 import "./AddUser.css";
-import { Link } from "react-router-dom";
 import axios from "axios";
 
 function validateEmail(email) {
@@ -22,6 +22,7 @@ const AddUser = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [authorization, setAuthorization] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -100,6 +101,7 @@ const AddUser = () => {
         });
       setError("");
     }
+    navigate("/admin");
   };
 
   return (
@@ -197,7 +199,6 @@ const AddUser = () => {
               className="addUserInput"
               value={authorization}
               onChange={handleAuthorizationChange}
-              defaultValue="choose"
               required
             >
               <option value="choose">Choose authorization</option>
@@ -218,11 +219,10 @@ const AddUser = () => {
               required
             />
           </label>
-
-          {error && <div className="addUserError">{error}</div>}
-          <br />
         </div>
         <div className="addUserFormBtn">
+          {error && <div className="addUserError">{error}</div>}
+          <br />
           <button className="addUserButton" type="submit">
             Add a user
           </button>

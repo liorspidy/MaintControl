@@ -57,6 +57,11 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.addUserInput option {
+  background: #173f5f;
+  color: #fff;
+}
+
 .passContent {
   display: flex;
   justify-content: space-between;
@@ -110,7 +115,7 @@
   }
 }
 
-@media screen and (max-width: 900px) {
+/* @media screen and (max-width: 900px) {
   .addUserBox {
     width: 80%;
     margin: 30px auto;
@@ -119,7 +124,7 @@
   .addUserInput {
     display: block;
     min-width: 100%;
-    border: 1px solid #ccc;
+    border: none;
     height: 2rem;
     margin: 0 auto;
     margin-top: 0.8rem;
@@ -135,4 +140,4 @@
     margin: 0rem auto;
     min-width: 14rem;
   }
-}
+} */
