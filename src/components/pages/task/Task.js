@@ -27,7 +27,7 @@ const Task = (props) => {
             locationName={locationName}
             setLocationName={setLocationName}
           /> */}
-         <Map
+          <Map
             selectedPosition={selectedPosition}
             locationName={locationName}
             setLocationName={setLocationName}
