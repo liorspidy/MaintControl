@@ -30,25 +30,28 @@ const Login = () => {
     setShowPassword(!showPassword); // toggle showPassword state
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    if (password.length === 0 && username.length === 0) {
-      setError('Must enter Username and Password');
-    } else if (password.length < 8 && password.length > 0) {
-      setError('Password must be at least 8 characters');
-    } else if (username.length < 4 && username.length > 0) {
+    if (username.trim().length < 4) {
       setError('Username must be at least 4 characters');
+    } else if (password.trim().length < 8) {
+      setError('Password must be at least 8 characters');
+    } else if (companyId.trim().length === 0) {
+      setError('Company ID must not be empty');
     } else {
       // submit the form
       console.log('submitted!');
 
       // get all users from 'users'
-      fetch('http://localhost:9000/users/details')
-        .then((response) => response.json())
-        .then((data) => console.log(data))
-        .catch((error) => console.error(error));
+      try {
+        const response = await fetch('http://localhost:9000/users/details');
+        const data = await response.json();
+        console.log(data);
+        navigate('../missions');
+      } catch (error) {
+        console.error(error);
+      }
     }
-    navigate('../missions');
   };
 
   return (
