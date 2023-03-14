@@ -3,12 +3,13 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import './Login.css';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [companyId, setCompanyId] = useState('');
+  const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false); // new state to track whether to show or hide the password
   const [error, setError] = useState('');
@@ -40,19 +41,14 @@ const Login = () => {
     } else {
       // submit the form
       console.log('submitted!');
-      axios
-        .post('http://localhost:9000/login', {
-          username,
-          password,
-        })
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-      setError('');
+
+      // get all users from 'users'
+      fetch('http://localhost:9000/users/details')
+        .then((response) => response.json())
+        .then((data) => console.log(data))
+        .catch((error) => console.error(error));
     }
+    navigate('../missions');
   };
 
   return (
@@ -101,7 +97,7 @@ const Login = () => {
             onChange={handleCompanyIdChange}
           />
         </label>
-        
+
         {error && <div className="loginError">{error}</div>}
         <br />
         <Link to="/forgot">Forgot my password or username</Link>
