@@ -1,4 +1,4 @@
-const administratorUser = require('../../models/users/administratorUser/index')
+const administratorUser = require('../../../models/users/administratorUser/index')
 
 module.exports = {
   updateUser: (req, res) => {

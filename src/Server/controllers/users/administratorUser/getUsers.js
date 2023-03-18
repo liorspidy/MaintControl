@@ -1,8 +1,8 @@
-const user = require('../../models/users/user/index')
+const administratorUser = require('../../../models/users/administratorUser/index')
 
 module.exports = {
-  login: (req, res) => {
-    user.login(req.body)
+  getUsers: (req, res) => {
+    administratorUser.getUsers(req.user, req.query)
       .then((result) => {
         return res.status(result.httpCode).json({
           answer: result.answer

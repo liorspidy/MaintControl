@@ -9,18 +9,27 @@ const PORT = 9000;
 const app = express();
 app.use(express.json());
 
-// load all routes
-getDirectories = (path) => {
-  return fs.readdirSync(path).filter((file) => {
-    return fs.statSync(path + '/' + file).isDirectory();
+
+const getDirectories = (path) => {
+  let directories = [];
+  fs.readdirSync(path).forEach((file) => {
+    const fullPath = path + '/' + file;
+    if (fs.statSync(fullPath).isDirectory()) {
+      directories.push(fullPath);
+      directories = directories.concat(getDirectories(fullPath));
+    }
   });
-}
+  return directories;
+};
 
 const directories = getDirectories('./routes');
 directories.forEach((directory) => {
-  fs.readdir('./routes/' + directory, (err, files) => {
+  fs.readdir(directory, (err, files) => {
     files.forEach((file) => {
-      app.use('/', require(`./routes/` + directory + '/' + file));
+      const filePath = directory + '/' + file;
+      if (fs.statSync(filePath).isFile()) {
+        app.use('/', require(filePath));
+      }
     });
   });
 });
