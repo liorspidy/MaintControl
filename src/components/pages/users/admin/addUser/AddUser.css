@@ -19,7 +19,7 @@
 .addUserFormContent {
   display: flex;
   flex-wrap: wrap;
-  width: 100%;
+  width: clamp(90%, 90%, 100%);
   margin: 0 auto;
   align-items: center;
   justify-content: space-between;

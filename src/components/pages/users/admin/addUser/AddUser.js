@@ -1,9 +1,9 @@
-import { useState } from "react";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import { useNavigate } from "react-router-dom";
-import "./AddUser.css";
-import axios from "axios";
+import { useState } from 'react';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import { useNavigate } from 'react-router-dom';
+import './AddUser.css';
+import axios from 'axios';
 
 function validateEmail(email) {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -11,17 +11,17 @@ function validateEmail(email) {
 }
 
 const AddUser = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false); // new state to track whether to show or hide the password
-  const [companyId, setCompanyId] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
+  const [companyId, setCompanyId] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
   //const [isValidEmail, setIsValidEmail] = useState(false);
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [authorization, setAuthorization] = useState("");
-  const [error, setError] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [authorization, setAuthorization] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleUsernameChange = (event) => {
@@ -61,47 +61,62 @@ const AddUser = () => {
     setShowPassword(!showPassword); // toggle showPassword state
   };
 
+  const token = localStorage.getItem('token');
+
+  async function addUserFetch() {
+    try {
+      const response = await fetch('http://localhost:9000/users/addUser', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          user_name: username,
+          first_name: firstName,
+          last_name: lastName,
+          email: email,
+          password: password,
+          phone: phoneNumber,
+          role: authorization,
+          company_id: companyId,
+        }),
+      });
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      console.log(response);
+      navigate('/admin');
+      return true;
+    } catch (err) {
+      console.error(err);
+      throw err;
+    }
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
     if (password.length < 8) {
-      setError("Password must be at least 8 characters");
+      setError('Password must be at least 8 characters');
     } else if (username.length < 4) {
-      setError("Username must be at least 4 characters");
-    } else if (companyId.length == 0) {
-      setError("Must enter company ID");
+      setError('Username must be at least 4 characters');
+    } else if (companyId.length === 0) {
+      setError('Must enter company ID');
     } else if (firstName.length < 2) {
-      setError("First name must be at least 2 characters");
+      setError('First name must be at least 2 characters');
     } else if (lastName.length < 2) {
-      setError("Last name must be at least 2 characters");
-    } else if (phoneNumber.length != 10) {
+      setError('Last name must be at least 2 characters');
+    } else if (phoneNumber.length !== 10) {
       /*else if (!isValidEmail) {
         setError('Must enter a valid Email');
     }*/
-      setError("Must enter a valid phone number");
-    } else if (document.getElementById("authorization").value === "choose") {
-      setError("Must choose an authorization");
+      setError('Must enter a valid phone number');
+    } else if (document.getElementById('authorization').value === 'choose') {
+      setError('Must choose an authorization');
     } else {
       // submit the form
-      console.log("submitted!");
-      axios
-        .post("http://localhost:9000/login", {
-          username,
-          password,
-          firstName,
-          lastName,
-          companyId,
-          email,
-          phoneNumber,
-        })
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-      setError("");
+      addUserFetch();
     }
-    navigate("/admin");
   };
 
   return (
@@ -126,7 +141,7 @@ const AddUser = () => {
               <input
                 id="pass"
                 className="addUserInput"
-                type={showPassword ? "text" : "password"} // show text if showPassword is true, otherwise show password
+                type={showPassword ? 'text' : 'password'} // show text if showPassword is true, otherwise show password
                 value={password}
                 onChange={handlePasswordChange}
                 required
@@ -202,9 +217,9 @@ const AddUser = () => {
               required
             >
               <option value="choose">Choose authorization</option>
-              <option value="admin">Admin</option>
-              <option value="Mmanager">Manager</option>
-              <option value="maintenanceMan">Maintenance man</option>
+              <option value="administrator">Admin</option>
+              <option value="manager">Manager</option>
+              <option value="maintainance">Maintenance man</option>
             </select>
           </label>
           <br />
