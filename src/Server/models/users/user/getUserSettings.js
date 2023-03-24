@@ -10,10 +10,10 @@ getUserSettings = (decodedToken) => {
 
       result.then((answer) => {
           const entries = Object.entries(answer.rows[0]).filter(([key]) => key !== 'user_id' && key !== 'password');
-          const settingsWithoutUserId = Object.fromEntries(entries);
+          const settings = Object.fromEntries(entries);
           resolve({
             httpCode: 200,
-            answer: settingsWithoutUserId
+            answer: settings
           })
         })
         .catch((err) => {
