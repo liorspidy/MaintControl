@@ -46,7 +46,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJOYW1lIjoidGVtcEFkbWluIiwiY29tcGFueUlkIjoxLCJpYXQiOjE2Nzk1ODkyNjYsImV4cCI6MTY3OTU5Mjg2Nn0.oUJ7hUdA55dzNEnTxsoxtrGzQ7NXvy6QThQ-v7fJEHQ",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJOYW1lIjoidGVtcEFkbWluIiwiY29tcGFueUlkIjoxLCJpYXQiOjE2ODAwMjY3NDcsImV4cCI6MTY4MDAzMDM0N30.wC3t0FXOj8fHHfAYOavgmN720hg_5pgmgp__NLhS344",
 									"type": "string"
 								}
 							]
@@ -67,6 +67,46 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "getGuides",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJOYW1lIjoidGVtcEFkbWluIiwiY29tcGFueUlkIjoxLCJpYXQiOjE2ODAwOTU3MjcsImV4cCI6MTY4MDA5OTMyN30.XH6niE6SYUW2y31abgvoJSkx85yV2bd1KZ5DhVYqhT0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/guides/getGuides?OFFSET=0&LIMIT=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"guides",
+								"getGuides"
+							],
+							"query": [
+								{
+									"key": "OFFSET",
+									"value": "0"
+								},
+								{
+									"key": "LIMIT",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -81,7 +121,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJOYW1lIjoidGVtcEFkbWluIiwiY29tcGFueUlkIjoxLCJpYXQiOjE2Nzk1ODAwODEsImV4cCI6MTY3OTU4MzY4MX0.IPl8i5QLJ8eKHuqlTMZ1P52GaGNBS2ELIJV0_hKDJoI",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJOYW1lIjoidGVtcEFkbWluIiwiY29tcGFueUlkIjoxLCJpYXQiOjE2Nzk2NjA5MjIsImV4cCI6MTY3OTY2NDUyMn0.mT_GmNENZgc7YX5bju-q3IS3VLw07C6TvDsFnEx33Ok",
 									"type": "string"
 								}
 							]
@@ -90,7 +130,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"user_name\":\"temp8\",\r\n\t\"first_name\":\"firstName_temp8\",\r\n\t\"last_name\":\"lastName_temp8\",\r\n\t\"email\": \"temp8@temp_company.com\",\r\n\t\"password\": \"temp8Password\",\r\n\t\"phone\": \"052-518-5874\",\r\n\t\"role\":\"maintainance\",\r\n\t\"company_id\":1\r\n}",
+							"raw": "{\r\n    \"user_name\":\"temp9\",\r\n\t\"first_name\":\"firstName_temp9\",\r\n\t\"last_name\":\"lastName_temp9\",\r\n\t\"email\": \"temp9@temp_company.com\",\r\n\t\"password\": \"temp9Password\",\r\n\t\"phone\": \"052-518-5874\",\r\n\t\"role\":\"maintainance\",\r\n\t\"company_id\":1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -120,7 +160,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJOYW1lIjoidGVtcEFkbWluIiwiY29tcGFueUlkIjoxLCJpYXQiOjE2Nzg1NzI4NzUsImV4cCI6MTY3ODU3NjQ3NX0.gbzO_5yREiBkUJY02E3Z9vUuKj7XfjZjaVYzFCz92pQ",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJOYW1lIjoidGVtcEFkbWluIiwiY29tcGFueUlkIjoxLCJpYXQiOjE2Nzk2NjA5MjIsImV4cCI6MTY3OTY2NDUyMn0.mT_GmNENZgc7YX5bju-q3IS3VLw07C6TvDsFnEx33Ok",
 									"type": "string"
 								}
 							]
@@ -129,7 +169,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"user_id\": 2,\r\n    \"user_name\":\"temp2Updated\",\r\n\t\"first_name\":\"firstName_temp2Updated\",\r\n\t\"last_name\":\"lastName_temp2Updated\",\r\n\t\"email\": \"temp2Updated@temp_company.com\",\r\n\t\"password\": \"temp2UpdatedPassword\",\r\n\t\"phone\": \"052-269-9877\",\r\n\t\"role\":\"manager\"\r\n}",
+							"raw": "{\r\n    \"user_id\": 3,\r\n    \"user_name\":\"temp3Updated\",\r\n\t\"first_name\":\"firstName_temp3Updated\",\r\n\t\"last_name\":\"lastName_temp3Updated\",\r\n\t\"email\": \"temp3Updated@temp_company.com\",\r\n\t\"password\": \"temp3UpdatedPassword\",\r\n\t\"phone\": \"052-269-9877\",\r\n\t\"role\":\"administrator\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -159,7 +199,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInVzZXJOYW1lIjoiam9obmRvZSIsImNvbXBhbnlJZCI6MSwiaWF0IjoxNjc5MDY1MDU2LCJleHAiOjE2NzkwNjg2NTZ9.rhQJOi9rM3CEL_-d8SlL7G2s97jfiqelosE1CTqBOnQ",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJOYW1lIjoidGVtcEFkbWluIiwiY29tcGFueUlkIjoxLCJpYXQiOjE2Nzk2NjA5MjIsImV4cCI6MTY3OTY2NDUyMn0.mT_GmNENZgc7YX5bju-q3IS3VLw07C6TvDsFnEx33Ok",
 									"type": "string"
 								}
 							]
@@ -168,7 +208,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"user_name\": \"temp8\",\r\n    \"email\": \"temp8@temp_company.com\",\r\n    \"company_id\": 1\r\n}",
+							"raw": "{\r\n    \"user_name\": \"temp2Updated\",\r\n    \"email\": \"temp2Updated@temp_company.com\",\r\n    \"company_id\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -198,7 +238,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJOYW1lIjoidGVtcEFkbWluIiwiY29tcGFueUlkIjoxLCJpYXQiOjE2Nzk1ODU0MzAsImV4cCI6MTY3OTU4OTAzMH0.lBjcewVXzVVm2vxCvH2fVC77PnMRFl_QZ01bUONLnL8",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJOYW1lIjoidGVtcEFkbWluIiwiY29tcGFueUlkIjoxLCJpYXQiOjE2Nzk2NjA3NzgsImV4cCI6MTY3OTY2NDM3OH0.XTiR2iOBge7tY3O8qjqfmIowyfyggTh7xabHwB0ASsE",
 									"type": "string"
 								}
 							]
@@ -229,6 +269,150 @@
 						}
 					},
 					"response": []
+				}
+			]
+		},
+		{
+			"name": "managerUser",
+			"item": [
+				{
+					"name": "guides",
+					"item": [
+						{
+							"name": "addGuide",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJOYW1lIjoidGVtcEFkbWluIiwiY29tcGFueUlkIjoxLCJpYXQiOjE2ODAwOTYxMzQsImV4cCI6MTY4MDA5OTczNH0.aQGBh3M_IuXcMCTOxjVEAaXKroEDojmW9Q6Z7bplblM",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"guide_title\": \"guide 5\",\r\n    \"guide_content\": \"content 5\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9000/guides/addGuide",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9000",
+									"path": [
+										"guides",
+										"addGuide"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updateGuide",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJOYW1lIjoidGVtcEFkbWluIiwiY29tcGFueUlkIjoxLCJpYXQiOjE2ODAwOTQ2OTcsImV4cCI6MTY4MDA5ODI5N30.SrlQyQHnNbGRlJ-QMzMoouv_z7X7oN-E7GS0802uYsE",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"guide_id\": 1,\r\n    \"guide_title\": \"guide 1 updated\",\r\n    \"guide_content\": \"content 1 updated\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9000/guides/updateGuide",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9000",
+									"path": [
+										"guides",
+										"updateGuide"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deleteGuide",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsInVzZXJOYW1lIjoidGVtcEFkbWluMSIsImNvbXBhbnlJZCI6MywiaWF0IjoxNjgwMDg2MTg2LCJleHAiOjE2ODAwODk3ODZ9.HoS1f9Ot0mJ-kkCDOaXCL-FjxIONMiBE5_BKI6PLsvw",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"guide_id\": 6\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9000/guides/deleteGuide",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9000",
+									"path": [
+										"guides",
+										"deleteGuide"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "missions",
+					"item": []
+				}
+			]
+		},
+		{
+			"name": "maintainanceUser",
+			"item": [
+				{
+					"name": "guides",
+					"item": []
+				},
+				{
+					"name": "missions",
+					"item": []
 				}
 			]
 		}
