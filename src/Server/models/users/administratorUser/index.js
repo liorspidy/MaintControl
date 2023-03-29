@@ -1,7 +1,7 @@
-const { addUser } = require("./addUser");
-const { updateUser } = require("./updateUser");
-const { deleteUser } = require("./deleteUser");
-const { getUsers } = require("./getUsers");
+const { addUser } = require("./usersManagement/addUser");
+const { updateUser } = require("./usersManagement/updateUser");
+const { deleteUser } = require("./usersManagement/deleteUser");
+const { getUsers } = require("./usersManagement/getUsers");
 
 module.exports = {
   addUser: addUser,

@@ -1,8 +1,8 @@
-const administratorUser = require('../../../models/users/administratorUser/index')
+const user = require('../../../../models/users/user/index')
 
 module.exports = {
-  deleteUser: (req, res) => {
-    administratorUser.deleteUser(req.body)
+  getUserSettings: (req, res) => {
+    user.getUserSettings(req.user)
       .then((result) => {
         return res.status(result.httpCode).json({
           answer: result.answer

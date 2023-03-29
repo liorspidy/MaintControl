@@ -1,7 +1,9 @@
-const { login } = require("./login");
-const { getUserSettings } = require("./getUserSettings");
+const { login } = require("./authorization/login");
+const { getUserSettings } = require("./settings/getUserSettings");
+const { getGuides } = require("./guides/getGuides");
 
 module.exports = {
   login: login,
-  getUserSettings: getUserSettings
+  getUserSettings: getUserSettings,
+  getGuides: getGuides
 }

@@ -1,5 +1,5 @@
 var Promise = require('promise');
-var db = require('../../../db/index');
+var db = require('../../../../db/index');
 
 getUsers = (decodedToken, query) => {
   return new Promise((resolve, reject) => {
