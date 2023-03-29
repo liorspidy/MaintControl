@@ -1,6 +1,6 @@
-CREATE TABLE public.dim_companies(
-company_id SERIAL PRIMARY KEY,
-company_name VARCHAR(255) NOT NULL UNIQUE
+CREATE TABLE IF NOT EXISTS public.dim_companies(
+  company_id SERIAL PRIMARY KEY,
+  company_name VARCHAR(255) NOT NULL UNIQUE
 );
 
 CREATE TABLE IF NOT EXISTS public.dim_users (
@@ -36,4 +36,11 @@ INSERT INTO public.dim_users (
     '555-1234',
     'administrator',
     1
+);
+
+CREATE TABLE IF NOT EXISTS public.fact_guides (
+  guide_id SERIAL PRIMARY KEY,
+  guide_title VARCHAR(255) NOT NULL UNIQUE,
+  guide_content TEXT NOT NULL,
+  company_id INTEGER NOT NULL REFERENCES public.dim_companies(company_id)
 );
