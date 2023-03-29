@@ -11,9 +11,11 @@ getGuides = (decodedToken, query) => {
                          LIMIT ${query.LIMIT}`);
 
       result.then((answer) => {
+        const entries = Object.entries(answer.rows[0]).filter(([key]) => key !== 'company_id');
+        const guides = Object.fromEntries(entries);
           resolve({
             httpCode: 200,
-            answer: answer.rows
+            answer: guides
           })
         })
         .catch((err) => {
