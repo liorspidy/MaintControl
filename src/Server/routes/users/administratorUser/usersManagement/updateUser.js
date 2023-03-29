@@ -3,11 +3,11 @@ const updateUserRouter = express.Router();
 const cors = require('cors');
 const {
   verifyToken
-} = require('../../../utils/autohrization/jwt');
-const administratorUserController = require('../../../controllers/users/administratorUser/index');
+} = require('../../../../utils/autohrization/jwt');
+const administratorUserController = require('../../../../controllers/users/administratorUser/index');
 const {
   authorizeRole
-} = require('../../../utils/autohrization/role');
+} = require('../../../../utils/autohrization/role');
 
 updateUserRouter.use(cors());
 

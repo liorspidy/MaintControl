@@ -1,8 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const getUserSettingsRouter = express.Router();
-const userController = require('../../../controllers/users/user/index');
-const db = require('../../../db');
+const userController = require('../../../../controllers/users/user/index');
+const db = require('../../../../db');
 
 getUserSettingsRouter.use(cors());
 
