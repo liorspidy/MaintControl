@@ -15,24 +15,24 @@ import icon from "../../assets/placeholder.png";
 
 const Map = (props) => {
 
-    const [points, setPoints] = useState([]);
+    // const [points, setPoints] = useState([]);
     const purpleOptions = { color: 'purple' }
 
-    const LocationMarker = () => {
-        const [position, setPosition] = useState(null)
-        const map = useMapEvents({
-            click(clickEvent) {
-                setPoints(prevPoints => [...prevPoints, [clickEvent.latlng.lat, clickEvent.latlng.lng]])
-            },
+    // const LocationMarker = () => {
+    //     const [position, setPosition] = useState(null)
+    //     const map = useMapEvents({
+    //         click(clickEvent) {
+    //             setPoints(prevPoints => [...prevPoints, [clickEvent.latlng.lat, clickEvent.latlng.lng]])
+    //         },
 
-        })
-
-        return position === null ? null : (
-            <Marker position={position}>
-                <Popup>You are here</Popup>
-            </Marker>
-        )
-    }
+    //     })
+    //     console.log("pos", position)
+    //     return position === null ? null : (
+    //         <Marker position={position}>
+    //             <Popup>You are here</Popup>
+    //         </Marker>
+    //     )
+    // }
 
     const ResetsCenterView = ({ selectedPosition }) => {
         const map = useMap();
@@ -49,6 +49,7 @@ const Map = (props) => {
     }
 
 
+
     return (
         <MapContainer
             center={[32.014371281588524, 34.773672250580155]}
@@ -60,11 +61,18 @@ const Map = (props) => {
                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <LocationMarker />
+            {/* <LocationMarker />  */}
+
+            {props.sites.map(site => {
+                const points = site.points[0].latlngs.map((latlng) => [latlng.lat, latlng.lng])
+                const avg = points.flat().reduce((acc, curr) => acc + curr) / (points.length * points[0].length);
+
+                return <Polygon key={avg} pathOptions={purpleOptions} positions={points} />
+            })}
             <ResetsCenterView
                 selectedPosition={props.selectedPosition}
             />
-            <Polygon pathOptions={purpleOptions} positions={points} />
+            {/* <Polygon pathOptions={purpleOptions} positions={points} /> */}
 
 
         </MapContainer>

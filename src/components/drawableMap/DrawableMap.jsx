@@ -22,7 +22,6 @@ const DrawableMap = ({ mapLayers, setMapLayers }) => {
     const { layerType, layer } = e;
     if (layerType === "polygon") {
       const { _leaflet_id, options } = layer;
-      console.log("amit", layer);
 
       setMapLayers((layers) => [
         ...layers,

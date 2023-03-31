@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./taskPage.css";
 import { Fab } from "@mui/material";
 import PolylineIcon from "@mui/icons-material/Polyline";
@@ -8,6 +8,7 @@ import Map from "../../map/Map";
 import NewSite from "../../../forms/NewStie/NewSite";
 
 const TaskPage = (props) => {
+  const [sites, SetSites] = useState([])
   const [isNewSiteFormOpen, setIsNewSiteFormOpen] = useState(true);
   const addArea = () => {
     console.log("add area");
@@ -19,10 +20,15 @@ const TaskPage = (props) => {
   const closeNewSiteForm = () => {
     setIsNewSiteFormOpen(false);
   };
+
+  const addSite = (newSite) => {
+    SetSites(prev => [...prev, newSite])
+  }
+
   return (
     <div className="task-container">
-      <Map />
-      <NewSite isOpen={isNewSiteFormOpen} closeForm={closeNewSiteForm} />
+      <Map sites={sites} />
+      <NewSite isOpen={isNewSiteFormOpen} closeForm={closeNewSiteForm} addSite={addSite} />
       <div className="floating-actions">
         <Fab
           color="primary"
