@@ -37,6 +37,36 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "getUserSettings",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJOYW1lIjoidGVtcEFkbWluIiwiY29tcGFueUlkIjoxLCJpYXQiOjE2Nzk1ODkyNjYsImV4cCI6MTY3OTU5Mjg2Nn0.oUJ7hUdA55dzNEnTxsoxtrGzQ7NXvy6QThQ-v7fJEHQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/users/getUserSettings",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"users",
+								"getUserSettings"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -51,7 +81,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJOYW1lIjoidGVtcEFkbWluIiwiY29tcGFueUlkIjoxLCJpYXQiOjE2Nzg1NjMwOTQsImV4cCI6MTY3ODU2NjY5NH0.vnol9aH_3pTXVDOvLTnpdRdJWrN61Twkf_FU-SEYjFk",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJOYW1lIjoidGVtcEFkbWluIiwiY29tcGFueUlkIjoxLCJpYXQiOjE2Nzk1ODAwODEsImV4cCI6MTY3OTU4MzY4MX0.IPl8i5QLJ8eKHuqlTMZ1P52GaGNBS2ELIJV0_hKDJoI",
 									"type": "string"
 								}
 							]
@@ -99,7 +129,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"user_id\": 2,\r\n    \"user_name\":\"temp2\",\r\n\t\"first_name\":\"firstName_temp2\",\r\n\t\"last_name\":\"lastName_temp2\",\r\n\t\"email\": \"temp2@temp_company.com\",\r\n\t\"password\": \"temp2Password\",\r\n\t\"phone\": \"052-269-9877\",\r\n\t\"role\":\"maintainance\"\r\n}",
+							"raw": "{\r\n    \"user_id\": 2,\r\n    \"user_name\":\"temp2Updated\",\r\n\t\"first_name\":\"firstName_temp2Updated\",\r\n\t\"last_name\":\"lastName_temp2Updated\",\r\n\t\"email\": \"temp2Updated@temp_company.com\",\r\n\t\"password\": \"temp2UpdatedPassword\",\r\n\t\"phone\": \"052-269-9877\",\r\n\t\"role\":\"manager\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -129,7 +159,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJOYW1lIjoidGVtcEFkbWluIiwiY29tcGFueUlkIjoxLCJpYXQiOjE2Nzg1NjMwOTQsImV4cCI6MTY3ODU2NjY5NH0.vnol9aH_3pTXVDOvLTnpdRdJWrN61Twkf_FU-SEYjFk",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInVzZXJOYW1lIjoiam9obmRvZSIsImNvbXBhbnlJZCI6MSwiaWF0IjoxNjc5MDY1MDU2LCJleHAiOjE2NzkwNjg2NTZ9.rhQJOi9rM3CEL_-d8SlL7G2s97jfiqelosE1CTqBOnQ",
 									"type": "string"
 								}
 							]
@@ -138,7 +168,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"user_name\": \"temp2\",\r\n    \"email\": \"temp2@temp_company.com\",\r\n    \"company_id\": 1\r\n}",
+							"raw": "{\r\n    \"user_name\": \"temp8\",\r\n    \"email\": \"temp8@temp_company.com\",\r\n    \"company_id\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -168,7 +198,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJOYW1lIjoidGVtcEFkbWluIiwiY29tcGFueUlkIjoxLCJpYXQiOjE2Nzg1NzI4NzUsImV4cCI6MTY3ODU3NjQ3NX0.gbzO_5yREiBkUJY02E3Z9vUuKj7XfjZjaVYzFCz92pQ",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJOYW1lIjoidGVtcEFkbWluIiwiY29tcGFueUlkIjoxLCJpYXQiOjE2Nzk1ODU0MzAsImV4cCI6MTY3OTU4OTAzMH0.lBjcewVXzVVm2vxCvH2fVC77PnMRFl_QZ01bUONLnL8",
 									"type": "string"
 								}
 							]

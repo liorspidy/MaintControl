@@ -1,32 +1,40 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import SearchAddress from './AddressLookup/SearchAddress';
-import './NewMission.css';
+import missionList from './missions.json';
+import './editMission.css';
 
-function NewMission() {
+function EditMission(props) {
+  const { missionId } = useParams();
+  const mission = missionList.find(
+    (mission) => mission.id === parseInt(missionId)
+  );
+
   const navigate = useNavigate();
-  const today = new Date();
-  const formattedDate = today.toISOString().substr(0, 10);
   const [picked, setPicked] = useState(false);
   const [addressVal, setAddressVal] = useState('');
   const [fullAddress, setFullAddress] = useState('');
+  const priorityOptions = ['High', 'Medium', 'Low'];
+  const defaultPriority = priorityOptions.includes(mission.urgency)
+    ? mission.urgency
+    : '';
+
+  const areaOptions = ['Central Israel', 'Northern Israe', 'Southern Israel'];
+  const defaultArea = areaOptions.includes(mission.area) ? mission.area : '';
+
   const [missionData, setMissionData] = useState({
-    title: '',
-    address: '',
-    area: '',
-    status: '',
-    city: '',
-    description: '',
-    created_date: formattedDate,
-    priority: '',
+    title: mission.title,
+    address: mission.address,
+    area: defaultArea,
+    city: mission.city,
+    status: mission.status,
+    description: mission.description,
+    created_date: mission.created_date,
+    priority: defaultPriority,
   });
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(picked, missionData);
-    console.log(fullAddress.address.city);
-    console.log(fullAddress.lat, fullAddress.lon);
-
     if (
       picked &&
       missionData.title !== '' &&
@@ -51,7 +59,7 @@ function NewMission() {
   missionData.address = addressVal;
 
   return (
-    <div className="new-mission-form-container">
+    <div className="edit-mission-form-container">
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="title">Title</label>
@@ -126,18 +134,18 @@ function NewMission() {
             required
           >
             <option value="">Choose Priority</option>
-            <option value="high">High</option>
-            <option value="medium">Medium</option>
-            <option value="low">Low</option>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
           </select>
         </div>
 
         <button type="submit" className="create-mission-btn">
-          Create Mission
+          Save Mission
         </button>
       </form>
     </div>
   );
 }
 
-export default NewMission;
+export default EditMission;

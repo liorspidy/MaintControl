@@ -5,7 +5,8 @@ getUsers = (decodedToken, query) => {
   return new Promise((resolve, reject) => {
     try {
       result = db.query(`SELECT * FROM dim_users
-                         WHERE company_id = ${decodedToken.companyId}
+                         WHERE company_id = ${decodedToken.companyId} AND
+                         user_id != ${decodedToken.userId}
                          ORDER BY user_id
                          OFFSET ${query.OFFSET}
                          LIMIT ${query.LIMIT}`);

@@ -1,5 +1,7 @@
 const { login } = require("./login");
+const { getUserSettings } = require("./getUserSettings");
 
 module.exports = {
-  login: login
+  login: login,
+  getUserSettings: getUserSettings
 }
