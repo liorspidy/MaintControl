@@ -8,47 +8,47 @@
   font-family: Arial, sans-serif;
 }
 
-.form-group {
+.new-mission-form-container .form-group {
   margin-bottom: 1.5rem;
 }
 
-.form-group label {
+.new-mission-form-container .form-group label {
   display: block;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
   color: #fff;
 }
 
-.form-group input[type="text"],
-.form-group textarea,
-.form-group input[type="date"],
-.form-group select {
+.new-mission-form-container .form-group input[type="text"],
+.new-mission-form-container .form-group textarea,
+.new-mission-form-container .form-group input[type="date"],
+.new-mission-form-container .form-group select {
   width: 100%;
   padding: 0.5rem;
   border-radius: 0.5rem;
   border: none;
   background-color: rgba(255, 255, 255, 0.1);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: #fff;
   caret-color: #fff;
   text-align: start;
 }
 
-.form-group input[type="text"]:focus,
-.form-group textarea:focus,
-.form-group input[type="date"]:focus,
-.form-group select:focus {
+.new-mission-form-container .form-group input[type="text"]:focus,
+.new-mission-form-container .form-group textarea:focus,
+.new-mission-form-container .form-group input[type="date"]:focus,
+.new-mission-form-container .form-group select:focus {
   background-color: rgba(255, 255, 255, 0.2);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-.form-group textarea {
+.new-mission-form-container .form-group textarea {
   height: 6rem;
 }
 
-.form-group select option {
+.new-mission-form-container .form-group select option {
   background: #173f5f;
   color: #fff;
 }
@@ -60,7 +60,7 @@
   border: none;
   border-radius: 0.5rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  font-size: 1.2rem;
+  font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
   margin-top: 1rem;
