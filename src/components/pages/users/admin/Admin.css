@@ -1,32 +1,155 @@
-.adminButtons {
+.listContainer {
   margin: 4rem auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: lightblue;
   border-radius: 15px;
   max-width: 80%;
 }
 
-.admin-button {
-  display: flex;
-  margin: 2rem;
-  font-weight: bold;
-  padding: 28px 28px;
-  background-color: white;
-  box-shadow: 0 2px 4px rgb(0 0 0 / 25%);
-  color: black;
-  border-radius: 15px;
-  text-decoration: none;
-  font-size: 40px;
-  text-align: center;
-  width: 40rem;
-  justify-content: center;
-  align-items: center;
+.listItemText,
+.listSubHeader{
+cursor: pointer;
 }
 
-.admin-button:hover {
+.listItemText:hover{
+  background-color: rgb(228, 228, 228);
+    transition: 0.3s all;
+}
+
+.searchUser{
+  margin: 1rem auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  max-width: 80%;
+  height: 2.4rem;
+  width: 28rem;
+}
+
+.userBox {
+  height: 84vh;
+  overflow: auto;
+}
+
+.users {
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  margin-bottom: 5rem;
+  background-color: lightblue;
+  border-radius: 15px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 25%);
+}
+
+.usersButtons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto !important;
+}
+
+.addIcon {
+  color: black;
+  scale: 2.2;
+  margin: 1.4rem;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  background-color: white;
+  padding: 0.15rem;
+  margin-right: 1.5rem;
+}
+
+.editIconEditOff {
+  background-color: white;
+}
+
+.editIconEditOn {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+.deleteIconRemovingOn {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+.deleteIconRemovingOff {
+  background-color: white;
+}
+
+.editIconEditOn,
+.editIconEditOff {
+  color: black;
+  scale: 2.2;
+  margin: 1.4rem;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  padding: 0.3rem;
+  margin-right: 1.5rem;
+}
+
+.deleteIconRemovingOn,
+.deleteIconRemovingOff {
+  color: black;
+  scale: 2.2;
+  margin: 1.4rem;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  padding: 0.3rem;
+  margin-right: 1.5rem;
+}
+
+.userBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 2rem 1rem;
+  border-radius: 15px;
+  padding: 0 2rem;
+  height: 6rem;
+  width: 6rem;
+  scale: 1.24;
+  cursor: pointer;
+}
+
+.userBtn:hover {
   background-color: rgb(228, 228, 228);
   transition: 0.3s all;
+}
+
+a {
+  text-decoration: none !important;
+  color: black;
+}
+
+::selection {
+  background: none;
+}
+
+@media (max-width: 900px) {
+  .userBtn {
+    margin: 1rem 0rem;
+  }
+
+  .listContainer {
+    margin: 1rem 1rem;
+  }
+
+  .users {
+    width: 80%;
+  }
+
+  .deleteIconRemovingOn,
+  .deleteIconRemovingOff,
+  .editIconEditOn,
+  .editIconEditOff,
+  .addIcon {
+    scale: 2;
+  }
 }
