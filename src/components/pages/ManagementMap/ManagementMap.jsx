@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./taskPage.css";
+import "./ManagementMap.css";
 import { Fab } from "@mui/material";
 import PolylineIcon from "@mui/icons-material/Polyline";
 import ConstructionIcon from "@mui/icons-material/Construction";
@@ -9,7 +9,7 @@ import NewSite from "../../../forms/NewStie/NewSite";
 
 const TaskPage = (props) => {
   const [sites, SetSites] = useState([])
-  const [isNewSiteFormOpen, setIsNewSiteFormOpen] = useState(true);
+  const [isNewSiteFormOpen, setIsNewSiteFormOpen] = useState(false);
   const addArea = () => {
     console.log("add area");
   };

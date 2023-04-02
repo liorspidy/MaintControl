@@ -99,6 +99,11 @@ export default function AccountMenu(props) {
             <Avatar /> Daily Missions
           </MenuItem>
         </Link>
+        <Link to="/map">
+          <MenuItem>
+            <Avatar /> Management Map
+          </MenuItem>
+        </Link>
         <Divider />
         <Link to="admin/addUser">
           <MenuItem>
