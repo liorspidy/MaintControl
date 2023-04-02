@@ -9,7 +9,7 @@ import NewSite from "../../../forms/NewStie/NewSite";
 
 const TaskPage = (props) => {
   const [sites, SetSites] = useState([])
-  const [isNewSiteFormOpen, setIsNewSiteFormOpen] = useState(true);
+  const [isNewSiteFormOpen, setIsNewSiteFormOpen] = useState(false);
   const addArea = () => {
     console.log("add area");
   };
