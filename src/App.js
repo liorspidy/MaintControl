@@ -6,6 +6,7 @@ import { useLocation } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
 import Forgot from './components/pages/login/forgot/Forgot';
 import Task from './components/pages/task/Task';
+import TaskPage from './components/pages/taskPage/taskPage';
 import Guides from './components/pages/guides/Guides';
 import AddGuide from './components/pages/guides/addGuide/AddGuide';
 import EditGuide from './components/pages/guides/editGuide/EditGuide';

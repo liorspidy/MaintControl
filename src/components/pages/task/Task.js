@@ -10,6 +10,7 @@ import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import Map from "../../map/Map";
 
 const Task = (props) => {
   const [selectedPosition, setSelectedPosition] = useState(null);
