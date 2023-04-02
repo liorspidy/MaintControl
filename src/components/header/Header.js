@@ -39,7 +39,7 @@ const Header = (props) => {
         return "Admin page";
       case "admin/addUser":
         return "Add a User";
-      case "map/":
+      case "map":
         return "Management Map";
       default:
         return "Unknown Page";
