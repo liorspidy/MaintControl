@@ -1,34 +1,35 @@
-import React, { useState } from 'react';
-import Maps from './map/Maps';
-import './Task.css';
-import tasks from './tasks.json';
-import PrevTasksTable from './PrevTasksTable';
-import AssignmentIcon from '@mui/icons-material/Assignment';
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import Fab from '@mui/material/Fab';
-import AddIcon from '@mui/icons-material/Add';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
+import React, { useState } from "react";
+import Maps from "./map/Maps";
+import "./Task.css";
+import tasks from "./tasks.json";
+import PrevTasksTable from "./PrevTasksTable";
+import AssignmentIcon from "@mui/icons-material/Assignment";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import Fab from "@mui/material/Fab";
+import AddIcon from "@mui/icons-material/Add";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import Map from "../../map/Map";
 
 const Task = (props) => {
   const [selectedPosition, setSelectedPosition] = useState(null);
   const [editTaskClicked, setEditTaskClicked] = useState(false);
-  const [locationName, setLocationName] = useState('');
+  const [locationName, setLocationName] = useState("");
   const navigate = useNavigate();
 
   const getStatusColor = (status) => {
     switch (status) {
-      case 'Pending':
-        return '#ffa500';
-      case 'In Progress':
-        return '#1e90ff';
-      case 'Finished':
-        return '#008000';
-      case 'Cancelled':
-        return '#ff0000';
+      case "Pending":
+        return "#ffa500";
+      case "In Progress":
+        return "#1e90ff";
+      case "Finished":
+        return "#008000";
+      case "Cancelled":
+        return "#ff0000";
       default:
-        return '#000';
+        return "#000";
     }
   };
 
@@ -60,7 +61,7 @@ const Task = (props) => {
     });
   };
 
-  const editTaskClickedClass = editTaskClicked ? 'info' : 'white';
+  const editTaskClickedClass = editTaskClicked ? "info" : "white";
 
   return (
     <div className="taskPageBox">
@@ -133,7 +134,7 @@ const Task = (props) => {
         )}
       </div>
       <div className="mapsBox">
-        <Maps
+        <Map
           selectedPosition={selectedPosition}
           locationName={locationName}
           setLocationName={setLocationName}
