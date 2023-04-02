@@ -3,12 +3,6 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useNavigate } from 'react-router-dom';
 import './AddUser.css';
-import axios from 'axios';
-
-function validateEmail(email) {
-  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return regex.test(email);
-}
 
 const AddUser = () => {
   const [username, setUsername] = useState('');
@@ -18,8 +12,9 @@ const AddUser = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
-  //const [isValidEmail, setIsValidEmail] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [area, setArea] = useState('');
+  const [address, setAddress] = useState('');
   const [authorization, setAuthorization] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -46,7 +41,6 @@ const AddUser = () => {
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
-    //setIsValidEmail(validateEmail(event.target.value));
   };
 
   const handlePhoneNumberChange = (event) => {
@@ -61,6 +55,13 @@ const AddUser = () => {
     setShowPassword(!showPassword); // toggle showPassword state
   };
 
+  const handleAddressChange = (event) => {
+    setAddress(event.target.value);
+  };
+
+  const handleAreaChange = (event) => {
+    setArea(event.target.value);
+  };
   const token = localStorage.getItem('token');
 
   async function addUserFetch() {
@@ -78,11 +79,16 @@ const AddUser = () => {
           email: email,
           password: password,
           phone: phoneNumber,
+          // address: address,
+          // area: area,
           role: authorization,
           company_id: companyId,
         }),
       });
       if (!response.ok) {
+        if (response.statusText === 'Unauthorized') {
+          setError('Please login again');
+        }
         throw new Error(response.statusText);
       }
       console.log(response);
@@ -107,12 +113,13 @@ const AddUser = () => {
     } else if (lastName.length < 2) {
       setError('Last name must be at least 2 characters');
     } else if (phoneNumber.length !== 10) {
-      /*else if (!isValidEmail) {
-        setError('Must enter a valid Email');
-    }*/
       setError('Must enter a valid phone number');
     } else if (document.getElementById('authorization').value === 'choose') {
       setError('Must choose an authorization');
+    } else if (document.getElementById('Area').value === 'choose') {
+      setError('Must enter a geographic area');
+    } else if (address === '') {
+      setError('Must enter an address');
     } else {
       // submit the form
       addUserFetch();
@@ -132,9 +139,9 @@ const AddUser = () => {
               value={username}
               onChange={handleUsernameChange}
               required
+              placeholder="Please enter a username"
             />
           </label>
-          <br />
           <label className="addUserLabel" htmlFor="pass">
             Password:
             <div className="passContent">
@@ -145,6 +152,7 @@ const AddUser = () => {
                 value={password}
                 onChange={handlePasswordChange}
                 required
+                placeholder="Please enter an 8 characters password"
               />
               {showPassword && (
                 <VisibilityIcon className="eye" onClick={handleShowPassword} />
@@ -157,7 +165,6 @@ const AddUser = () => {
               )}
             </div>
           </label>
-          <br />
           <label className="addUserLabel" htmlFor="firstName">
             First name:
             <input
@@ -167,9 +174,9 @@ const AddUser = () => {
               value={firstName}
               onChange={handleFirstNameChange}
               required
+              placeholder="Please enter a first name"
             />
           </label>
-          <br />
           <label className="addUserLabel" htmlFor="LastName">
             Last name:
             <input
@@ -179,9 +186,9 @@ const AddUser = () => {
               value={lastName}
               onChange={handleLastNameChange}
               required
+              placeholder="Please enter a last name"
             />
           </label>
-          <br />
           <label className="addUserLabel" htmlFor="Email">
             Email adress:
             <input
@@ -191,9 +198,9 @@ const AddUser = () => {
               value={email}
               onChange={handleEmailChange}
               required
+              placeholder="Please enter a valid email"
             />
           </label>
-          <br />
           <label className="addUserLabel" htmlFor="phoneNumber">
             Phone number:
             <input
@@ -203,9 +210,37 @@ const AddUser = () => {
               value={phoneNumber}
               onChange={handlePhoneNumberChange}
               required
+              placeholder="Please enter a valid phone number"
             />
           </label>
-          <br />
+          <label className="addUserLabel" htmlFor="Address">
+            Living Address:
+            <input
+              id="Address"
+              className="addUserInput"
+              type="text"
+              value={address}
+              onChange={handleAddressChange}
+              required
+              placeholder="Please enter an address"
+            />
+          </label>
+          <label className="addUserLabel" htmlFor="Area">
+            Geographic Area:
+            <select
+              id="Area"
+              name="Area"
+              className="addUserInput"
+              value={area}
+              onChange={handleAreaChange}
+              required
+            >
+              <option value="choose">Choose Geographic Area</option>
+              <option value="center">Central Israel</option>
+              <option value="north">Northern Israel</option>
+              <option value="south">Southern Israel</option>
+            </select>
+          </label>
           <label htmlFor="authorization" className="addUserLabel">
             Authorization:
             <select
@@ -222,7 +257,6 @@ const AddUser = () => {
               <option value="maintainance">Maintenance man</option>
             </select>
           </label>
-          <br />
           <label className="addUserLabel" htmlFor="companyId">
             Company ID:
             <input
@@ -232,12 +266,12 @@ const AddUser = () => {
               value={companyId}
               onChange={handleCompanyIdChange}
               required
+              placeholder="Please enter a company id"
             />
           </label>
         </div>
         <div className="addUserFormBtn">
           {error && <div className="addUserError">{error}</div>}
-          <br />
           <button className="addUserButton" type="submit">
             Add a user
           </button>

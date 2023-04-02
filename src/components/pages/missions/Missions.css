@@ -1,7 +1,7 @@
 .MissionsTableBox {
-  width: 80%;
+  width: 90%;
   height: 70%;
-  min-width: 70rem;
+  min-width: 80rem;
   padding: 2rem;
   display: flex;
   flex-direction: column;
@@ -38,13 +38,18 @@
 
 .actionBtns {
   margin: 0 1.5rem;
+  gap: 1rem;
+  display: flex;
 }
+
 .UrgencyHigh {
   color: red !important;
 }
+
 .UrgencyMed {
   color: orange !important;
 }
+
 .UrgencyLow {
   color: greenyellow !important;
 }
@@ -148,11 +153,13 @@
   color: #fff;
   min-width: 50px;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .filters {
   margin: 0 1.5rem;
   display: flex;
+  cursor: pointer;
 }
 
 .filterContent {
