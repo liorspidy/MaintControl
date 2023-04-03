@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import "./Admin.css";
 import * as React from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -9,6 +8,7 @@ import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useState, useEffect } from "react";
+import "./Admin.css";
 
 const token = localStorage.getItem("token");
 
@@ -35,11 +35,38 @@ async function getUsers() {
   }
 }
 
+async function deleteUser(id, username, email, companyId) {
+  try {
+    const response = await fetch(`http://localhost:9000/users/deleteUser`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        user_name: username,
+        email: email,
+        company_id: companyId,
+      }),
+    });
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+    const data = await response.json();
+    console.log(data);
+    return data;
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+}
+
 const Admin = () => {
   const [isEditable, setIsEditable] = useState(false);
   const [isRemoving, setIsRemoving] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [users, setUsers] = useState([]);
+
   const [isSectionOpen, setIsSectionOpen] = useState(
     ["administrator", "manager", "maintenance"].map(() => true)
   );
@@ -75,6 +102,21 @@ const Admin = () => {
     }
   };
 
+  const handleDeleteUser = async (id, username, email, companyId) => {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this user?"
+    );
+    if (confirmed) {
+      try {
+        await deleteUser(id, username, email, companyId);
+        const updatedUsers = users.filter((user) => user.user_id !== id);
+        setUsers(updatedUsers);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  };
+
   const filteredUsers = users.filter((user) =>
     user.first_name.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -89,6 +131,7 @@ const Admin = () => {
         onChange={handleSearchBar}
       />
       <List
+        className="list"
         sx={{
           width: "100%",
           maxWidth: 700,
@@ -105,6 +148,12 @@ const Admin = () => {
             <li key={`section-${sectionId}`}>
               <ul>
                 <ListSubheader
+                  sx={{
+                    bgcolor: "#173f5f",
+                    fontWeight: "bold",
+                    color: "white",
+                    fontSize: "16px",
+                  }}
                   className="listSubHeader"
                   onClick={() => toggleSection(index)}
                 >{`${sectionId}`}</ListSubheader>
@@ -116,7 +165,7 @@ const Admin = () => {
                         <ListItem key={`user-${filteredUser.user_id}`}>
                           {isEditable ? (
                             <Link
-                              to={`/editUser/${filteredUser.user_id}`}
+                              to={`/admin/editUser/${filteredUser.user_id}`}
                               key={filteredUser.user_id}
                             >
                               <ListItemText
@@ -124,11 +173,18 @@ const Admin = () => {
                                 className="listItemText"
                               />
                             </Link>
-                          ) : //adding the DEL function
-                          isRemoving ? (
+                          ) : isRemoving ? (
                             <ListItemText
                               primary={`${filteredUser.first_name} ${filteredUser.last_name}`}
                               className="listItemText"
+                              onClick={() => {
+                                handleDeleteUser(
+                                  filteredUser.user_id,
+                                  filteredUser.user_name,
+                                  filteredUser.email,
+                                  filteredUser.company_id
+                                );
+                              }}
                             />
                           ) : (
                             <ListItemText
