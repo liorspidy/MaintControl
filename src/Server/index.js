@@ -3,7 +3,7 @@ const colors = require('colors');
 const db = require('./db/index');
 const fs = require("fs");
 
-const PORT = 9000;
+const PORT = 8080;
 
 // connect middlware
 const app = express();
