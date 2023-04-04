@@ -14,12 +14,14 @@ const Header = (props) => {
       return "Edit A Guide";
     } else if (pageName.includes("guides/details")) {
       return "Guide details";
+    } else if (pageName.includes("admin/editUser")) {
+      return "Edit A User";
     } else if (pageName.includes("missions/edit")) {
       return "Edit a mission";
     } else if (pageName.includes("/fill/")) {
       return "Filling a task";
     }
-    console.log("name",pageName)
+    console.log("name", pageName);
     switch (pageName) {
       case "login":
         return "Login Page";

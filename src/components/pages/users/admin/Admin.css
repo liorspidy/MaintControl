@@ -1,3 +1,8 @@
+
+.list{
+  border-radius: 15px;
+}
+
 .listContainer {
   margin: 4rem auto;
   display: flex;
@@ -8,9 +13,12 @@
   max-width: 80%;
 }
 
-.listItemText,
 .listSubHeader{
 cursor: pointer;
+}
+
+.listItemText{
+  cursor: pointer;
 }
 
 .listItemText:hover{
@@ -109,12 +117,12 @@ cursor: pointer;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin: 2rem 1rem;
+  margin: 1rem 1rem;
   border-radius: 15px;
   padding: 0 2rem;
   height: 6rem;
   width: 6rem;
-  scale: 1.24;
+  scale: 1.2;
   cursor: pointer;
 }
 
