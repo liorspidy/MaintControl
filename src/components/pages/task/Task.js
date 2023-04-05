@@ -1,41 +1,140 @@
-import React, { useState } from "react";
-import Maps from "./map/Maps";
-import "./Task.css";
-import tasks from "./tasks.json";
-import PrevTasksTable from "./PrevTasksTable";
-import AssignmentIcon from "@mui/icons-material/Assignment";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
-import Fab from "@mui/material/Fab";
-import AddIcon from "@mui/icons-material/Add";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
-import Map from "../../map/Map";
+import React, { useState } from 'react';
+import './Task.css';
+import tasks from './tasks.json';
+import PrevTasksTable from './PrevTasksTable';
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import { useNavigate, Link } from 'react-router-dom';
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import NumbersIcon from '@mui/icons-material/Numbers';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import TextRotateVerticalIcon from '@mui/icons-material/TextRotateVertical';
+import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
+import Map from '../../map/Map';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 const Task = (props) => {
   const [selectedPosition, setSelectedPosition] = useState(null);
   const [editTaskClicked, setEditTaskClicked] = useState(false);
-  const [locationName, setLocationName] = useState("");
+  const [locationName, setLocationName] = useState('');
+  const [tasksSortingOrderDate, setTasksSortingOrderDate] = useState('asc');
+  const [tasksSortingOrderAlph, setTasksSortingOrderAlph] = useState('asc');
+  const [tasksSortingOrderSerial, setTasksSortingOrderSerial] = useState('asc');
+  const [tasksSortingOrderStatus, setTasksSortingOrderStatus] =
+    useState('desc');
+  const [tasksState, setTasksState] = useState(
+    tasks.map((task) => ({ ...task, isProblemOpen: false }))
+  );
+
+  const [filter, setFilter] = useState('status');
   const navigate = useNavigate();
 
-  const getStatusColor = (status) => {
-    switch (status) {
-      case "Pending":
-        return "#ffa500";
-      case "In Progress":
-        return "#1e90ff";
-      case "Finished":
-        return "#008000";
-      case "Cancelled":
-        return "#ff0000";
-      default:
-        return "#000";
+  const handleFilter = (event, newFilter) => {
+    if (newFilter !== null) {
+      setFilter(newFilter);
     }
   };
 
-  const sortedTasks = tasks.sort((a, b) => {
-    return a.product_serial_number.localeCompare(b.product_serial_number);
-  });
+  // sort asc or desc by clicking on filter
+  const sortingHandlerDate = () => {
+    if (tasksSortingOrderDate === 'asc') {
+      setTasksSortingOrderDate('desc');
+    } else if (tasksSortingOrderDate === 'desc') {
+      setTasksSortingOrderDate('asc');
+    }
+  };
+  const sortingHandlerAlph = () => {
+    if (tasksSortingOrderAlph === 'asc') {
+      setTasksSortingOrderAlph('desc');
+    } else if (tasksSortingOrderAlph === 'desc') {
+      setTasksSortingOrderAlph('asc');
+    }
+  };
+  const sortingHandlerSerial = () => {
+    if (tasksSortingOrderSerial === 'asc') {
+      setTasksSortingOrderSerial('desc');
+    } else if (tasksSortingOrderSerial === 'desc') {
+      setTasksSortingOrderSerial('asc');
+    }
+  };
+  const sortingHandlerUrg = () => {
+    if (tasksSortingOrderStatus === 'asc') {
+      setTasksSortingOrderStatus('desc');
+    } else if (tasksSortingOrderStatus === 'desc') {
+      setTasksSortingOrderStatus('asc');
+    }
+  };
+
+  // set filters
+
+  let filteredTasks = tasksState;
+
+  if (filter === 'abc' && tasksSortingOrderAlph === 'asc') {
+    filteredTasks = tasksState.sort((a, b) =>
+      a.problem.localeCompare(b.problem)
+    );
+  } else if (filter === 'abc' && tasksSortingOrderAlph === 'desc') {
+    filteredTasks = tasksState.sort((a, b) =>
+      b.problem.localeCompare(a.problem)
+    );
+  }
+  if (filter === 'serial' && tasksSortingOrderSerial === 'asc') {
+    filteredTasks = tasksState.sort((a, b) =>
+      a.product_serial_number.localeCompare(b.product_serial_number)
+    );
+  } else if (filter === 'serial' && tasksSortingOrderSerial === 'desc') {
+    filteredTasks = tasksState.sort((a, b) =>
+      b.product_serial_number.localeCompare(a.product_serial_number)
+    );
+  }
+  if (filter === 'date_updated' && tasksSortingOrderDate === 'asc') {
+    filteredTasks = tasksState.sort((a, b) =>
+      a.date_updated.localeCompare(b.date_updated)
+    );
+  } else if (filter === 'date_updated' && tasksSortingOrderDate === 'desc') {
+    filteredTasks = tasksState.sort((a, b) =>
+      b.date_updated.localeCompare(a.date_updated)
+    );
+  }
+
+  const statusValues = {
+    'In Progress': 1,
+    Pending: 2,
+    Finished: 3,
+    Cancelled: 4,
+  };
+  if (filter === 'status' && tasksSortingOrderStatus === 'asc') {
+    filteredTasks = tasksState.sort(
+      (a, b) => statusValues[b.status] - statusValues[a.status]
+    );
+  } else if (filter === 'status' && tasksSortingOrderStatus === 'desc') {
+    filteredTasks = tasksState.sort(
+      (a, b) => statusValues[a.status] - statusValues[b.status]
+    );
+  }
+
+  const getStatusColor = (status) => {
+    switch (status) {
+      case 'Pending':
+        return '#ffa500';
+      case 'In Progress':
+        return '#1e90ff';
+      case 'Finished':
+        return '#008000';
+      case 'Cancelled':
+        return '#ff0000';
+      default:
+        return '#000';
+    }
+  };
+
+  // const sortedTasks = tasks.sort((a, b) => {
+  //   return a.product_serial_number.localeCompare(b.product_serial_number);
+  // });
 
   const taskPositionHandler = (task) => {
     if (!editTaskClicked) {
@@ -61,75 +160,148 @@ const Task = (props) => {
     });
   };
 
-  const editTaskClickedClass = editTaskClicked ? "info" : "white";
+  const toggleProblem = (task, event) => {
+    const index = filteredTasks.findIndex(
+      (curr) => curr.task_id === task.task_id
+    );
+    const updatedTasks = [...tasksState];
+    updatedTasks[index] = {
+      ...updatedTasks[index],
+      isProblemOpen: !updatedTasks[index].isProblemOpen,
+    };
+    setTasksState(updatedTasks);
+    event.stopPropagation();
+  };
+
+  const editTaskClickedClass = editTaskClicked ? 'info' : 'white';
 
   return (
     <div className="taskPageBox">
       <div className="tasksList">
-        <div className="actionBtns">
-          <Fab size="small" color="white" aria-label="add">
-            <DeleteIcon />
-          </Fab>
-          <Fab
-            size="small"
-            color={editTaskClickedClass}
-            aria-label="add"
-            onClick={editTaskHandler}
-          >
-            <EditIcon />
-          </Fab>
-          <Link className="newMission" to={`${currentUrl}/addTask`}>
+        <div className="taskListHeader">
+          <div className="taskFilters">
+            <ToggleButtonGroup
+              value={filter}
+              exclusive
+              required
+              onChange={handleFilter}
+              aria-label="set filter"
+            >
+              <ToggleButton
+                value="date_updated"
+                aria-label="filter by date updated"
+                onClick={sortingHandlerDate}
+              >
+                <CalendarMonthIcon />
+              </ToggleButton>
+              <ToggleButton
+                value="abc"
+                aria-label="filter alphabetically"
+                onClick={sortingHandlerAlph}
+              >
+                <TextRotateVerticalIcon />
+              </ToggleButton>
+              <ToggleButton
+                value="serial"
+                aria-label="filter by serial number"
+                onClick={sortingHandlerSerial}
+              >
+                <NumbersIcon />
+              </ToggleButton>
+              <ToggleButton
+                value="status"
+                aria-label="filter by status"
+                onClick={sortingHandlerUrg}
+              >
+                <PriorityHighIcon />
+              </ToggleButton>
+            </ToggleButtonGroup>
+          </div>
+          <div className="actionBtns">
             <Fab size="small" color="white" aria-label="add">
-              <AddIcon />
+              <DeleteIcon />
             </Fab>
-          </Link>
+            <Fab
+              size="small"
+              color={editTaskClickedClass}
+              aria-label="add"
+              onClick={editTaskHandler}
+            >
+              <EditIcon />
+            </Fab>
+            <Link className="newMission" to={`${currentUrl}/addTask`}>
+              <Fab size="small" color="white" aria-label="add">
+                <AddIcon />
+              </Fab>
+            </Link>
+          </div>
         </div>
-        {sortedTasks.length > 0 && (
+        {filteredTasks.length > 0 && (
           <ul>
-            {sortedTasks &&
-              sortedTasks.map((task, index) => (
-                <li
-                  className="taskItem"
-                  key={index}
-                  onClick={taskPositionHandler.bind(this, task)}
-                >
-                  <div className="taskCard">
-                    <div className="product">
-                      <p className="taskTitle">Product:</p>
-                      <div className="taskProductDetails">
-                        <h3>{task.product_type}</h3>
-                        <p className="tasksSerialNumber">
-                          {task.product_serial_number}
-                        </p>
+            {filteredTasks &&
+              filteredTasks.map((task, index) => {
+                return (
+                  <li
+                    className="taskItem"
+                    key={index}
+                    onClick={taskPositionHandler.bind(this, task)}
+                  >
+                    <div className="taskCard">
+                      <div className="product">
+                        <p className="taskTitle">Product:</p>
+                        <div className="taskProductDetails">
+                          <h3>{task.product_type}</h3>
+                          <p className="tasksSerialNumber">
+                            {task.product_serial_number}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="problem">
+                        <p className="taskTitle">Problem:</p>
+                        <div className="taskProblem">
+                          <p
+                            className={`taskProblemContent ${
+                              task.isProblemOpen ? 'open' : ''
+                            }`}
+                          >
+                            {task.problem}
+                          </p>
+                          {task.problem.length > 42 && (
+                            <div
+                              className="problemExpandArrow"
+                              onClick={toggleProblem.bind(this, task)}
+                            >
+                              <KeyboardArrowDownIcon />
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                      <div className="lastUpdated">
+                        <p className="taskTitle">Last Updated:</p>
+                        <p>{task.date_updated}</p>
+                      </div>
+                      <div className="status">
+                        <div
+                          className="fillTaskForm"
+                          onClick={fillTaskFormHandler.bind(this, task)}
+                        >
+                          <AssignmentIcon />
+                        </div>
+                        <div
+                          className="statusBall"
+                          style={{
+                            backgroundColor: getStatusColor(task.status),
+                          }}
+                          title={task.status}
+                        ></div>
                       </div>
                     </div>
-                    <div className="problem">
-                      <p className="taskTitle">Problem:</p>
-                      <p className="taskProblemContent">{task.problem}</p>
-                    </div>
-                    <div className="lastUpdated">
-                      <p className="taskTitle">Last Updated:</p>
-                      <p>{task.date_updated}</p>
-                    </div>
-                    <div className="status">
-                      <div
-                        className="fillTaskForm"
-                        onClick={fillTaskFormHandler.bind(this, task)}
-                      >
-                        <AssignmentIcon />
-                      </div>
-                      <div
-                        className="statusBall"
-                        style={{ backgroundColor: getStatusColor(task.status) }}
-                        title={task.status}
-                      ></div>
-                    </div>
-                  </div>
-                </li>
-              ))}
+                  </li>
+                );
+              })}
           </ul>
         )}
-        {sortedTasks.length === 0 && (
+        {filteredTasks.length === 0 && (
           <p className="noTasks">No Tasks Yet....</p>
         )}
       </div>
