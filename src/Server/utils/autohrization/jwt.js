@@ -7,7 +7,7 @@ generateAccessToken = (payload) => {
       expiresIn: '1h'
     };
 
-    jwt.sign(payload, jwtSecretConfig.secretKey, options, (err, token) => {
+    jwt.sign(payload, process.env.TOKEN_SECRET_KEY, options, (err, token) => {
       if (err) {
         reject(err)
       } else {
@@ -28,7 +28,7 @@ verifyToken = (req, res, next) => {
 
   const token = authHeader.split(' ')[1]
 
-  jwt.verify(token, jwtSecretConfig.secretKey, (err, decodedToken) => {
+  jwt.verify(token, process.env.TOKEN_SECRET_KEY, (err, decodedToken) => {
     if (err) {
       return res.status(401).json({
         error: 'Invalid or expired token'
