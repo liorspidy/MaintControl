@@ -1,22 +1,22 @@
-import { useState } from 'react';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import { useNavigate } from 'react-router-dom';
-import './AddUser.css';
+import { useState } from "react";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { useNavigate } from "react-router-dom";
+import "./AddUser.css";
 
 const AddUser = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false); // new state to track whether to show or hide the password
-  const [companyId, setCompanyId] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [area, setArea] = useState('');
-  const [address, setAddress] = useState('');
-  const [authorization, setAuthorization] = useState('');
-  const [error, setError] = useState('');
+  const [companyId, setCompanyId] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [area, setArea] = useState("");
+  const [address, setAddress] = useState("");
+  const [authorization, setAuthorization] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleUsernameChange = (event) => {
@@ -62,37 +62,40 @@ const AddUser = () => {
   const handleAreaChange = (event) => {
     setArea(event.target.value);
   };
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
 
   async function addUserFetch() {
     try {
-      const response = await fetch('http://localhost:9000/users/addUser', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          user_name: username,
-          first_name: firstName,
-          last_name: lastName,
-          email: email,
-          password: password,
-          phone: phoneNumber,
-          // address: address,
-          // area: area,
-          role: authorization,
-          company_id: companyId,
-        }),
-      });
+      const response = await fetch(
+        "https://maint-control-docker-image-2n3aq2y4ja-zf.a.run.app/users/addUser",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            user_name: username,
+            first_name: firstName,
+            last_name: lastName,
+            email: email,
+            password: password,
+            phone: phoneNumber,
+            // address: address,
+            // area: area,
+            role: authorization,
+            company_id: companyId,
+          }),
+        }
+      );
       if (!response.ok) {
-        if (response.statusText === 'Unauthorized') {
-          setError('Please login again');
+        if (response.statusText === "Unauthorized") {
+          setError("Please login again");
         }
         throw new Error(response.statusText);
       }
       console.log(response);
-      navigate('/admin');
+      navigate("/admin");
       return true;
     } catch (err) {
       console.error(err);
@@ -103,23 +106,23 @@ const AddUser = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (password.length < 8) {
-      setError('Password must be at least 8 characters');
+      setError("Password must be at least 8 characters");
     } else if (username.length < 4) {
-      setError('Username must be at least 4 characters');
+      setError("Username must be at least 4 characters");
     } else if (companyId.length === 0) {
-      setError('Must enter company ID');
+      setError("Must enter company ID");
     } else if (firstName.length < 2) {
-      setError('First name must be at least 2 characters');
+      setError("First name must be at least 2 characters");
     } else if (lastName.length < 2) {
-      setError('Last name must be at least 2 characters');
+      setError("Last name must be at least 2 characters");
     } else if (phoneNumber.length !== 10) {
-      setError('Must enter a valid phone number');
-    } else if (document.getElementById('authorization').value === 'choose') {
-      setError('Must choose an authorization');
-    } else if (document.getElementById('Area').value === 'choose') {
-      setError('Must enter a geographic area');
-    } else if (address === '') {
-      setError('Must enter an address');
+      setError("Must enter a valid phone number");
+    } else if (document.getElementById("authorization").value === "choose") {
+      setError("Must choose an authorization");
+    } else if (document.getElementById("Area").value === "choose") {
+      setError("Must enter a geographic area");
+    } else if (address === "") {
+      setError("Must enter an address");
     } else {
       // submit the form
       addUserFetch();
@@ -148,7 +151,7 @@ const AddUser = () => {
               <input
                 id="pass"
                 className="addUserInput"
-                type={showPassword ? 'text' : 'password'} // show text if showPassword is true, otherwise show password
+                type={showPassword ? "text" : "password"} // show text if showPassword is true, otherwise show password
                 value={password}
                 onChange={handlePasswordChange}
                 required
