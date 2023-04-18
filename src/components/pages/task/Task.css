@@ -43,14 +43,17 @@
 }
 
 .taskItem:hover {
-  background-color: #16344c;
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
 .tasksList ul {
   list-style: none;
   padding: 0;
+  margin: 0;
   display: flex;
   flex-direction: column;
+  background-color: #173f5f;
+  border-radius: 5px;
 }
 
 
@@ -93,10 +96,43 @@
   width: 55rem;
 }
 
-.taskProblemContent {
-  text-overflow: ellipsis;
+.taskProblem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 22rem;
 }
 
+.taskProblemContent {
+  text-overflow: ellipsis;
+  width: 19rem;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.taskProblemContent.open {
+  text-overflow: unset;
+  white-space: unset;
+}
+
+.problemExpandArrow {
+  align-items: center;
+  display: flex;
+  margin-left: 1rem;
+  color: white;
+  border: 1px solid #a6a6a642;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 25%);
+  border-radius: 50%;
+  min-height: 2rem;
+  min-width: 2rem;
+  justify-content: center;
+  transition: all 0.2s ease-in-out;
+}
+
+.problemExpandArrow:hover,
+.problemExpandArrow:active {
+  background-color: #5187b3;
+}
 
 .taskTitle {
   font-weight: bold;
@@ -167,6 +203,12 @@
   color: black;
   font-size: 1.5rem;
   font-weight: bold;
+}
+
+.taskListHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 @media (max-width: 900px) {

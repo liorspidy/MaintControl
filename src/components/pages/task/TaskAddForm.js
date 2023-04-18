@@ -1,20 +1,15 @@
 import './TaskEditForm.css';
-import tasksList from './tasks.json';
-import { useParams } from 'react-router-dom';
 import Subtasks from './Subtasks/Subtasks';
 
-function TaskEditForm(props) {
-  const { taskId } = useParams();
-  const tasks = tasksList.find((task) => task.task_id === parseInt(taskId));
-
+const TaskAddForm = () => {
   const defaultTaskDetails = {
-    product_serial_number: tasks.product_serial_number,
-    product_type: tasks.product_type,
-    problem: tasks.problem,
-    status: tasks.status,
-    location: tasks.location,
-    date_created: tasks.date_created,
-    date_updated: tasks.date_updated,
+    product_serial_number: '',
+    product_type: '',
+    problem: '',
+    status: '',
+    location: '',
+    date_created: '',
+    date_updated: '',
   };
 
   return (
@@ -74,6 +69,6 @@ function TaskEditForm(props) {
       <Subtasks />
     </div>
   );
-}
+};
 
-export default TaskEditForm;
+export default TaskAddForm;
