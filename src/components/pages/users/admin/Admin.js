@@ -15,7 +15,7 @@ const token = localStorage.getItem("token");
 async function getUsers() {
   try {
     const response = await fetch(
-      "http://localhost:9000/users/getUsers?OFFSET=0&LIMIT=3",
+      "https://maint-control-docker-image-2n3aq2y4ja-zf.a.run.app/users/getUsers?OFFSET=0&LIMIT=100",
       {
         headers: {
           "Content-Type": "application/json",
@@ -117,8 +117,10 @@ const Admin = () => {
     }
   };
 
-  const filteredUsers = users.filter((user) =>
-    user.first_name.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredUsers = users.filter(
+    (user) =>
+      user.first_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.last_name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (

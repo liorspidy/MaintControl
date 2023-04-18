@@ -28,7 +28,7 @@ const EditUser = () => {
   async function getUsers() {
     try {
       const response = await fetch(
-        "http://localhost:9000/users/getUsers?OFFSET=0&LIMIT=3",
+        "https://maint-control-docker-image-2n3aq2y4ja-zf.a.run.app/users/getUsers?OFFSET=0&LIMIT=100",
         {
           headers: {
             "Content-Type": "application/json",
@@ -77,26 +77,29 @@ const EditUser = () => {
 
   async function editUserFetch() {
     try {
-      const response = await fetch("http://localhost:9000/users/updateUser", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          user_id: userId,
-          user_name: username,
-          first_name: firstName,
-          last_name: lastName,
-          email: email,
-          password: password,
-          phone: phoneNumber,
-          //address: address,
-          //area: area,
-          role: authorization,
-          //company_id: companyId,
-        }),
-      });
+      const response = await fetch(
+        "https://maint-control-docker-image-2n3aq2y4ja-zf.a.run.app/users/updateUser",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            user_id: userId,
+            user_name: username,
+            first_name: firstName,
+            last_name: lastName,
+            email: email,
+            password: password,
+            phone: phoneNumber,
+            //address: address,
+            //area: area,
+            role: authorization,
+            //company_id: companyId,
+          }),
+        }
+      );
       if (!response.ok) {
         if (response.statusText === "Unauthorized") {
           setError("Please login again");
