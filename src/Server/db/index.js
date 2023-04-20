@@ -1,40 +1,37 @@
-const dbConfig = require('../config/MaintControlDBConfig');
 const {
   Client
 } = require('pg');
-var colors = require('colors');
-var myClient = null;
+let myClient = null;
 
-connectMaintControlDB = () => {
+const connectMaintControlDB = () => {
   return new Promise((resolve, reject) => {
     try {
-      const dbDetails = dbConfig.DATABASE_CONNECTION_DETAILS();
       const client = new Client({
-        host: dbDetails.host,
-        user: dbDetails.user,
-        port: dbDetails.port,
-        password: dbDetails.password,
-        database: dbDetails.database,
+        host: process.env.HOST,
+        user: process.env.USER,
+        port: process.env.DB_PORT,
+        password: process.env.PASSWORD,
+        database: process.env.DATABASE,
       });
 
       client.connect(function (err) {
         if (err) {
-          console.log('err===> '+err);
-          throw err;
-        }else{
+          console.log('err===> ' + err);
+          setTimeout(connectMaintControlDB, 5000);
+        } else {
           myClient = client;
-          console.log(colors.green(`SUCCESS: connected to MaintControlDB`));
+          console.log('SUCCESS: connected to MaintControlDB');
+          resolve();
         }
-      })
-      resolve();
+      });
     } catch (error) {
-      console.log(colors.red(`FAILURE: ${error}`));
-      reject(error);
+      console.log(`DB CONNECTION FAILURE: ${error}`);
+      setTimeout(connectMaintControlDB, 5000);
     }
   });
 };
 
-query = (queryText, values = []) => {
+const query = (queryText, values = []) => {
   return new Promise((resolve, reject) => {
     try {
       const result = myClient.query(queryText, values);
@@ -47,5 +44,5 @@ query = (queryText, values = []) => {
 
 module.exports = {
   connectMaintControlDB: connectMaintControlDB,
-  query: query,
+  query: query
 };

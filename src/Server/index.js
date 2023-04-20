@@ -1,14 +1,12 @@
 const express = require('express');
-const colors = require('colors');
 const db = require('./db/index');
+const guides_bucket = require('./bucket/guides_bucket');
 const fs = require("fs");
-
-const PORT = 8080;
+require('dotenv').config();
 
 // connect middlware
 const app = express();
 app.use(express.json());
-
 
 const getDirectories = (path) => {
   let directories = [];
@@ -35,9 +33,12 @@ directories.forEach((directory) => {
 });
 
 //connect db
-db.connectMaintControlDB();
+db.connectMaintControlDB()
+
+//create guides bucket
+guides_bucket.createBucket()
 
 //start server
-app.listen(PORT, () => {
-  console.log(colors.bgGreen(`Server listening on port ${PORT}`));
+app.listen(process.env.PORT, () => {
+  console.log(`Server listening on port ${process.env.PORT}`);
 });
