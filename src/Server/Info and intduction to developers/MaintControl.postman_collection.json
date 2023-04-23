@@ -27,12 +27,14 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:9000/users/login",
-									"protocol": "http",
+									"raw": "https://maint-control-docker-image-2n3aq2y4ja-zf.a.run.app/users/login",
+									"protocol": "https",
 									"host": [
-										"localhost"
+										"maint-control-docker-image-2n3aq2y4ja-zf",
+										"a",
+										"run",
+										"app"
 									],
-									"port": "9000",
 									"path": [
 										"users",
 										"login"
@@ -54,7 +56,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJOYW1lIjoidGVtcEFkbWluIiwiY29tcGFueUlkIjoxLCJpYXQiOjE2ODAwMjY3NDcsImV4cCI6MTY4MDAzMDM0N30.wC3t0FXOj8fHHfAYOavgmN720hg_5pgmgp__NLhS344",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJOYW1lIjoidGVtcEFkbWluIiwiY29tcGFueUlkIjoxLCJpYXQiOjE2ODEyMTAyMTcsImV4cCI6MTY4MTIxMzgxN30.oqDH0nTJsXvXL5jTZbR1AKQgN311yMn-PjVcykGv30Y",
 											"type": "string"
 										}
 									]
@@ -62,12 +64,12 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:9000/users/getUserSettings",
+									"raw": "http://localhost:8080/users/getUserSettings",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "9000",
+									"port": "8080",
 									"path": [
 										"users",
 										"getUserSettings"
@@ -139,7 +141,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJOYW1lIjoidGVtcEFkbWluIiwiY29tcGFueUlkIjoxLCJpYXQiOjE2ODAxMTk0NTEsImV4cCI6MTY4MDEyMzA1MX0.iGzAlnYAh4A9KEY4cLhQZw91Tg6oHsnesWanEt5iSJM",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJOYW1lIjoidGVtcEFkbWluIiwiY29tcGFueUlkIjoxLCJpYXQiOjE2ODIyNTA0NDMsImV4cCI6MTY4MjI1NDA0M30.ui2TJjibHCvhrq_Va2bBxPSpIULqFUFQzMpUCHw_zzc",
 											"type": "string"
 										}
 									]
@@ -283,6 +285,47 @@
 											"key": "LIMIT",
 											"value": "3"
 										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "searchUser",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJOYW1lIjoidGVtcEFkbWluIiwiY29tcGFueUlkIjoxLCJpYXQiOjE2ODIyNjc3OTMsImV4cCI6MTY4MjI3MTM5M30.70fSoCTlscStZ3lZLREaRKblELPgmtdArNxEaRnesyA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"search_term\": \"052\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://maint-control-docker-image-2n3aq2y4ja-zf.a.run.app/users/searchUser",
+									"protocol": "https",
+									"host": [
+										"maint-control-docker-image-2n3aq2y4ja-zf",
+										"a",
+										"run",
+										"app"
+									],
+									"path": [
+										"users",
+										"searchUser"
 									]
 								}
 							},
