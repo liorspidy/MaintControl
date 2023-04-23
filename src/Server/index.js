@@ -1,6 +1,5 @@
 const express = require('express');
 const db = require('./db/index');
-const guides_bucket = require('./bucket/guides_bucket');
 const fs = require("fs");
 require('dotenv').config();
 
@@ -34,9 +33,6 @@ directories.forEach((directory) => {
 
 //connect db
 db.connectMaintControlDB()
-
-//create guides bucket
-guides_bucket.createBucket()
 
 //start server
 app.listen(process.env.PORT, () => {
