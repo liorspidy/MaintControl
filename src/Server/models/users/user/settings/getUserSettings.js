@@ -1,6 +1,5 @@
 var Promise = require('promise');
 var db = require('../../../../db/index');
-jwtSecretConfig = require('../../../../config/JWTAuthoriztionConfig');
 
 getUserSettings = (decodedToken) => {
   return new Promise((resolve, reject) => {

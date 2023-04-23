@@ -1,6 +1,5 @@
 var Promise = require('promise');
 var db = require('../../../../db/index');
-jwtSecretConfig = require('../../../../config/JWTAuthoriztionConfig');
 const {
   generateAccessToken
 } = require('../../../../utils/autohrization/jwt');

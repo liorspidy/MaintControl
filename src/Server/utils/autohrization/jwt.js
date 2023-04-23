@@ -1,5 +1,4 @@
 const jwt = require("jsonwebtoken");
-const jwtSecretConfig = require("../../config/JWTAuthoriztionConfig");
 
 generateAccessToken = (payload) => {
   return new Promise((resolve, reject) => {
