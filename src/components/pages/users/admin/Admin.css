@@ -1,10 +1,50 @@
 
-.list{
+
+
+.btnPages {
+  position: absolute;
+  bottom: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.btnPrevious{
+  position: absolute;
+    left: 4px;
+    background-color: #173f5f;
+    color: white;
+    cursor: pointer;
+    border-radius: 20%;
+}
+
+.list {
   border-radius: 15px;
+  position: relative;
+}
+
+.btnNext {
+  position: absolute;
+  left: 673px;
+  background-color: #173f5f;
+  color:white;
+  cursor: pointer;
+  border-radius: 20%;
+}
+
+.btnPrevious:hover {
+  scale: 1.1;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.btnNext:hover{
+  scale: 1.1;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
 }
 
 .listContainer {
-  margin: 4rem auto;
+  margin: 2rem auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
