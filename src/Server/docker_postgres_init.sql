@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS dim_users (
   email VARCHAR(255) NOT NULL UNIQUE,
   password VARCHAR(255) NOT NULL,
   phone VARCHAR(50) NOT NULL,
-  role VARCHAR(50) NOT NULL CHECK (role IN ('maintainance', 'manager', 'administrator')),
+  role VARCHAR(50) NOT NULL CHECK (role IN ('maintainace', 'manager', 'administrator')),
   company_id INTEGER NOT NULL REFERENCES dim_companies(company_id)
 );
 
