@@ -74,7 +74,7 @@ const Admin = () => {
   const [checkedRoles, setCheckedRoles] = useState({
     administrator: true,
     manager: true,
-    maintainance: true,
+    maintenance: true,
   });
   const [page, setPage] = useState(0);
   const usersPerPage = 10;
@@ -134,7 +134,7 @@ const Admin = () => {
       (user) =>
         (checkedRoles.administrator && user.role === "administrator") ||
         (checkedRoles.manager && user.role === "manager") ||
-        (checkedRoles.maintainance && user.role === "maintainance")
+        (checkedRoles.maintenance && user.role === "maintenance")
     )
     .filter(
       (user) =>
@@ -143,7 +143,7 @@ const Admin = () => {
     );
 
   const sortedUsers = filteredUsers.sort((user1, user2) => {
-    const roleOrder = ["administrator", "manager", "maintainance"];
+    const roleOrder = ["administrator", "manager", "maintenance"];
     return roleOrder.indexOf(user1.role) - roleOrder.indexOf(user2.role);
   });
 
@@ -216,11 +216,11 @@ const Admin = () => {
                     color: "#173f5f",
                   },
                 }}
-                checked={checkedRoles.maintainance}
+                checked={checkedRoles.maintenance}
                 onChange={(event) =>
                   setCheckedRoles({
                     ...checkedRoles,
-                    maintainance: event.target.checked,
+                    maintenance: event.target.checked,
                   })
                 }
               />
