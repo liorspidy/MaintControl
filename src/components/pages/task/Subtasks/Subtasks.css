@@ -4,24 +4,35 @@
     justify-content: flex-start;
     flex-direction: column;
     align-items: flex-start;
+    margin: 2rem 0;
 }
 
 .subtask-fill-form-container {
     background: #173f5f;
     padding: 1rem;
-    border-radius: 1rem;
+    border-radius: 0 0 1rem 1rem;
     width: 90%;
-    margin: 4rem 0;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     font-family: Arial, sans-serif;
+    height: 49rem;
 }
 
 .subtask-fill-form-container .form-group {
     margin-bottom: 1.5rem;
-    border-bottom: 1px solid #cccccc68;
+    /* border-bottom: 1px solid #cccccc68; */
     padding: 1.5rem;
-    /* height: 40rem;
-    overflow: auto; */
+    height: 40rem;
+    overflow: auto;
+    display: none;
+}
+
+.subtask-fill-form-container .form-group.active {
+    margin-bottom: 1.5rem;
+    /* border-bottom: 1px solid #cccccc68; */
+    padding: 1.5rem;
+    height: 40rem;
+    overflow: auto;
+    display: block;
 }
 
 .subtask-fill-form-container .form-group:last-child {
@@ -175,4 +186,43 @@
 
 .subtasksPhotosSlider:focus-visible {
     outline: none;
+}
+
+.subtaskTabBox {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width: 90%;
+}
+
+.subtaskTab {
+    width: clamp(1rem, 90%, 10rem);
+    padding: 0.1rem 0;
+    min-width: 1rem;
+    font-weight: bold;
+    font-size: 1.4rem;
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    background-color: #bcbcbc;
+    cursor: pointer;
+}
+
+.subtaskTab:hover {
+    background-color: #dcdcdc;
+}
+
+.subtaskTab.active {
+    background-color: #dcdcdc;
+}
+
+.subtaskTabFiller {
+    width: clamp(1rem, 90%, 10rem);
+    padding: 0.1rem 0;
+    min-width: 1rem;
+    font-weight: bold;
+    font-size: 1.4rem;
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    background-color: #bcbcbc;
+    cursor: pointer;
 }
