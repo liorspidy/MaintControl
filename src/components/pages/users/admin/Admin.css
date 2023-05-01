@@ -24,9 +24,17 @@
   position: relative;
 }
 
+.list li:not(:last-child) {
+  border-bottom: 0.1px solid #173f5f;
+}
+
+.list li:last-child {
+  border-bottom: none;
+}
+
 .btnNext {
   position: absolute;
-  left: 673px;
+  left: 689px;
   background-color: #173f5f;
   color:white;
   cursor: pointer;
@@ -61,7 +69,7 @@ cursor: pointer;
   cursor: pointer;
 }
 
-.listItemText:hover{
+.listItem:hover{
   background-color: rgb(228, 228, 228);
     transition: 0.3s all;
 }
@@ -200,4 +208,21 @@ a {
   .addIcon {
     scale: 2;
   }
+
+.list{
+  width: 80%;
+}
+
+.btnPages {
+  position: relative;
+}
+
+.btnNext {
+  left: 97%;
+  transform: translateX(-50%);
+}
+.btnPrevious {
+  position: absolute;
+  top:28rem;
+}
 }

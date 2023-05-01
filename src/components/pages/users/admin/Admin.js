@@ -242,7 +242,7 @@ const Admin = () => {
           maxWidth: 715,
           bgcolor: "background.paper",
           position: "relative",
-          overflowY: "scroll",
+          overflowY: "hidden",
           maxHeight: 561,
           minHeight: 561,
           "& ul": { padding: 0 },
@@ -256,7 +256,7 @@ const Admin = () => {
                 bgcolor: "#173f5f",
                 fontWeight: "bold",
                 color: "white",
-                fontSize: "16px",
+                fontSize: "23px",
                 position: "relative",
               }}
               className="listSubHeader"
@@ -265,16 +265,22 @@ const Admin = () => {
             </ListSubheader>
             {displayedUsers.length === 0 ? ( //Checks if the user does not exist
               <ListItemText
-                primary={"User not Exist"}
+                primary={"User not exist"}
                 className="listItemText"
               />
             ) : (
               displayedUsers.map((filteredUser) => (
                 <ListItem
                   key={`user-${filteredUser.user_id}`}
+                  className="listItem"
                   sx={{
                     textAlign: "center",
                     display: "block",
+                    paddingTop: "0px",
+                    paddingBottom: "0px",
+                    "&:last-child": {
+                      borderBottom: "none",
+                    },
                   }}
                 >
                   {isEditable ? (
@@ -284,18 +290,48 @@ const Admin = () => {
                     >
                       <ListItemText
                         primary={`${filteredUser.first_name} ${filteredUser.last_name}`}
+                        primaryTypographyProps={{
+                          sx: {
+                            fontSize: "1.2rem",
+                            lineHeight: "1.15",
+                          },
+                        }}
+                        secondary={`${filteredUser.role}`}
+                        secondaryTypographyProps={{
+                          sx: {
+                            lineHeight: "1.15",
+                          },
+                        }}
                         className="listItemText"
                         sx={{
                           textAlign: "center",
                           display: "block",
+                          paddingTop: "0px",
+                          paddingBottom: "0px",
                         }}
                       />
                     </Link>
                   ) : isRemoving ? (
                     <ListItemText
                       primary={`${filteredUser.first_name} ${filteredUser.last_name}`}
+                      primaryTypographyProps={{
+                        sx: {
+                          fontSize: "1.2rem",
+                          lineHeight: "1.15",
+                        },
+                      }}
+                      secondary={`${filteredUser.role}`}
+                      secondaryTypographyProps={{
+                        sx: {
+                          lineHeight: "1.15",
+                        },
+                      }}
                       className="listItemText"
-                      sx={{ textAlign: "center" }}
+                      sx={{
+                        textAlign: "center",
+                        paddingTop: "0px",
+                        paddingBottom: "0px",
+                      }}
                       onClick={() => {
                         handleDeleteUser(
                           filteredUser.user_id,
@@ -308,8 +344,24 @@ const Admin = () => {
                   ) : (
                     <ListItemText
                       primary={`${filteredUser.first_name} ${filteredUser.last_name}`}
+                      primaryTypographyProps={{
+                        sx: {
+                          fontSize: "1.2rem",
+                          lineHeight: "1.15",
+                        },
+                      }}
+                      secondary={`${filteredUser.role}`}
+                      secondaryTypographyProps={{
+                        sx: {
+                          lineHeight: "1.15",
+                        },
+                      }}
                       className="listItemText"
-                      sx={{ textAlign: "center" }}
+                      sx={{
+                        textAlign: "center",
+                        paddingTop: "0px",
+                        paddingBottom: "0px",
+                      }}
                     />
                   )}
                 </ListItem>
