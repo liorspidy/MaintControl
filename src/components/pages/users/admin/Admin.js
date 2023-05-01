@@ -42,18 +42,21 @@ async function getUsers() {
 
 async function deleteUser(id, username, email, companyId) {
   try {
-    const response = await fetch(`http://localhost:9000/users/deleteUser`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        user_name: username,
-        email: email,
-        company_id: companyId,
-      }),
-    });
+    const response = await fetch(
+      `https://maint-control-docker-image-2n3aq2y4ja-zf.a.run.app/users/deleteUser`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          user_name: username,
+          email: email,
+          company_id: companyId,
+        }),
+      }
+    );
     if (!response.ok) {
       throw new Error(response.statusText);
     }
