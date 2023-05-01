@@ -11,6 +11,7 @@ import { useParams } from 'react-router-dom';
 
 const Subtasks = () => {
   const { missionid, taskId } = useParams();
+  const [currentSubtask, setCurrentSubtask] = useState(0);
 
   const currentSubtasks = subtasksJson.find((subtask) => {
     return +subtask.father_task_id === +taskId;
@@ -58,17 +59,43 @@ const Subtasks = () => {
     reader.readAsDataURL(file);
   }
 
+  const tabHandler = (subtaskIndex) => {
+    setCurrentSubtask(subtaskIndex);
+  };
+
   const subtaskPhotoHandler = () => {};
 
   return (
     <div className="subtasksListBox">
+      <div className="subtaskTabBox">
+        {subtasks &&
+          subtasks.map((subtask, subtaskIndex) => {
+            const isActive = currentSubtask === subtaskIndex; // Check if current subtask is active
+            return (
+              <div
+                className={`subtaskTab ${isActive ? 'active' : ''}`} // Add "active" class to active tab
+                key={subtaskIndex}
+                tabNum={subtaskIndex}
+                onClick={tabHandler.bind(this, subtaskIndex)}
+              >
+                {subtaskIndex + 1}
+              </div>
+            );
+          })}
+        {subtasks.length === 0 && <div className="subtaskTabFiller">...</div>}
+      </div>
       <form className="subtask-fill-form-container">
         <button className="taskButton" type="button" onClick={handleAddSubtask}>
           Add Subtask
         </button>
         {subtasks.map((subtask, subtaskIndex) => {
+          const isActive = currentSubtask === subtaskIndex;
+
           return (
-            <div key={subtaskIndex} className="form-group">
+            <div
+              key={subtaskIndex}
+              className={`form-group ${isActive ? 'active' : ''}`}
+            >
               <div className="subtaskTitleAndButton">
                 <div className="subtaskTitle">
                   <label htmlFor="subtaskTitle">{subtaskIndex + 1}.</label>
