@@ -12,6 +12,6 @@ module.exports = {
         return res.status(err.httpCode).json({
           error: err.answer
         })
-      });
+      })
   }
-};
+}

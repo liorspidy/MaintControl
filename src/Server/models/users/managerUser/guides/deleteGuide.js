@@ -1,12 +1,12 @@
-var Promise = require('promise');
-var db = require('../../../../db/index');
+var Promise = require('promise')
+var db = require('../../../../db/index')
 
 deleteGuide = (decodedToken, data) => {
   return new Promise((resolve, reject) => {
     try {
       result = db.query(`DELETE FROM fact_guides WHERE
                          guide_id = ${data.guide_id} AND 
-                         company_id = ${decodedToken.companyId}`);
+                         company_id = ${decodedToken.companyId}`)
 
       result.then(() => {
           resolve({
@@ -24,7 +24,7 @@ deleteGuide = (decodedToken, data) => {
       reject({
         httpCode: 500,
         answer: "Internal server error"
-      });
+      })
     }
   })
 }

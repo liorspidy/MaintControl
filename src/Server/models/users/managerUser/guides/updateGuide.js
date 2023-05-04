@@ -1,5 +1,5 @@
-var Promise = require('promise');
-var db = require('../../../../db/index');
+var Promise = require('promise')
+var db = require('../../../../db/index')
         
 updateGuide = (data) => {
   return new Promise((resolve, reject) => {
@@ -7,7 +7,7 @@ updateGuide = (data) => {
       result = db.query(`UPDATE fact_guides
                         SET guide_title = '${data.guide_title}',
                         guide_content = '${data.guide_content}'
-                        WHERE guide_id = ${data.guide_id}`);
+                        WHERE guide_id = ${data.guide_id}`)
 
       result.then(() => {
           resolve({
@@ -25,7 +25,7 @@ updateGuide = (data) => {
       reject({
         httpCode: 500,
         answer: "Internal server error"
-      });
+      })
     }
   })
 }

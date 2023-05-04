@@ -1,6 +1,6 @@
-const { login } = require("./authorization/login");
-const { getUserSettings } = require("./settings/getUserSettings");
-const { getGuides } = require("./guides/getGuides");
+const { login } = require("./authorization/login")
+const { getUserSettings } = require("./settings/getUserSettings")
+const { getGuides } = require("./guides/getGuides")
 
 
 module.exports = {

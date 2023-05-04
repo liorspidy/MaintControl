@@ -1,5 +1,5 @@
-var Promise = require('promise');
-var db = require('../../../../db/index');
+var Promise = require('promise')
+var db = require('../../../../db/index')
 
 getGuides = (decodedToken, query) => {
   return new Promise((resolve, reject) => {
@@ -8,11 +8,11 @@ getGuides = (decodedToken, query) => {
                          WHERE company_id = ${decodedToken.companyId}
                          ORDER BY guide_id
                          OFFSET ${query.OFFSET}
-                         LIMIT ${query.LIMIT}`);
+                         LIMIT ${query.LIMIT}`)
 
       result.then((answer) => {
-        const entries = Object.entries(answer.rows[0]).filter(([key]) => key !== 'company_id');
-        const guides = Object.fromEntries(entries);
+        const entries = Object.entries(answer.rows[0]).filter(([key]) => key !== 'company_id')
+        const guides = Object.fromEntries(entries)
           resolve({
             httpCode: 200,
             answer: guides
@@ -28,7 +28,7 @@ getGuides = (decodedToken, query) => {
       reject({
         httpCode: 500,
         answer: "Internal server error"
-      });
+      })
     }
   })
 }

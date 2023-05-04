@@ -1,10 +1,10 @@
-const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken")
 
 generateAccessToken = (payload) => {
   return new Promise((resolve, reject) => {
     const options = {
       expiresIn: '1h'
-    };
+    }
 
     jwt.sign(payload, process.env.TOKEN_SECRET_KEY, options, (err, token) => {
       if (err) {
@@ -12,8 +12,8 @@ generateAccessToken = (payload) => {
       } else {
         resolve(token)
       }
-    });
-  });
+    })
+  })
 }
 
 verifyToken = (req, res, next) => {
@@ -35,7 +35,7 @@ verifyToken = (req, res, next) => {
     }else{}
     req.user = decodedToken
     next()
-  });
+  })
 }
 
 module.exports = {

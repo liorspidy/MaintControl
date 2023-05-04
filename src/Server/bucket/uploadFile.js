@@ -1,62 +1,100 @@
-uploadFile = (bucketName) => {
-  createFolderIfNotExists(bucketName)
-    .then(() => {
-      uploadFileToFolder('path/to/myfile.txt', 'myfile.txt');
-    })
-    .catch((err) => {
-      console.error(`Error: ${err}`);
-    });
-}
+const {
+  Storage
+} = require('@google-cloud/storage')
 
-// Create a folder if it doesn't exist
-createFolderIfNotExists = (bucketName) => {
+uploadFile = (bucketName, pathToFile, folderName, fileName, mimetype) => {
   return new Promise((resolve, reject) => {
-    const bucket = storage.bucket(bucketName);
-    const folderFile = bucket.file(folderName);
-    folderFile.exists()
-      .then((data) => {
-        const exists = data[0];
-        if (!exists) {
-          console.log(`Creating folder ${folderName} in bucket ${bucketName}`);
-          return folderFile.save('')
-            .then(() => {
-              resolve();
-            })
-            .catch((err) => {
-              reject(err);
-            });
-        }
-        resolve();
+    getSecret()
+      .then(keyFile => {
+        const storageWithCredentials = new Storage({
+          projectId: process.env.GCP_PROJECT_ID,
+          credentials: keyFile
+        })
+        createFolderIfNotExists(storageWithCredentials, bucketName, folderName)
+          .then(() => {
+            console.log('folder if not exists success')
+            uploadFileToFolder(storageWithCredentials, bucketName, pathToFile, folderName, fileName, mimetype)
+              .then(() => {
+                console.log('File uploaded successfully');
+                resolve();
+              })
+              .catch((err) => {
+                console.error(`Error uploading file: ${err}`);
+                reject();
+              });
+          })
+          .catch((err) => {
+            console.error(`Error could not create folder if not exists: ${err}`)
+            reject()
+          })
       })
       .catch((err) => {
-        reject(err);
-      });
-  });
+        console.error(`Error secret: ${err}`)
+        reject(err)
+      })
+  })
 }
 
-// Upload a file to a folder in a bucket
-uploadFileToFolder = (filePath, fileName) => {
+getSecret = () => {
   return new Promise((resolve, reject) => {
-    const bucket = storage.bucket(bucketName);
-    const file = bucket.file(`${folderName}${fileName}`);
+    try {
+      const keyFile = JSON.parse(process.env.guides_bucket_secret)
+      resolve(keyFile)
+    } catch (error) {
+      reject(error)
+    }
+  })
+}
+
+createFolderIfNotExists = (storage, bucketName, folderName) => {
+  return new Promise((resolve, reject) => {
+    const bucket = storage.bucket(bucketName)
+    const folderFile = bucket.file(`${folderName}/`)
+    folderFile.exists()
+      .then((data) => {
+        const exists = data[0]
+        if (!exists) {
+          console.log(`Creating folder ${folderName} in bucket ${bucketName}`)
+          return folderFile.save('')
+            .then(() => {
+              resolve()
+            })
+            .catch((err) => {
+              reject(err)
+            })
+        }
+        resolve()
+      })
+      .catch((err) => {
+        reject(err)
+      })
+  })
+}
+
+
+uploadFileToFolder = (storage, bucketName, pathToFile, folderName, fileName, mimetype) => {
+  return new Promise((resolve, reject) => {
+    console.log(mimetype);
+    const bucket = storage.bucket(bucketName)
+    const file = bucket.file(`${folderName}/${fileName}`)
     const options = {
       destination: file,
       resumable: false,
       validation: false,
       metadata: {
-        contentType: 'text/plain',
+        contentType: mimetype,
       },
-    };
-    bucket.upload(filePath, options)
+    }
+    bucket.upload(pathToFile, options)
       .then(() => {
-        console.log(`File ${fileName} uploaded to folder ${folderName} in bucket ${bucketName}`);
-        resolve();
+        console.log(`File ${fileName} uploaded to folder ${folderName} in bucket ${bucketName}`)
+        resolve()
       })
       .catch((err) => {
-        console.error(`Error uploading file ${fileName} to folder ${folderName} in bucket ${bucketName}: ${err}`);
-        reject(err);
-      });
-  });
+        console.error(`Error uploading file ${fileName} to folder ${folderName} in bucket ${bucketName}: ${err}`)
+        reject(err)
+      })
+  })
 }
 
 module.exports = {

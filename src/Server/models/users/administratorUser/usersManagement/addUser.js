@@ -1,5 +1,5 @@
-var Promise = require('promise');
-var db = require('../../../../db/index');
+var Promise = require('promise')
+var db = require('../../../../db/index')
 
 addUser = (data) => {
   return new Promise((resolve, reject) => {
@@ -20,7 +20,7 @@ addUser = (data) => {
 						   '${data.password}',
 						   '${data.phone}',
 						   '${data.role}',
-						   ${data.company_id})`);
+						   ${data.company_id})`)
 
       result.then(() => {
           resolve({
@@ -38,7 +38,7 @@ addUser = (data) => {
       reject({
         httpCode: 500,
         answer: "Internal server error"
-      });
+      })
     }
   })
 }
