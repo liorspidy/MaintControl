@@ -14,7 +14,9 @@ addGuide = (decodedToken, req) => {
       let mimetype = '';
 
       busboy.on('file', (fieldname, file, originalname) => {
-        filename = `${Date.now()}-${originalname}`;
+        const now = new Date();
+        const date = now.toLocaleDateString('he-IL');
+        filename = `${originalname.filename} - ${date}`;
 
         // Get the file type from the buffer
         const chunks = [];
