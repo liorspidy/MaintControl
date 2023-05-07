@@ -14,24 +14,7 @@ import L from "leaflet";
 import icon from "../../assets/placeholder.png";
 
 const Map = (props) => {
-  // const [points, setPoints] = useState([]);
   const purpleOptions = { color: "purple" };
-
-  // const LocationMarker = () => {
-  //     const [position, setPosition] = useState(null)
-  //     const map = useMapEvents({
-  //         click(clickEvent) {
-  //             setPoints(prevPoints => [...prevPoints, [clickEvent.latlng.lat, clickEvent.latlng.lng]])
-  //         },
-
-  //     })
-  //     console.log("pos", position)
-  //     return position === null ? null : (
-  //         <Marker position={position}>
-  //             <Popup>You are here</Popup>
-  //         </Marker>
-  //     )
-  // }
 
   const ResetsCenterView = ({ selectedPosition }) => {
     const map = useMap();
@@ -63,14 +46,20 @@ const Map = (props) => {
       />
       {/* <LocationMarker />  */}
 
-      {/* {props?.sites.map(site => {
-                const points = site.points[0].latlngs.map((latlng) => [latlng.lat, latlng.lng])
-                const avg = points.flat().reduce((acc, curr) => acc + curr) / (points.length * points[0].length);
+      {props?.sites.map((site) => {
+        const points = site.points[0].latlngs.map((latlng) => [
+          latlng.lat,
+          latlng.lng,
+        ]);
+        const avg =
+          points.flat().reduce((acc, curr) => acc + curr) /
+          (points.length * points[0].length);
 
-                return <Polygon key={avg} pathOptions={purpleOptions} positions={points} />
-            })} */}
+        return (
+          <Polygon key={avg} pathOptions={purpleOptions} positions={points} />
+        );
+      })}
       <ResetsCenterView selectedPosition={props.selectedPosition} />
-      {/* <Polygon pathOptions={purpleOptions} positions={points} /> */}
     </MapContainer>
   );
 };
