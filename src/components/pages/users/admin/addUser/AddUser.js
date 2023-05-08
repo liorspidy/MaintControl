@@ -257,7 +257,7 @@ const AddUser = () => {
               <option value="choose">Choose authorization</option>
               <option value="administrator">Admin</option>
               <option value="manager">Manager</option>
-              <option value="maintainance">Maintenance man</option>
+              <option value="maintenance">Maintenance man</option>
             </select>
           </label>
           <label className="addUserLabel" htmlFor="companyId">

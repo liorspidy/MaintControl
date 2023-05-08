@@ -96,7 +96,7 @@ const EditUser = () => {
             //address: address,
             //area: area,
             role: authorization,
-            //company_id: companyId,
+            company_id: companyId,
           }),
         }
       );
@@ -256,7 +256,7 @@ const EditUser = () => {
                 />
               </label>
               <label className="editUserLabel" htmlFor="Email">
-                Email adress:
+                Email address:
                 <input
                   id="email"
                   className="editUserInput"
@@ -320,7 +320,7 @@ const EditUser = () => {
                   <option value="choose">Choose authorization</option>
                   <option value="administrator">Admin</option>
                   <option value="manager">Manager</option>
-                  <option value="maintainance">Maintenance man</option>
+                  <option value="maintenance">Maintenance man</option>
                 </select>
               </label>
               <label className="editUserLabel" htmlFor="companyId">

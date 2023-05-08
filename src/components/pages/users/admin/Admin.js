@@ -342,27 +342,32 @@ const Admin = () => {
                       }}
                     />
                   ) : (
-                    <ListItemText
-                      primary={`${filteredUser.first_name} ${filteredUser.last_name}`}
-                      primaryTypographyProps={{
-                        sx: {
-                          fontSize: "1.2rem",
-                          lineHeight: "1.15",
-                        },
-                      }}
-                      secondary={`${filteredUser.role}`}
-                      secondaryTypographyProps={{
-                        sx: {
-                          lineHeight: "1.15",
-                        },
-                      }}
-                      className="listItemText"
-                      sx={{
-                        textAlign: "center",
-                        paddingTop: "0px",
-                        paddingBottom: "0px",
-                      }}
-                    />
+                    <Link
+                      to={`/admin/showUser/${filteredUser.user_id}`}
+                      key={filteredUser.user_id}
+                    >
+                      <ListItemText
+                        primary={`${filteredUser.first_name} ${filteredUser.last_name}`}
+                        primaryTypographyProps={{
+                          sx: {
+                            fontSize: "1.2rem",
+                            lineHeight: "1.15",
+                          },
+                        }}
+                        secondary={`${filteredUser.role}`}
+                        secondaryTypographyProps={{
+                          sx: {
+                            lineHeight: "1.15",
+                          },
+                        }}
+                        className="listItemText"
+                        sx={{
+                          textAlign: "center",
+                          paddingTop: "0px",
+                          paddingBottom: "0px",
+                        }}
+                      />
+                    </Link>
                   )}
                 </ListItem>
               ))

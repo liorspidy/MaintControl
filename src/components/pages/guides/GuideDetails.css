@@ -1,4 +1,4 @@
-.addGuideBtn {
+.backBtn {
     border: none;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
     background-color: rgb(131, 131, 131);
@@ -12,10 +12,10 @@
     cursor: pointer;
 }
 
-.addGuideBtn:hover {
+.backBtn:hover {
     background-color: rgb(94, 94, 94);
 }
 
-.addGuideBtn:active {
+.backBtn:active {
     animation: 0.05s clicked forwards ease-in-out;
 }

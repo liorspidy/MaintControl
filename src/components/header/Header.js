@@ -16,6 +16,8 @@ const Header = (props) => {
       return "Guide details";
     } else if (pageName.includes("admin/editUser")) {
       return "Edit A User";
+    } else if (pageName.includes("admin/showUser")) {
+      return "User details";
     } else if (pageName.includes("missions/edit")) {
       return "Edit a mission";
     } else if (pageName.includes("/fill/")) {
