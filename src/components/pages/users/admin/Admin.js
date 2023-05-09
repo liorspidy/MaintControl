@@ -1,30 +1,30 @@
-import { Link } from "react-router-dom";
-import * as React from "react";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
-import ListSubheader from "@mui/material/ListSubheader";
-import Checkbox from "@mui/material/Checkbox";
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import AddIcon from "@mui/icons-material/Add";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
-import ArrowRightIcon from "@mui/icons-material/ArrowRight";
-import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
-import { useState, useEffect } from "react";
-import ConfirmDeleteModal from "../../../confirmDeleteModal/ConfirmDeleteModal";
-import "./Admin.css";
+import { Link } from 'react-router-dom';
+import * as React from 'react';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import ListSubheader from '@mui/material/ListSubheader';
+import Checkbox from '@mui/material/Checkbox';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import AddIcon from '@mui/icons-material/Add';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
+import { useState, useEffect } from 'react';
+import ConfirmDeleteModal from '../../../confirmDeleteModal/ConfirmDeleteModal';
+import './Admin.css';
 
-const token = localStorage.getItem("token");
+const token = localStorage.getItem('token');
 
 async function getUsers() {
   try {
     const response = await fetch(
-      "https://maint-control-docker-image-2n3aq2y4ja-zf.a.run.app/users/getUsers?OFFSET=0&LIMIT=100",
+      'https://maint-control-docker-image-2n3aq2y4ja-zf.a.run.app/users/getUsers?OFFSET=0&LIMIT=100',
       {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
       }
@@ -33,37 +33,7 @@ async function getUsers() {
       throw new Error(response.statusText);
     }
     const data = await response.json();
-    console.log(data);
     return data.answer;
-  } catch (err) {
-    console.error(err);
-    throw err;
-  }
-}
-
-async function deleteUser(id, username, email, companyId) {
-  try {
-    const response = await fetch(
-      `https://maint-control-docker-image-2n3aq2y4ja-zf.a.run.app/users/deleteUser`,
-      {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          user_name: username,
-          email: email,
-          company_id: companyId,
-        }),
-      }
-    );
-    if (!response.ok) {
-      throw new Error(response.statusText);
-    }
-    const data = await response.json();
-    console.log(data);
-    return data;
   } catch (err) {
     console.error(err);
     throw err;
@@ -73,7 +43,7 @@ async function deleteUser(id, username, email, companyId) {
 const Admin = () => {
   const [isEditable, setIsEditable] = useState(false);
   const [isRemoving, setIsRemoving] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const [users, setUsers] = useState([]);
   const [checkedRoles, setCheckedRoles] = useState({
     administrator: true,
@@ -82,6 +52,7 @@ const Admin = () => {
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [page, setPage] = useState(0);
+  const [currentPickedUser, setCurrentPickedUser] = useState(null);
   const usersPerPage = 10;
   const startIndex = page * usersPerPage;
   const endIndex = startIndex + usersPerPage;
@@ -98,7 +69,6 @@ const Admin = () => {
     getUsers()
       .then((data) => {
         setUsers(data);
-        console.log(data);
       })
       .catch((err) => console.error(err));
   }, []);
@@ -119,31 +89,27 @@ const Admin = () => {
     }
   };
 
-  const handleDeleteUser = async (id, username, email, companyId) => {
-    try {
-      await deleteUser(id, username, email, companyId);
-      const updatedUsers = users.filter((user) => user.user_id !== id);
-      setUsers(updatedUsers);
-      closeModal();
-    } catch (err) {
-      console.error(err);
+  const openModalHandler = (filteredUser) => {
+    if (!isModalOpen) {
+      document.querySelector('.backdrop').classList.add('show');
     }
-  };
-
-  const openModal = () => {
+    setCurrentPickedUser(filteredUser);
     setIsModalOpen(true);
   };
 
-  const closeModal = () => {
+  const closeModalHandler = () => {
+    if (isModalOpen) {
+      document.querySelector('.backdrop').classList.remove('show');
+    }
     setIsModalOpen(false);
   };
 
   const filteredUsers = users
     .filter(
       (user) =>
-        (checkedRoles.administrator && user.role === "administrator") ||
-        (checkedRoles.manager && user.role === "manager") ||
-        (checkedRoles.maintenance && user.role === "maintenance")
+        (checkedRoles.administrator && user.role === 'administrator') ||
+        (checkedRoles.manager && user.role === 'manager') ||
+        (checkedRoles.maintenance && user.role === 'maintenance')
     )
     .filter(
       (user) =>
@@ -152,7 +118,7 @@ const Admin = () => {
     );
 
   const sortedUsers = filteredUsers.sort((user1, user2) => {
-    const roleOrder = ["administrator", "manager", "maintenance"];
+    const roleOrder = ['administrator', 'manager', 'maintenance'];
     return roleOrder.indexOf(user1.role) - roleOrder.indexOf(user2.role);
   });
 
@@ -168,15 +134,15 @@ const Admin = () => {
         onChange={handleSearchBar}
       />
       <div className="checkBoxContainer">
-        <FormGroup sx={{ display: "flex", flexDirection: "row" }}>
+        <FormGroup sx={{ display: 'flex', flexDirection: 'row' }}>
           <FormControlLabel
             control={
               <Checkbox
                 defaultChecked
                 sx={{
-                  color: "#173f5f",
-                  "&.Mui-checked": {
-                    color: "#173f5f",
+                  color: '#173f5f',
+                  '&.Mui-checked': {
+                    color: '#173f5f',
                   },
                 }}
                 checked={checkedRoles.administrator}
@@ -189,7 +155,7 @@ const Admin = () => {
               />
             }
             label="Administrator"
-            sx={{ color: "black", marginBottom: "0.5rem" }}
+            sx={{ color: 'black', marginBottom: '0.5rem' }}
             className="formControlLabel"
           />
           <FormControlLabel
@@ -197,9 +163,9 @@ const Admin = () => {
               <Checkbox
                 defaultChecked
                 sx={{
-                  color: "#173f5f",
-                  "&.Mui-checked": {
-                    color: "#173f5f",
+                  color: '#173f5f',
+                  '&.Mui-checked': {
+                    color: '#173f5f',
                   },
                 }}
                 checked={checkedRoles.manager}
@@ -212,7 +178,7 @@ const Admin = () => {
               />
             }
             label="Manager"
-            sx={{ color: "black", marginBottom: "0.5rem" }}
+            sx={{ color: 'black', marginBottom: '0.5rem' }}
             className="formControlLabel"
           />
           <FormControlLabel
@@ -220,9 +186,9 @@ const Admin = () => {
               <Checkbox
                 defaultChecked
                 sx={{
-                  color: "#173f5f",
-                  "&.Mui-checked": {
-                    color: "#173f5f",
+                  color: '#173f5f',
+                  '&.Mui-checked': {
+                    color: '#173f5f',
                   },
                 }}
                 checked={checkedRoles.maintenance}
@@ -235,7 +201,7 @@ const Admin = () => {
               />
             }
             label="Maintenance"
-            sx={{ color: "black", marginBottom: "0.5rem" }}
+            sx={{ color: 'black', marginBottom: '0.5rem' }}
             className="formControlLabel"
           />
         </FormGroup>
@@ -244,14 +210,14 @@ const Admin = () => {
       <List
         className="list"
         sx={{
-          width: "100%",
+          width: '100%',
           maxWidth: 715,
-          bgcolor: "background.paper",
-          position: "relative",
-          overflowY: "hidden",
+          bgcolor: 'background.paper',
+          position: 'relative',
+          overflowY: 'hidden',
           maxHeight: 561,
           minHeight: 561,
-          "& ul": { padding: 0 },
+          '& ul': { padding: 0 },
         }}
         subheader={<li />}
       >
@@ -259,129 +225,126 @@ const Admin = () => {
           <ul>
             <ListSubheader
               sx={{
-                bgcolor: "#173f5f",
-                fontWeight: "bold",
-                color: "white",
-                fontSize: "23px",
-                position: "relative",
+                bgcolor: '#173f5f',
+                fontWeight: 'bold',
+                color: 'white',
+                fontSize: '23px',
+                position: 'relative',
               }}
               className="listSubHeader"
             >
-              {"Users"}
+              {'Users'}
             </ListSubheader>
             {displayedUsers.length === 0 ? ( //Checks if the user does not exist
               <ListItemText
-                primary={"User not exist"}
+                primary={'User not exist'}
                 className="listItemText"
               />
             ) : (
-              displayedUsers.map((filteredUser) => (
-                <ListItem
-                  key={`user-${filteredUser.user_id}`}
-                  className="listItem"
-                  sx={{
-                    textAlign: "center",
-                    display: "block",
-                    paddingTop: "0px",
-                    paddingBottom: "0px",
-                    "&:last-child": {
-                      borderBottom: "none",
-                    },
-                  }}
-                >
-                  {isEditable ? (
-                    <Link
-                      to={`/admin/editUser/${filteredUser.user_id}`}
-                      key={filteredUser.user_id}
-                    >
-                      <ListItemText
-                        primary={`${filteredUser.first_name} ${filteredUser.last_name}`}
-                        primaryTypographyProps={{
-                          sx: {
-                            fontSize: "1.2rem",
-                            lineHeight: "1.15",
-                          },
-                        }}
-                        secondary={`${filteredUser.role}`}
-                        secondaryTypographyProps={{
-                          sx: {
-                            lineHeight: "1.15",
-                          },
-                        }}
-                        className="listItemText"
-                        sx={{
-                          textAlign: "center",
-                          display: "block",
-                          paddingTop: "0px",
-                          paddingBottom: "0px",
-                        }}
-                      />
-                    </Link>
-                  ) : isRemoving ? (
-                    <ListItemText
-                      primary={`${filteredUser.first_name} ${filteredUser.last_name}`}
-                      primaryTypographyProps={{
-                        sx: {
-                          fontSize: "1.2rem",
-                          lineHeight: "1.15",
-                        },
-                      }}
-                      secondary={`${filteredUser.role}`}
-                      secondaryTypographyProps={{
-                        sx: {
-                          lineHeight: "1.15",
-                        },
-                      }}
-                      className="listItemText"
-                      sx={{
-                        textAlign: "center",
-                        paddingTop: "0px",
-                        paddingBottom: "0px",
-                      }}
-                      onClick={openModal}
-                    >
-                      {isModalOpen && (
-                        <ConfirmDeleteModal
-                          handleDeleteUser={handleDeleteUser(
-                            filteredUser.user_id,
-                            filteredUser.user_name,
-                            filteredUser.email,
-                            filteredUser.company_id
-                          )}
-                          closeModal={closeModal}
+              displayedUsers.map((filteredUser) => {
+                return (
+                  <ListItem
+                    key={`user-${filteredUser.user_id}`}
+                    className="listItem"
+                    sx={{
+                      textAlign: 'center',
+                      display: 'block',
+                      paddingTop: '0px',
+                      paddingBottom: '0px',
+                      '&:last-child': {
+                        borderBottom: 'none',
+                      },
+                    }}
+                  >
+                    {isEditable ? (
+                      <Link
+                        to={`/admin/editUser/${filteredUser.user_id}`}
+                        key={filteredUser.user_id}
+                      >
+                        <ListItemText
+                          primary={`${filteredUser.first_name} ${filteredUser.last_name}`}
+                          primaryTypographyProps={{
+                            sx: {
+                              fontSize: '1.2rem',
+                              lineHeight: '1.15',
+                            },
+                          }}
+                          secondary={`${filteredUser.role}`}
+                          secondaryTypographyProps={{
+                            sx: {
+                              lineHeight: '1.15',
+                            },
+                          }}
+                          className="listItemText"
+                          sx={{
+                            textAlign: 'center',
+                            display: 'block',
+                            paddingTop: '0px',
+                            paddingBottom: '0px',
+                          }}
                         />
-                      )}
-                    </ListItemText>
-                  ) : (
-                    <Link
-                      to={`/admin/showUser/${filteredUser.user_id}`}
-                      key={filteredUser.user_id}
-                    >
+                      </Link>
+                    ) : isRemoving ? (
                       <ListItemText
                         primary={`${filteredUser.first_name} ${filteredUser.last_name}`}
                         primaryTypographyProps={{
                           sx: {
-                            fontSize: "1.2rem",
-                            lineHeight: "1.15",
+                            fontSize: '1.2rem',
+                            lineHeight: '1.15',
                           },
                         }}
                         secondary={`${filteredUser.role}`}
                         secondaryTypographyProps={{
                           sx: {
-                            lineHeight: "1.15",
+                            lineHeight: '1.15',
                           },
                         }}
                         className="listItemText"
                         sx={{
-                          textAlign: "center",
-                          paddingTop: "0px",
-                          paddingBottom: "0px",
+                          textAlign: 'center',
+                          paddingTop: '0px',
+                          paddingBottom: '0px',
                         }}
-                      />
-                    </Link>
-                  )}
-                </ListItem>
-              ))
+                        onClick={openModalHandler.bind(this, filteredUser)}
+                      ></ListItemText>
+                    ) : (
+                      <Link
+                        to={`/admin/showUser/${filteredUser.user_id}`}
+                        key={filteredUser.user_id}
+                      >
+                        <ListItemText
+                          primary={`${filteredUser.first_name} ${filteredUser.last_name}`}
+                          primaryTypographyProps={{
+                            sx: {
+                              fontSize: '1.2rem',
+                              lineHeight: '1.15',
+                            },
+                          }}
+                          secondary={`${filteredUser.role}`}
+                          secondaryTypographyProps={{
+                            sx: {
+                              lineHeight: '1.15',
+                            },
+                          }}
+                          className="listItemText"
+                          sx={{
+                            textAlign: 'center',
+                            paddingTop: '0px',
+                            paddingBottom: '0px',
+                          }}
+                        />
+                      </Link>
+                    )}
+                    <ConfirmDeleteModal
+                      currentPickedUser={currentPickedUser}
+                      token={token}
+                      users={users}
+                      setUsers={setUsers}
+                      closeModal={closeModalHandler}
+                    />
+                  </ListItem>
+                );
+              })
             )}
           </ul>
         </li>

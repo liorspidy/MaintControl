@@ -1,6 +1,3 @@
-
-
-
 .btnPages {
   position: absolute;
   bottom: 15px;
@@ -10,13 +7,13 @@
   align-items: center;
 }
 
-.btnPrevious{
+.btnPrevious {
   position: absolute;
-    left: 4px;
-    background-color: #173f5f;
-    color: white;
-    cursor: pointer;
-    border-radius: 20%;
+  left: 4px;
+  background-color: #173f5f;
+  color: white;
+  cursor: pointer;
+  border-radius: 20%;
 }
 
 .list {
@@ -36,7 +33,7 @@
   position: absolute;
   left: 689px;
   background-color: #173f5f;
-  color:white;
+  color: white;
   cursor: pointer;
   border-radius: 20%;
 }
@@ -46,7 +43,7 @@
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
 }
 
-.btnNext:hover{
+.btnNext:hover {
   scale: 1.1;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
 }
@@ -61,20 +58,20 @@
   max-width: 80%;
 }
 
-.listSubHeader{
-cursor: pointer;
-}
-
-.listItemText{
+.listSubHeader {
   cursor: pointer;
 }
 
-.listItem:hover{
-  background-color: rgb(228, 228, 228);
-    transition: 0.3s all;
+.listItemText {
+  cursor: pointer;
 }
 
-.searchUser{
+.listItem:hover {
+  background-color: rgb(228, 228, 228);
+  transition: 0.3s all;
+}
+
+.searchUser {
   margin: 1rem auto;
   display: flex;
   flex-direction: column;
@@ -83,6 +80,7 @@ cursor: pointer;
   border-radius: 10px;
   max-width: 80%;
   height: 2.4rem;
+  padding-left: 10px;
   width: 28rem;
 }
 
@@ -188,6 +186,11 @@ a {
   background: none;
 }
 
+.MuiListItemText-root.MuiListItemText-multiline.listItemText.css-aqg2kt-MuiListItemText-root {
+  margin: 0;
+  padding: 6px 0;
+}
+
 @media (max-width: 900px) {
   .userBtn {
     margin: 1rem 0rem;
@@ -209,20 +212,21 @@ a {
     scale: 2;
   }
 
-.list{
-  width: 80%;
-}
+  .list {
+    width: 80%;
+  }
 
-.btnPages {
-  position: relative;
-}
+  .btnPages {
+    position: relative;
+  }
 
-.btnNext {
-  left: 97%;
-  transform: translateX(-50%);
-}
-.btnPrevious {
-  position: absolute;
-  top:28rem;
-}
+  .btnNext {
+    left: 97%;
+    transform: translateX(-50%);
+  }
+
+  .btnPrevious {
+    position: absolute;
+    top: 28rem;
+  }
 }
