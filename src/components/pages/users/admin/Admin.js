@@ -13,6 +13,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import { useState, useEffect } from "react";
+import ConfirmDeleteModal from "../../../confirmDeleteModal/ConfirmDeleteModal";
 import "./Admin.css";
 
 const token = localStorage.getItem("token");
@@ -79,6 +80,7 @@ const Admin = () => {
     manager: true,
     maintenance: true,
   });
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [page, setPage] = useState(0);
   const usersPerPage = 10;
   const startIndex = page * usersPerPage;
@@ -118,18 +120,22 @@ const Admin = () => {
   };
 
   const handleDeleteUser = async (id, username, email, companyId) => {
-    const confirmed = window.confirm(
-      "Are you sure you want to delete this user?"
-    );
-    if (confirmed) {
-      try {
-        await deleteUser(id, username, email, companyId);
-        const updatedUsers = users.filter((user) => user.user_id !== id);
-        setUsers(updatedUsers);
-      } catch (err) {
-        console.error(err);
-      }
+    try {
+      await deleteUser(id, username, email, companyId);
+      const updatedUsers = users.filter((user) => user.user_id !== id);
+      setUsers(updatedUsers);
+      closeModal();
+    } catch (err) {
+      console.error(err);
     }
+  };
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   const filteredUsers = users
@@ -332,15 +338,20 @@ const Admin = () => {
                         paddingTop: "0px",
                         paddingBottom: "0px",
                       }}
-                      onClick={() => {
-                        handleDeleteUser(
-                          filteredUser.user_id,
-                          filteredUser.user_name,
-                          filteredUser.email,
-                          filteredUser.company_id
-                        );
-                      }}
-                    />
+                      onClick={openModal}
+                    >
+                      {isModalOpen && (
+                        <ConfirmDeleteModal
+                          handleDeleteUser={handleDeleteUser(
+                            filteredUser.user_id,
+                            filteredUser.user_name,
+                            filteredUser.email,
+                            filteredUser.company_id
+                          )}
+                          closeModal={closeModal}
+                        />
+                      )}
+                    </ListItemText>
                   ) : (
                     <Link
                       to={`/admin/showUser/${filteredUser.user_id}`}
