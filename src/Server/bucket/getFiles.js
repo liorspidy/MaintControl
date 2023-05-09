@@ -2,14 +2,7 @@ const {
   Storage
 } = require('@google-cloud/storage')
 
-const minutesToExpiration = 60
-const options = {
-  version: 'v4',
-  action: 'read',
-  expires: minutesToExpiration * 60 * 1000 + Date.now(),
-}
-
-downloadFile = (bucketName, fileName) => {
+getFiles = (bucketName, fileName) => {
   return new Promise((resolve, reject) => {
     getSecret()
       .then(keyFile => {
@@ -18,12 +11,17 @@ downloadFile = (bucketName, fileName) => {
           credentials: keyFile
         })
         storageWithCredentials.bucket(bucketName)
-          .file(fileName)
-          .getSignedUrl(options)
-          .then(([url]) => resolve(url))
+          .getFiles({prefix: 'companyID - 1/'})
+          .then((data) => {
+            console.log('======= data =====' + data)
+            const files = data[0]
+            console.log('Files:')
+            files.forEach((file) => {
+              console.log(file.name)
+            })
+          })
           .catch((err) => {
-            console.error('Error getting signed URL:', err)
-            reject()
+            console.error('ERROR:', err)
           })
       })
   })
@@ -41,5 +39,5 @@ getSecret = () => {
 }
 
 module.exports = {
-  downloadFile: downloadFile
+  getFiles: getFiles
 }

@@ -11,9 +11,12 @@ This folder includes:
 all the pacakges of npm we used in the project.
 
 2. In order to upload the docker image to GCP:
-docker build -t maint_control_docker_image .
-docker tag maint_control_docker_image gcr.io/maintcontrol/maint_control_docker_image
-docker push gcr.io/maintcontrol/maint_control_docker_image
+a) install google sdk on your computer
+b) run the following commands:
+  docker build -t maint_control_docker_image .
+  docker tag maint_control_docker_image gcr.io/maintcontrol/maint_control_docker_image
+  docker push gcr.io/maintcontrol/maint_control_docker_image
+c) In the cloud run on the container registery run the latest image
 
 3. In order to send requests to the gcp revision,
 use the following url: https://maint-control-docker-image-2n3aq2y4ja-zf.a.run.app

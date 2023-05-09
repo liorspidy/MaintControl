@@ -1,9 +1,9 @@
 const { addGuide } = require("./guides/addGuide")
-const { updateGuide } = require("./guides/updateGuide")
+const { downloadGuide } = require("./guides/downloadGuide")
 const { deleteGuide } = require("./guides/deleteGuide")
 
 module.exports = {
   addGuide: addGuide,
-  updateGuide: updateGuide,
+  downloadGuide: downloadGuide,
   deleteGuide: deleteGuide
 }

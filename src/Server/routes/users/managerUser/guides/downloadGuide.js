@@ -1,5 +1,5 @@
 const express = require('express')
-const updateGuideRouter = express.Router()
+const downloadGuideRouter = express.Router()
 const cors = require('cors')
 const managerUserController = require('../../../../controllers/users/managerUser/index')
 const {
@@ -10,10 +10,10 @@ const {
 } = require('../../../../utils/autohrization/role')
 
 
-updateGuideRouter.use(cors())
+downloadGuideRouter.use(cors())
 
-updateGuideRouter.put('/guides/updateGuide', verifyToken, authorizeRole(['administrator', 'manager']), (req, res) => {
-  managerUserController.updateGuide(req, res)
+downloadGuideRouter.put('/guides/downloadGuide', verifyToken, authorizeRole(['administrator', 'manager']), (req, res) => {
+  managerUserController.downloadGuide(req, res)
 })
 
-module.exports = updateGuideRouter
+module.exports = downloadGuideRouter

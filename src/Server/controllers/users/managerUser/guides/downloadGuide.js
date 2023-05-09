@@ -1,8 +1,8 @@
-const managerUser = require('../../../../models/users/managerUser/index')
+const managerUser = require('../../../../models/users/managerUser/index');
 
 module.exports = {
-  updateGuide: (req, res) => {
-    managerUser.updateGuide(req.body)
+  downloadGuide: (req, res) => {
+    managerUser.downloadGuide(req.user, req.body)
       .then((result) => {
         return res.status(result.httpCode).json({
           answer: result.answer
@@ -10,7 +10,7 @@ module.exports = {
       })
       .catch((err) => {
         return res.status(err.httpCode).json({
-          error: err.answer
+          error: `Error during downloading guide`
         })
       })
   }
