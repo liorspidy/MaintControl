@@ -1,14 +1,16 @@
 var Promise = require('promise')
-var db = require('../../../../db/index')
+const bucket = require('../../../../bucket/index')
 
 deleteGuide = (decodedToken, data) => {
   return new Promise((resolve, reject) => {
     try {
-      result = db.query(`DELETE FROM fact_guides WHERE
-                         guide_id = ${data.guide_id} AND 
-                         company_id = ${decodedToken.companyId}`)
 
-      result.then(() => {
+      const bucketName = 'maint_control_guides_bucket'
+      const folderName = `companyID - ${decodedToken.companyId}`
+      const secretName = process.env.guides_bucket_secret
+
+      bucket.deleteFile(bucketName, folderName,data.file_name, secretName)
+      .then(() => {
           resolve({
             httpCode: 200,
             answer: "deleted guide succesfuly"
