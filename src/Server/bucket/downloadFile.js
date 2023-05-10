@@ -1,6 +1,7 @@
 const {
   Storage
 } = require('@google-cloud/storage')
+var secretManager = require('../secretManager/index')
 
 const minutesToExpiration = 60
 const options = {
@@ -9,9 +10,9 @@ const options = {
   expires: minutesToExpiration * 60 * 1000 + Date.now(),
 }
 
-downloadFile = (bucketName, fileName) => {
+downloadFile = (bucketName, fileName, secretName) => {
   return new Promise((resolve, reject) => {
-    getSecret()
+    secretManager.getSecret(secretName)
       .then(keyFile => {
         const storageWithCredentials = new Storage({
           projectId: process.env.GCP_PROJECT_ID,
@@ -29,16 +30,16 @@ downloadFile = (bucketName, fileName) => {
   })
 }
 
-getSecret = () => {
-  return new Promise((resolve, reject) => {
-    try {
-      const keyFile = JSON.parse(process.env.guides_bucket_secret)
-      resolve(keyFile)
-    } catch (error) {
-      reject(error)
-    }
-  })
-}
+// getSecret = () => {
+//   return new Promise((resolve, reject) => {
+//     try {
+//       const keyFile = JSON.parse(process.env.guides_bucket_secret)
+//       resolve(keyFile)
+//     } catch (error) {
+//       reject(error)
+//     }
+//   })
+// }
 
 module.exports = {
   downloadFile: downloadFile

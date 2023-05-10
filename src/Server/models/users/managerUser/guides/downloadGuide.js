@@ -7,8 +7,9 @@ downloadGuide = (decodedToken, data) => {
     try {
       const bucketName = 'maint_control_guides_bucket';
       const srcFilename = `companyID - ${decodedToken.companyId}/${data.file_name}`;
+      const secretName = process.env.guides_bucket_secret
       
-      bucket.downloadFile(bucketName, srcFilename)
+      bucket.downloadFile(bucketName, srcFilename, secretName)
         .then((signedUrl) => {
           resolve({
             httpCode: 200,

@@ -36,7 +36,8 @@ addGuide = (decodedToken, req) => {
             path.join('/tmp', filename),
             `companyID - ${decodedToken.companyId}`,
             filename,
-            mimetype
+            mimetype,
+            process.env.guides_bucket_secret
           )
           .then(() => {
             resolve({

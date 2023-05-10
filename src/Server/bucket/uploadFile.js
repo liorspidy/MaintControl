@@ -1,10 +1,11 @@
 const {
   Storage
 } = require('@google-cloud/storage')
+const secretManager = require('../secretManager/index')
 
-uploadFile = (bucketName, pathToFile, folderName, fileName, mimetype) => {
+uploadFile = (bucketName, pathToFile, folderName, fileName, mimetype, secretName) => {
   return new Promise((resolve, reject) => {
-    getSecret()
+    secretManager.getSecret(secretName)
       .then(keyFile => {
         const storageWithCredentials = new Storage({
           projectId: process.env.GCP_PROJECT_ID,
@@ -15,13 +16,13 @@ uploadFile = (bucketName, pathToFile, folderName, fileName, mimetype) => {
             console.log('folder if not exists success')
             uploadFileToFolder(storageWithCredentials, bucketName, pathToFile, folderName, fileName, mimetype)
               .then(() => {
-                console.log('File uploaded successfully');
-                resolve();
+                console.log('File uploaded successfully')
+                resolve()
               })
               .catch((err) => {
-                console.error(`Error uploading file: ${err}`);
-                reject();
-              });
+                console.error(`Error uploading file: ${err}`)
+                reject()
+              })
           })
           .catch((err) => {
             console.error(`Error could not create folder if not exists: ${err}`)
@@ -74,7 +75,6 @@ createFolderIfNotExists = (storage, bucketName, folderName) => {
 
 uploadFileToFolder = (storage, bucketName, pathToFile, folderName, fileName, mimetype) => {
   return new Promise((resolve, reject) => {
-    console.log(mimetype);
     const bucket = storage.bucket(bucketName)
     const file = bucket.file(`${folderName}/${fileName}`)
     const options = {
