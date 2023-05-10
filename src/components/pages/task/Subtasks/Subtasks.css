@@ -203,16 +203,16 @@
     font-size: 1.4rem;
     border-radius: 10px 10px 0 0;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-    background-color: #bcbcbc;
+    background-color: #81bacd;
     cursor: pointer;
 }
 
 .subtaskTab:hover {
-    background-color: #dcdcdc;
+    background-color: #add8e6;
 }
 
 .subtaskTab.active {
-    background-color: #dcdcdc;
+    background-color: #add8e6;
 }
 
 .subtaskTabFiller {
