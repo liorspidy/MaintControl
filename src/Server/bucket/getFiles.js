@@ -3,7 +3,7 @@ const {
 } = require('@google-cloud/storage')
 const secretManager = require('../secretManager/index')
 
-const getFiles = (bucketName, offset, limit, companyId, secretName) => {
+getFiles = (bucketName, offset, limit, companyId, secretName) => {
   return new Promise((resolve, reject) => {
     secretManager.getSecret(secretName)
       .then(keyFile => {

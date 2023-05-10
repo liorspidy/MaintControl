@@ -21,7 +21,15 @@ downloadFile = (bucketName, fileName, secretName) => {
         storageWithCredentials.bucket(bucketName)
           .file(fileName)
           .getSignedUrl(options)
-          .then(([url]) => resolve(url))
+          .then(([url]) => {
+            let cleanFileName = fileName.split('/').pop()
+            cleanFileName = cleanFileName.replace(/ - \d+\.\d+\.\d+ - \d+:\d+:\d+/, '')//clean date and time
+            const response = {
+              fileName: cleanFileName,
+              fileUrl: url
+            }
+            resolve(response)
+          })
           .catch((err) => {
             console.error('Error getting signed URL:', err)
             reject()
@@ -33,17 +41,6 @@ downloadFile = (bucketName, fileName, secretName) => {
       })
   })
 }
-
-// getSecret = () => {
-//   return new Promise((resolve, reject) => {
-//     try {
-//       const keyFile = JSON.parse(process.env.guides_bucket_secret)
-//       resolve(keyFile)
-//     } catch (error) {
-//       reject(error)
-//     }
-//   })
-// }
 
 module.exports = {
   downloadFile: downloadFile
