@@ -12,10 +12,13 @@ addGuide = (decodedToken, req) => {
       })
       let filename = ''
       let mimetype = ''
+      let saveTo = ''
+
       busboy.on('file', (fieldname, file, originalname) => {
         const now = new Date()
         const date = now.toLocaleDateString('he-IL')
-        filename = `${originalname.filename} - ${date}`
+        const time = new Intl.DateTimeFormat('he-IL', {hour: 'numeric', minute: 'numeric', second: 'numeric', timeZone: 'Asia/Jerusalem'}).format(now)
+        filename = `${originalname.filename} - ${date} - ${time}`
 
         // Get the file type from the buffer
         const chunks = []
@@ -25,19 +28,23 @@ addGuide = (decodedToken, req) => {
           const buffer = Buffer.concat(chunks)
           const type = fileType(buffer)
           mimetype = type?.mime
-          const saveTo = path.join('/tmp', filename)
+          saveTo = path.join('/tmp', filename)
           fs.writeFileSync(saveTo, buffer)
         })
       })
 
+      const bucketName = 'maint_control_guides_bucket'
+      const folderName = `companyID - ${decodedToken.companyId}`
+      const secretName = process.env.guides_bucket_secret
+
       busboy.on('finish', () => {
         bucket.uploadFile(
-            'maint_control_guides_bucket',
-            path.join('/tmp', filename),
-            `companyID - ${decodedToken.companyId}`,
+            bucketName,
+            saveTo,
+            folderName,
             filename,
             mimetype,
-            process.env.guides_bucket_secret
+            secretName
           )
           .then(() => {
             resolve({
