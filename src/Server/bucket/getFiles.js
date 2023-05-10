@@ -31,7 +31,7 @@ const getFiles = (bucketName, offset, limit, companyId, secretName) => {
           })
       })
       .catch((err) => {
-        console.error(`Error getting secret: ${err}`)
+        console.error(`Error secret: ${err}`)
         reject(err)
       })
   })

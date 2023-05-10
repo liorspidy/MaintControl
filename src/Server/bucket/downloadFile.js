@@ -27,6 +27,10 @@ downloadFile = (bucketName, fileName, secretName) => {
             reject()
           })
       })
+      .catch((err) => {
+        console.error(`Error secret: ${err}`)
+        reject(err)
+      })
   })
 }
 

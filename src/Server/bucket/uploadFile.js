@@ -36,17 +36,6 @@ uploadFile = (bucketName, pathToFile, folderName, fileName, mimetype, secretName
   })
 }
 
-getSecret = () => {
-  return new Promise((resolve, reject) => {
-    try {
-      const keyFile = JSON.parse(process.env.guides_bucket_secret)
-      resolve(keyFile)
-    } catch (error) {
-      reject(error)
-    }
-  })
-}
-
 createFolderIfNotExists = (storage, bucketName, folderName) => {
   return new Promise((resolve, reject) => {
     const bucket = storage.bucket(bucketName)
