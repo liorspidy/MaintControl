@@ -91,7 +91,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsInVzZXJOYW1lIjoibmF2ZXNoIiwiY29tcGFueUlkIjoxLCJpYXQiOjE2ODM3MzkxODUsImV4cCI6MTY4Mzc0Mjc4NX0.RDboa-hJtfddnYTzLEmcTUccX18nAdVhN20gzeqtA9E",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInVzZXJOYW1lIjoidGVtcEFkbWluIiwiY29tcGFueUlkIjoyLCJpYXQiOjE2ODM3NDUwMTcsImV4cCI6MTY4Mzc0ODYxN30.mQM0WI-qpPh8O3VNOlv8dj3svOpPh157-sM0mqq0YZo",
 											"type": "string"
 										}
 									]
@@ -393,7 +393,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInVzZXJOYW1lIjoidGVtcEFkbWluIiwiY29tcGFueUlkIjoyLCJpYXQiOjE2ODM3MTIzNTksImV4cCI6MTY4MzcxNTk1OX0.JGYWAJOcRDViwEAMEaEHf5N6AE2Ffbt9oeGLteoY7vM",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInVzZXJOYW1lIjoidGVtcEFkbWluIiwiY29tcGFueUlkIjoyLCJpYXQiOjE2ODM3NDg1MDIsImV4cCI6MTY4Mzc1MjEwMn0.37JmxTFUMU3p0bRlHKaFQ9iuC1qcb6ZaG9jPlxOEQOY",
 											"type": "string"
 										}
 									]
@@ -402,7 +402,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"file_name\":\"poster2.pdf - 10.5.2023 - 12:52:53\"\r\n}",
+									"raw": "{\r\n    \"file_name\":\"poster2.pdf - 10.5.2023 - 12:53:28\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -434,7 +434,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsInVzZXJOYW1lIjoidGVtcEFkbWluMSIsImNvbXBhbnlJZCI6MywiaWF0IjoxNjgwMDg2MTg2LCJleHAiOjE2ODAwODk3ODZ9.HoS1f9Ot0mJ-kkCDOaXCL-FjxIONMiBE5_BKI6PLsvw",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInVzZXJOYW1lIjoidGVtcEFkbWluIiwiY29tcGFueUlkIjoyLCJpYXQiOjE2ODM3NDUwMTcsImV4cCI6MTY4Mzc0ODYxN30.mQM0WI-qpPh8O3VNOlv8dj3svOpPh157-sM0mqq0YZo",
 											"type": "string"
 										}
 									]
@@ -443,7 +443,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"guide_id\": 6\r\n}",
+									"raw": "{\r\n    \"file_name\": \"poster2.pdf - 10.5.2023 - 12:52:53\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -451,12 +451,14 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:9000/guides/deleteGuide",
-									"protocol": "http",
+									"raw": "https://maint-control-docker-image-dev-2n3aq2y4ja-zf.a.run.app/guides/deleteGuide",
+									"protocol": "https",
 									"host": [
-										"localhost"
+										"maint-control-docker-image-dev-2n3aq2y4ja-zf",
+										"a",
+										"run",
+										"app"
 									],
-									"port": "9000",
 									"path": [
 										"guides",
 										"deleteGuide"
