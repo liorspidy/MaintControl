@@ -16,7 +16,7 @@ const connectMaintControlDB = () => {
 
       client.connect(function (err) {
         if (err) {
-          console.log('err===> ' + err)
+          console.log('err db connection ===> ' + err)
           setTimeout(connectMaintControlDB, 5000)
         } else {
           myClient = client

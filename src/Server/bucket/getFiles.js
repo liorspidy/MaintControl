@@ -1,40 +1,39 @@
 const {
   Storage
 } = require('@google-cloud/storage')
+const secretManager = require('../secretManager/index')
 
-getFiles = (bucketName, fileName) => {
+const getFiles = (bucketName, offset, limit, companyId, secretName) => {
   return new Promise((resolve, reject) => {
-    getSecret()
+    secretManager.getSecret(secretName)
       .then(keyFile => {
         const storageWithCredentials = new Storage({
           projectId: process.env.GCP_PROJECT_ID,
           credentials: keyFile
         })
+
+        const options = {
+          prefix: `companyID - ${companyId}/`
+        }
+
         storageWithCredentials.bucket(bucketName)
-          .getFiles({prefix: 'companyID - 1/'})
+          .getFiles(options)
           .then((data) => {
-            console.log('======= data =====' + data)
             const files = data[0]
-            console.log('Files:')
-            files.forEach((file) => {
-              console.log(file.name)
-            })
+            let filteredFilesNames = files.map((file) => file.name.split('/').pop())
+            filteredFilesNames = filteredFilesNames.filter(val => val !== "")
+            filteredFilesNames = filteredFilesNames.slice(offset, offset + limit)
+            resolve(filteredFilesNames)
           })
           .catch((err) => {
             console.error('ERROR:', err)
+            reject(err)
           })
       })
-  })
-}
-
-getSecret = () => {
-  return new Promise((resolve, reject) => {
-    try {
-      const keyFile = JSON.parse(process.env.guides_bucket_secret)
-      resolve(keyFile)
-    } catch (error) {
-      reject(error)
-    }
+      .catch((err) => {
+        console.error(`Error getting secret: ${err}`)
+        reject(err)
+      })
   })
 }
 

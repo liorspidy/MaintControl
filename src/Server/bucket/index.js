@@ -1,11 +1,11 @@
-// const { createBucket } = require('./createBucket')
 const { uploadFile } = require('./uploadFile')
 const { deleteFile } = require('./deleteFile')
 const { downloadFile } = require('./downloadFile')
+const { getFiles } = require('./getFiles')
 
 module.exports={
-  // createBucket: createBucket,
   uploadFile: uploadFile,
   deleteFile: deleteFile,
-  downloadFile: downloadFile
+  downloadFile: downloadFile,
+  getFiles: getFiles
 }
