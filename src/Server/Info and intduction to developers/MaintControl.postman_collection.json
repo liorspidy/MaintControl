@@ -27,10 +27,10 @@
 									}
 								},
 								"url": {
-									"raw": "https://maint-control-docker-image-2n3aq2y4ja-zf.a.run.app/users/login",
+									"raw": "https://maint-control-docker-image-dev-2n3aq2y4ja-zf.a.run.app/users/login",
 									"protocol": "https",
 									"host": [
-										"maint-control-docker-image-2n3aq2y4ja-zf",
+										"maint-control-docker-image-dev-2n3aq2y4ja-zf",
 										"a",
 										"run",
 										"app"
@@ -349,7 +349,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJOYW1lIjoidGVtcEFkbWluIiwiY29tcGFueUlkIjoxLCJpYXQiOjE2ODAwOTYxMzQsImV4cCI6MTY4MDA5OTczNH0.aQGBh3M_IuXcMCTOxjVEAaXKroEDojmW9Q6Z7bplblM",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInVzZXJOYW1lIjoidGVtcEFkbWluIiwiY29tcGFueUlkIjoyLCJpYXQiOjE2ODM3MTIzNTksImV4cCI6MTY4MzcxNTk1OX0.JGYWAJOcRDViwEAMEaEHf5N6AE2Ffbt9oeGLteoY7vM",
 											"type": "string"
 										}
 									]
@@ -357,21 +357,24 @@
 								"method": "POST",
 								"header": [],
 								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"guide_title\": \"guide 5\",\r\n    \"guide_content\": \"content 5\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "",
+											"type": "file",
+											"src": "/D:/משתמשים/poster2.pdf"
 										}
-									}
+									]
 								},
 								"url": {
-									"raw": "http://localhost:9000/guides/addGuide",
-									"protocol": "http",
+									"raw": "https://maint-control-docker-image-dev-2n3aq2y4ja-zf.a.run.app/guides/addGuide",
+									"protocol": "https",
 									"host": [
-										"localhost"
+										"maint-control-docker-image-dev-2n3aq2y4ja-zf",
+										"a",
+										"run",
+										"app"
 									],
-									"port": "9000",
 									"path": [
 										"guides",
 										"addGuide"
@@ -381,14 +384,14 @@
 							"response": []
 						},
 						{
-							"name": "updateGuide",
+							"name": "downloadGuide",
 							"request": {
 								"auth": {
 									"type": "bearer",
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJOYW1lIjoidGVtcEFkbWluIiwiY29tcGFueUlkIjoxLCJpYXQiOjE2ODAwOTQ2OTcsImV4cCI6MTY4MDA5ODI5N30.SrlQyQHnNbGRlJ-QMzMoouv_z7X7oN-E7GS0802uYsE",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInVzZXJOYW1lIjoidGVtcEFkbWluIiwiY29tcGFueUlkIjoyLCJpYXQiOjE2ODM3MTIzNTksImV4cCI6MTY4MzcxNTk1OX0.JGYWAJOcRDViwEAMEaEHf5N6AE2Ffbt9oeGLteoY7vM",
 											"type": "string"
 										}
 									]
@@ -397,7 +400,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"guide_id\": 1,\r\n    \"guide_title\": \"guide 1 updated\",\r\n    \"guide_content\": \"content 1 updated\"\r\n}",
+									"raw": "{\r\n    \"file_name\":\"poster2.pdf - 10.5.2023 - 12:52:53\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -405,15 +408,17 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:9000/guides/updateGuide",
-									"protocol": "http",
+									"raw": "https://maint-control-docker-image-dev-2n3aq2y4ja-zf.a.run.app/guides/downloadGuide",
+									"protocol": "https",
 									"host": [
-										"localhost"
+										"maint-control-docker-image-dev-2n3aq2y4ja-zf",
+										"a",
+										"run",
+										"app"
 									],
-									"port": "9000",
 									"path": [
 										"guides",
-										"updateGuide"
+										"downloadGuide"
 									]
 								}
 							},
