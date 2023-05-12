@@ -138,10 +138,6 @@ const Task = (props) => {
     }
   };
 
-  // const sortedTasks = tasks.sort((a, b) => {
-  //   return a.product_serial_number.localeCompare(b.product_serial_number);
-  // });
-
   const taskClickedHandler = (task) => {
     if (!editTaskClicked && !deleteTaskClicked) {
       setSelectedPosition({
@@ -209,7 +205,10 @@ const Task = (props) => {
 
   return (
     <div className="taskPageBox">
-      <DeleteTaskModal closeModal={closeModalHandler} />
+      <DeleteTaskModal
+        closeModal={closeModalHandler}
+        selectedTaskToDelete={selectedTaskToDelete}
+      />
       <div className="tasksList">
         <div className="taskListHeader">
           <div className="taskFilters">

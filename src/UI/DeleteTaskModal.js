@@ -1,9 +1,9 @@
 import './Card.css';
 import Card from './Card';
 
-const DeleteTaskModal = ({ closeModal }) => {
+const DeleteTaskModal = ({ closeModal, selectedTaskToDelete }) => {
   const handleDeleteUser = () => {
-    console.log('task deleted');
+    console.log('task deleted', selectedTaskToDelete);
     closeModal();
   };
 
