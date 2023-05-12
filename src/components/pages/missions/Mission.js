@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Mission = (props) => {
   const [showDescription, setShowDescription] = useState(false);
+  const [isDone, setIsDone] = useState(false);
   const label = { inputProps: { 'aria-label': 'Mission Checkbox' } };
   const navigate = useNavigate();
 
@@ -32,8 +33,9 @@ const Mission = (props) => {
       navigate(`/missions/edit/${props.mission.id}`);
   };
 
-  const stopPropagationHandle = (event) => {
+  const checkBoxHandler = (event) => {
     event.stopPropagation();
+    setIsDone((prevState) => !prevState);
   };
 
   const UrgencyClass =
@@ -46,7 +48,10 @@ const Mission = (props) => {
       : 'Urgency';
 
   return (
-    <li key={props.mission.id} className="MissionlistItem">
+    <li
+      key={props.mission.id}
+      className={`MissionlistItem ${isDone ? 'done' : ''}`}
+    >
       <div className="MissionlistItemContent">
         <Checkbox
           {...label}
@@ -56,7 +61,7 @@ const Mission = (props) => {
               color: 'white',
             },
           }}
-          onClick={stopPropagationHandle}
+          onClick={checkBoxHandler}
         />
         <label className="MissionLabel">
           <div className="MissionContent">
@@ -124,7 +129,7 @@ const Mission = (props) => {
           <Link
             className="taskBtn"
             to={`/task/mission/${props.mission.id}`}
-            onClick={stopPropagationHandle}
+            onClick={checkBoxHandler}
           >
             <Fab size="small" color="info" aria-label="add">
               <NextWeekIcon />

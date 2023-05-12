@@ -1,5 +1,5 @@
-import '../../UI/Card.css';
-import Card from '../../UI/Card';
+import './Card.css';
+import Card from './Card';
 
 const ConfirmDeleteModal = ({
   token,

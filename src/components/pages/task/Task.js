@@ -16,10 +16,16 @@ import TextRotateVerticalIcon from '@mui/icons-material/TextRotateVertical';
 import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 import Map from '../../map/Map';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import DeleteTaskModal from '../../../UI/DeleteTaskModal';
 
 const Task = (props) => {
   const [selectedPosition, setSelectedPosition] = useState(null);
+  const [selectedTaskToDelete, setSelectedTaskToDelete] = useState(null);
+
   const [editTaskClicked, setEditTaskClicked] = useState(false);
+  const [deleteTaskClicked, setDeleteTaskClicked] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const [locationName, setLocationName] = useState('');
   const [tasksSortingOrderDate, setTasksSortingOrderDate] = useState('asc');
   const [tasksSortingOrderAlph, setTasksSortingOrderAlph] = useState('asc');
@@ -136,14 +142,17 @@ const Task = (props) => {
   //   return a.product_serial_number.localeCompare(b.product_serial_number);
   // });
 
-  const taskPositionHandler = (task) => {
-    if (!editTaskClicked) {
+  const taskClickedHandler = (task) => {
+    if (!editTaskClicked && !deleteTaskClicked) {
       setSelectedPosition({
         lat: task?.location?.lat,
         lon: task?.location?.lon,
       });
-    } else {
+    } else if (editTaskClicked && !deleteTaskClicked) {
       navigate(`${currentUrl}/edit/${task.task_id}`);
+    } else if (deleteTaskClicked && !editTaskClicked) {
+      setSelectedTaskToDelete(task);
+      openModalHandler();
     }
   };
 
@@ -158,6 +167,14 @@ const Task = (props) => {
     setEditTaskClicked((prevState) => {
       return (prevState = !prevState);
     });
+    setDeleteTaskClicked(false);
+  };
+
+  const deleteTaskHandler = () => {
+    setDeleteTaskClicked((prev) => {
+      return (prev = !prev);
+    });
+    setEditTaskClicked(false);
   };
 
   const toggleProblem = (task, event) => {
@@ -173,10 +190,26 @@ const Task = (props) => {
     event.stopPropagation();
   };
 
+  const openModalHandler = () => {
+    if (!isModalOpen) {
+      document.querySelector('.backdrop').classList.add('show');
+    }
+    setIsModalOpen(true);
+  };
+
+  const closeModalHandler = () => {
+    if (isModalOpen) {
+      document.querySelector('.backdrop').classList.remove('show');
+    }
+    setIsModalOpen(false);
+  };
+
   const editTaskClickedClass = editTaskClicked ? 'info' : 'white';
+  const deleteTaskClickedClass = deleteTaskClicked ? 'info' : 'white';
 
   return (
     <div className="taskPageBox">
+      <DeleteTaskModal closeModal={closeModalHandler} />
       <div className="tasksList">
         <div className="taskListHeader">
           <div className="taskFilters">
@@ -218,19 +251,24 @@ const Task = (props) => {
             </ToggleButtonGroup>
           </div>
           <div className="actionBtns">
-            <Fab size="small" color="white" aria-label="add">
+            <Fab
+              size="small"
+              color={deleteTaskClickedClass}
+              aria-label="deleteTask"
+              onClick={deleteTaskHandler}
+            >
               <DeleteIcon />
             </Fab>
             <Fab
               size="small"
               color={editTaskClickedClass}
-              aria-label="add"
+              aria-label="editTask"
               onClick={editTaskHandler}
             >
               <EditIcon />
             </Fab>
             <Link className="newMission" to={`${currentUrl}/addTask`}>
-              <Fab size="small" color="white" aria-label="add">
+              <Fab size="small" color="white" aria-label="addTask">
                 <AddIcon />
               </Fab>
             </Link>
@@ -244,7 +282,7 @@ const Task = (props) => {
                   <li
                     className="taskItem"
                     key={index}
-                    onClick={taskPositionHandler.bind(this, task)}
+                    onClick={taskClickedHandler.bind(this, task)}
                   >
                     <div className="taskCard">
                       <div className="product">

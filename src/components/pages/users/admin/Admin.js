@@ -13,7 +13,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import { useState, useEffect } from 'react';
-import ConfirmDeleteModal from '../../../confirmDeleteModal/ConfirmDeleteModal';
+import ConfirmDeleteModal from '../../../../UI/ConfirmDeleteModal';
 import './Admin.css';
 
 const token = localStorage.getItem('token');
