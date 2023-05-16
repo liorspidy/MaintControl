@@ -19,8 +19,10 @@ b) run the following commands:
 c) In the cloud run on the container registery run the latest image
 
 3. In order to send requests to the gcp revision,
-use the following url: https://maint-control-docker-image-2n3aq2y4ja-zf.a.run.app
+use the following url for production: https://maint-control-docker-image-2n3aq2y4ja-zf.a.run.app
+use the following url for development: https://maint-control-docker-image-dev-2n3aq2y4ja-zf.a.run.app
 for example: https://maint-control-docker-image-2n3aq2y4ja-zf.a.run.app/users/login
+for example: https://maint-control-docker-image-dev-2n3aq2y4ja-zf.a.run.app/users/login
 
 4. In order to use env parameters on the GCP, you need to use secret manager on gcp
 

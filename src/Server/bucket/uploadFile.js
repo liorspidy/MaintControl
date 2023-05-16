@@ -2,6 +2,7 @@ const {
   Storage
 } = require('@google-cloud/storage')
 const secretManager = require('../secretManager/index')
+const getSignedUrl = require('./getSignedUrl').getSignedUrl
 
 uploadFile = (bucketName, pathToFile, folderName, fileName, mimetype, secretName) => {
   return new Promise((resolve, reject) => {
@@ -14,10 +15,10 @@ uploadFile = (bucketName, pathToFile, folderName, fileName, mimetype, secretName
         createFolderIfNotExists(storageWithCredentials, bucketName, folderName)
           .then(() => {
             console.log('folder if not exists success')
-            uploadFileToFolder(storageWithCredentials, bucketName, pathToFile, folderName, fileName, mimetype)
-              .then(() => {
+            uploadFileToFolder(storageWithCredentials, bucketName, pathToFile, folderName, fileName, mimetype, secretName)
+              .then((signedUrl) => {
                 console.log('File uploaded successfully')
-                resolve()
+                resolve(signedUrl)
               })
               .catch((err) => {
                 console.error(`Error uploading file: ${err}`)
@@ -62,7 +63,7 @@ createFolderIfNotExists = (storage, bucketName, folderName) => {
 }
 
 
-uploadFileToFolder = (storage, bucketName, pathToFile, folderName, fileName, mimetype) => {
+uploadFileToFolder = (storage, bucketName, pathToFile, folderName, fileName, mimetype, secretName) => {
   return new Promise((resolve, reject) => {
     const bucket = storage.bucket(bucketName)
     const file = bucket.file(`${folderName}/${fileName}`)
@@ -76,8 +77,11 @@ uploadFileToFolder = (storage, bucketName, pathToFile, folderName, fileName, mim
     }
     bucket.upload(pathToFile, options)
       .then(() => {
-        console.log(`File ${fileName} uploaded to folder ${folderName} in bucket ${bucketName}`)
-        resolve()
+        console.log(`File ${fileName} uploaded to folder ${folderName} in bucket ${bucketName}`)        
+        return getSignedUrl(bucketName, `${folderName}/${fileName}`, secretName)
+      })
+      .then(signedUrl => {
+        resolve(signedUrl.fileUrl);
       })
       .catch((err) => {
         console.error(`Error uploading file ${fileName} to folder ${folderName} in bucket ${bucketName}: ${err}`)

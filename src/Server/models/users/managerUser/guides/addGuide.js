@@ -3,6 +3,7 @@ const path = require('path')
 const Busboy = require('busboy')
 const fileType = require('file-type')
 const bucket = require('../../../../bucket/index')
+var db = require('../../../../db/index')
 
 addGuide = (decodedToken, req) => {
   return new Promise((resolve, reject) => {
@@ -13,6 +14,9 @@ addGuide = (decodedToken, req) => {
       let filename = ''
       let mimetype = ''
       let saveTo = ''
+      let title = '';
+      let description = '';
+
 
       busboy.on('file', (fieldname, file, originalname) => {
         const now = new Date()
@@ -33,6 +37,15 @@ addGuide = (decodedToken, req) => {
         })
       })
 
+      busboy.on('field', (fieldname, val, fieldnameTruncated, valTruncated, encoding, mimetype) => {
+        if (fieldname === 'title') {
+          title = val;
+        }
+        if (fieldname === 'description') {
+          description = val;
+        }
+      });
+
       const bucketName = 'maint_control_guides_bucket'
       const folderName = `companyID - ${decodedToken.companyId}`
       const secretName = process.env.guides_bucket_secret
@@ -46,6 +59,15 @@ addGuide = (decodedToken, req) => {
             mimetype,
             secretName
           )
+          .then(signedUrl => {
+            console.log(title);
+            console.log(description);
+            console.log(signedUrl);
+            return db.query(
+              'INSERT INTO fact_guides (title, description, file_path, company_id) VALUES ($1, $2, $3, $4)',
+              [title, description, signedUrl, decodedToken.companyId]
+            );
+          })
           .then(() => {
             resolve({
               httpCode: 200,
