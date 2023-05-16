@@ -1,5 +1,5 @@
-var Promise = require('promise');
-var db = require('../../../../db/index');
+var Promise = require('promise')
+var db = require('../../../../db/index')
 
 searchUser = (decodedToken, data) => {
   return new Promise((resolve, reject) => {
@@ -11,7 +11,7 @@ searchUser = (decodedToken, data) => {
                               OR last_name ILIKE '%${data.search_term}%' 
                               OR email ILIKE '%${data.search_term}%' 
                               OR phone ILIKE '%${data.search_term}%')
-                         ORDER BY user_id`);
+                         ORDER BY user_id`)
 
       result.then((answer) => {
           resolve({
@@ -29,7 +29,7 @@ searchUser = (decodedToken, data) => {
       reject({
         httpCode: 500,
         answer: "Internal server error"
-      });
+      })
     }
   })
 }

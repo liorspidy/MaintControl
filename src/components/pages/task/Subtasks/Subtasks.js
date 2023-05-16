@@ -3,6 +3,7 @@ import subtasksJson from './subtasks.json';
 import './Subtasks.css';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
+import DeleteIcon from '@mui/icons-material/Delete';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -59,6 +60,10 @@ const Subtasks = () => {
     reader.readAsDataURL(file);
   }
 
+  const handleRemoveImage = (subtaskIndex, paragraphIndex, index) => {
+    console.log(subtaskIndex, paragraphIndex, index);
+  };
+
   const tabHandler = (subtaskIndex) => {
     setCurrentSubtask(subtaskIndex);
   };
@@ -98,7 +103,7 @@ const Subtasks = () => {
             >
               <div className="subtaskTitleAndButton">
                 <div className="subtaskTitle">
-                  <label htmlFor="subtaskTitle">{subtaskIndex + 1}.</label>
+                  {/* <label htmlFor="subtaskTitle">{subtaskIndex + 1}.</label> */}
                   <input
                     type="text"
                     id="subtaskTitle"
@@ -121,9 +126,7 @@ const Subtasks = () => {
                     <div>
                       <label
                         htmlFor={`subtask-${subtaskIndex}-paragraph-${paragraphIndex}-text`}
-                      >
-                        Text
-                      </label>
+                      ></label>
                       <textarea
                         id={`subtask-${subtaskIndex}-paragraph-${paragraphIndex}-text`}
                         value={paragraph.text}
@@ -139,9 +142,7 @@ const Subtasks = () => {
                     <div>
                       <label
                         htmlFor={`subtask-${subtaskIndex}-paragraph-${paragraphIndex}-photo`}
-                      >
-                        Photo
-                      </label>
+                      ></label>
                       <input
                         id={`subtask-${subtaskIndex}-paragraph-${paragraphIndex}-photo`}
                         type="file"
@@ -156,6 +157,24 @@ const Subtasks = () => {
                         paragraphIndex
                       ]?.links_to_photos?.map((url, index) => (
                         <div className="subtasksPhotosSlider" key={index}>
+                          <div className="removeImageButton">
+                            <Fab
+                              size="small"
+                              color="white"
+                              aria-label="remove image"
+                              className="addParagraphButton"
+                              onClick={() =>
+                                handleRemoveImage(
+                                  subtaskIndex,
+                                  paragraphIndex,
+                                  index,
+                                  url
+                                )
+                              }
+                            >
+                              <DeleteIcon type="button" />
+                            </Fab>
+                          </div>
                           <img
                             title={`Slide ${index + 1}`}
                             onClick={subtaskPhotoHandler}

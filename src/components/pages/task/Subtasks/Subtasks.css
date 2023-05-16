@@ -19,7 +19,6 @@
 
 .subtask-fill-form-container .form-group {
     margin-bottom: 1.5rem;
-    /* border-bottom: 1px solid #cccccc68; */
     padding: 1.5rem;
     height: 40rem;
     overflow: auto;
@@ -28,9 +27,8 @@
 
 .subtask-fill-form-container .form-group.active {
     margin-bottom: 1.5rem;
-    /* border-bottom: 1px solid #cccccc68; */
     padding: 1.5rem;
-    height: 40rem;
+    height: 42rem;
     overflow: auto;
     display: block;
 }
@@ -143,11 +141,11 @@
 .subtask-fill-form-container .taskButton {
     background-color: white;
     color: black;
-    padding: 0.3rem 0.8rem;
+    padding: 0.5rem 0.8rem;
     border: none;
     border-radius: 0.5rem;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    font-size: 0.8rem;
+    font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
     margin: 1rem;
@@ -164,19 +162,19 @@
 
 .slick-slider {
     max-width: 26rem;
-    margin: 1.5rem auto;
+    margin: 0rem auto;
+    margin-bottom: 1rem;
 }
 
 .subtasksPhotosSlider {
-    display: flex;
-    width: 20rem;
+    position: relative;
 }
 
 .subtasksPhotos {
-    width: 20rem;
-    aspect-ratio: auto;
-    object-fit: fill;
+    width: 25rem;
+    object-fit: contain;
     margin: 0 auto;
+    height: 22rem;
     cursor: pointer;
 }
 
@@ -203,16 +201,16 @@
     font-size: 1.4rem;
     border-radius: 10px 10px 0 0;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-    background-color: #81bacd;
+    background-color: #979797;
     cursor: pointer;
 }
 
 .subtaskTab:hover {
-    background-color: #add8e6;
+    background-color: #c7c7c7;
 }
 
 .subtaskTab.active {
-    background-color: #add8e6;
+    background-color: #c7c7c7;
 }
 
 .subtaskTabFiller {
@@ -223,6 +221,20 @@
     font-size: 1.4rem;
     border-radius: 10px 10px 0 0;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-    background-color: #bcbcbc;
+    background-color: #979797;
     cursor: pointer;
+}
+
+.removeImageButton {
+    position: absolute;
+    top: 1rem;
+    left: 50%;
+    z-index: 10;
+    transform: translate(-50%, 0);
+    display: none;
+
+}
+
+.subtasksPhotosSlider:hover .removeImageButton {
+    display: block;
 }

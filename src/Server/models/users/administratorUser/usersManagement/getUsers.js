@@ -1,5 +1,5 @@
-var Promise = require('promise');
-var db = require('../../../../db/index');
+var Promise = require('promise')
+var db = require('../../../../db/index')
 
 getUsers = (decodedToken, query) => {
   return new Promise((resolve, reject) => {
@@ -9,7 +9,7 @@ getUsers = (decodedToken, query) => {
                          user_id != ${decodedToken.userId}
                          ORDER BY user_id
                          OFFSET ${query.OFFSET}
-                         LIMIT ${query.LIMIT}`);
+                         LIMIT ${query.LIMIT}`)
 
       result.then((answer) => {
           resolve({
@@ -27,7 +27,7 @@ getUsers = (decodedToken, query) => {
       reject({
         httpCode: 500,
         answer: "Internal server error"
-      });
+      })
     }
   })
 }

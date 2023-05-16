@@ -1,5 +1,5 @@
-var Promise = require('promise');
-var db = require('../../../../db/index');
+var Promise = require('promise')
+var db = require('../../../../db/index')
 
 updateUser = (data, decodedToken) => {
   return new Promise((resolve, reject) => {
@@ -13,7 +13,7 @@ updateUser = (data, decodedToken) => {
                             phone = '${data.phone}',
                             role = '${data.role}' 
                             WHERE user_id = ${data.user_id} AND 
-                            company_id = ${decodedToken.companyId}`);
+                            company_id = ${decodedToken.companyId}`)
 
       result.then(() => {
           resolve({
@@ -31,7 +31,7 @@ updateUser = (data, decodedToken) => {
       reject({
         httpCode: 500,
         answer: "Internal server error"
-      });
+      })
     }
   })
 }

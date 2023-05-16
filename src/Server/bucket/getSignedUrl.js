@@ -10,7 +10,7 @@ const options = {
   expires: minutesToExpiration * 60 * 1000 + Date.now(),
 }
 
-downloadFile = (bucketName, fileName, secretName) => {
+getSignedUrl = (bucketName, fileName, secretName) => {
   return new Promise((resolve, reject) => {
     secretManager.getSecret(secretName)
       .then(keyFile => {
@@ -22,10 +22,7 @@ downloadFile = (bucketName, fileName, secretName) => {
           .file(fileName)
           .getSignedUrl(options)
           .then(([url]) => {
-            let cleanFileName = fileName.split('/').pop()
-            cleanFileName = cleanFileName.replace(/ - \d+\.\d+\.\d+ - \d+:\d+:\d+/, '')//clean date and time
-            const response = {
-              fileName: cleanFileName,
+            const response = {              
               fileUrl: url
             }
             resolve(response)
@@ -43,5 +40,5 @@ downloadFile = (bucketName, fileName, secretName) => {
 }
 
 module.exports = {
-  downloadFile: downloadFile
+  getSignedUrl: getSignedUrl
 }

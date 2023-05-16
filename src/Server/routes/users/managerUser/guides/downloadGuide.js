@@ -1,5 +1,5 @@
 const express = require('express')
-const deleteGuideRouter = express.Router()
+const downloadGuideRouter = express.Router()
 const cors = require('cors')
 const managerUserController = require('../../../../controllers/users/managerUser/index')
 const {
@@ -10,10 +10,10 @@ const {
 } = require('../../../../utils/autohrization/role')
 
 
-deleteGuideRouter.use(cors())
+downloadGuideRouter.use(cors())
 
-deleteGuideRouter.delete('/guides/deleteGuide', verifyToken, authorizeRole(['administrator', 'manager']), (req, res) => {
-  managerUserController.deleteGuide(req, res)
+downloadGuideRouter.put('/guides/downloadGuide', verifyToken, authorizeRole(['administrator', 'manager']), (req, res) => {
+  managerUserController.downloadGuide(req, res)
 })
 
-module.exports = deleteGuideRouter
+module.exports = downloadGuideRouter

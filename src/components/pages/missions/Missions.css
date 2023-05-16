@@ -91,6 +91,11 @@
   transition: all 0.2s ease-in-out;
 }
 
+.MissionlistItem.done {
+  opacity: 0.4;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
 .Missions li:last-child {
   border-bottom: none;
 }

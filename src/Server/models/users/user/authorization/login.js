@@ -1,8 +1,8 @@
-var Promise = require('promise');
-var db = require('../../../../db/index');
+var Promise = require('promise')
+var db = require('../../../../db/index')
 const {
   generateAccessToken
-} = require('../../../../utils/autohrization/jwt');
+} = require('../../../../utils/autohrization/jwt')
 
 login = (data) => {
   return new Promise((resolve, reject) => {
@@ -10,7 +10,7 @@ login = (data) => {
       result = db.query(`SELECT * FROM dim_users WHERE 
                         user_name='${data.user_name}' AND 
                         password='${data.password}' AND
-                        company_id=${data.company_id}`);
+                        company_id=${data.company_id}`)
 
       role = ''
       result.then((answer) => {
@@ -27,7 +27,7 @@ login = (data) => {
             reject({
               httpCode: 401,
               answer: 'Unauthorized'
-            });
+            })
           }
         })
         .then((token) => {
@@ -49,13 +49,13 @@ login = (data) => {
       reject({
         httpCode: 500,
         answer: "Internal server error"
-      });
+      })
     }
   })
 }
 
 isUserExist = (answer) => {
-  return answer.rowCount == 1 ? true : false;
+  return answer.rowCount == 1 ? true : false
 }
 
 module.exports = {
