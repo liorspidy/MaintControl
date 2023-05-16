@@ -60,12 +60,9 @@ addGuide = (decodedToken, req) => {
             secretName
           )
           .then(signedUrl => {
-            console.log(title);
-            console.log(description);
-            console.log(signedUrl);
             return db.query(
-              'INSERT INTO fact_guides (title, description, file_path, company_id) VALUES ($1, $2, $3, $4)',
-              [title, description, signedUrl, decodedToken.companyId]
+              'INSERT INTO fact_guides (title, description, file_name, file_path, company_id) VALUES ($1, $2, $3, $4, $5)',
+              [title, description, filename, signedUrl, decodedToken.companyId]
             );
           })
           .then(() => {

@@ -91,7 +91,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInVzZXJOYW1lIjoidGVtcEFkbWluIiwiY29tcGFueUlkIjoyLCJpYXQiOjE2ODM3NDUwMTcsImV4cCI6MTY4Mzc0ODYxN30.mQM0WI-qpPh8O3VNOlv8dj3svOpPh157-sM0mqq0YZo",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInVzZXJOYW1lIjoidGVtcEFkbWluIiwiY29tcGFueUlkIjoyLCJpYXQiOjE2ODQyNjA5OTYsImV4cCI6MTY4NDI2NDU5Nn0.3EC1M5FNMgWoCaJEkyG_LsmPftNpRP_qb9jiYScbCgc",
 											"type": "string"
 										}
 									]
@@ -99,7 +99,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "https://maint-control-docker-image-dev-2n3aq2y4ja-zf.a.run.app/guides/getGuides?OFFSET=0&LIMIT=5",
+									"raw": "https://maint-control-docker-image-dev-2n3aq2y4ja-zf.a.run.app/guides/getGuides?OFFSET=0&LIMIT=2",
 									"protocol": "https",
 									"host": [
 										"maint-control-docker-image-dev-2n3aq2y4ja-zf",
@@ -118,7 +118,7 @@
 										},
 										{
 											"key": "LIMIT",
-											"value": "5"
+											"value": "2"
 										}
 									]
 								}
@@ -351,7 +351,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsInVzZXJOYW1lIjoibmF2ZXNoIiwiY29tcGFueUlkIjoxLCJpYXQiOjE2ODM3MzkxODUsImV4cCI6MTY4Mzc0Mjc4NX0.RDboa-hJtfddnYTzLEmcTUccX18nAdVhN20gzeqtA9E",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInVzZXJOYW1lIjoidGVtcEFkbWluIiwiY29tcGFueUlkIjoyLCJpYXQiOjE2ODQyNTc2NzIsImV4cCI6MTY4NDI2MTI3Mn0.fYPgdEM4tI0qZEY5cTTjTcBXq51eHkHKQmlAOvhOopA",
 											"type": "string"
 										}
 									]
@@ -365,6 +365,16 @@
 											"key": "",
 											"type": "file",
 											"src": "/D:/משתמשים/poster2.pdf"
+										},
+										{
+											"key": "title",
+											"value": "poster 2 title",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "poster 2 description",
+											"type": "text"
 										}
 									]
 								},
@@ -434,7 +444,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInVzZXJOYW1lIjoidGVtcEFkbWluIiwiY29tcGFueUlkIjoyLCJpYXQiOjE2ODM3NDUwMTcsImV4cCI6MTY4Mzc0ODYxN30.mQM0WI-qpPh8O3VNOlv8dj3svOpPh157-sM0mqq0YZo",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInVzZXJOYW1lIjoidGVtcEFkbWluIiwiY29tcGFueUlkIjoyLCJpYXQiOjE2ODQyNjA2MTMsImV4cCI6MTY4NDI2NDIxM30.IAVBNlttOfo54ECMuLPN-fEWKVcmj3O-dLnov00pGhY",
 											"type": "string"
 										}
 									]
@@ -443,7 +453,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"file_name\": \"poster2.pdf - 10.5.2023 - 12:52:53\"\r\n}",
+									"raw": "{\r\n    \"file_name\": \"poster2.pdf - 16.5.2023 - 19:35:03\",\r\n    \"guide_id\": \"4\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"

@@ -40,6 +40,7 @@ CREATE TABLE IF NOT EXISTS fact_guides (
   guide_id SERIAL PRIMARY KEY,
   title TEXT NOT NULL,
   description TEXT NOT NULL,
+  file_name TEXT NOT NULL,
   file_path TEXT NOT NULL,
   company_id INTEGER NOT NULL REFERENCES public.dim_companies(company_id)
 );
