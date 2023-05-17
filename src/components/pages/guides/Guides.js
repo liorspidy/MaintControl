@@ -50,21 +50,27 @@ const Guides = ({ guides, setGuides }) => {
   const GuidesList = () => {
     return (
       <>
-        {guides.map((item) => (
-          <Link
-            to={
-              isEditable
-                ? `/guides/editGuide/${item.guide_id}`
-                : `/guides/details/${item.guide_id}`
-            }
-            key={item.guide_id}
-          >
-            <div className="guideContainer">
-              <h1>{item.title}</h1>
-              <p>{item.description}</p>
-            </div>
-          </Link>
-        ))}
+        {guides ? (
+          guides.map((item) => (
+            <Link
+              to={
+                isEditable
+                  ? `/guides/editGuide/${item.guide_id}`
+                  : `/guides/details/${item.guide_id}`
+              }
+              key={item.guide_id}
+            >
+              <div className="guideContainer">
+                <h1>{item.title}</h1>
+                <p>{item.description}</p>
+              </div>
+            </Link>
+          ))
+        ) : (
+          <div>
+            <h2 style={{ padding: '0.5rem' }}>No guides found...</h2>
+          </div>
+        )}
       </>
     );
   };

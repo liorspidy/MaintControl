@@ -1,6 +1,6 @@
-import React from 'react';
+import { useState } from 'react';
 import Fab from '@mui/material/Fab';
-import AddIcon from '@mui/icons-material/Add';
+import NoteAddIcon from '@mui/icons-material/NoteAdd';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Slider from 'react-slick';
 
@@ -11,16 +11,29 @@ const FillTaskSubtaskPar = ({
   subtaskIndex,
   setSubtasks,
 }) => {
-  //add note handler
-  function handleAddNote(subtaskIndex) {
+  const [paragraphNotes, setParagraphNotes] = useState([]);
+
+  // Add note handler
+  function handleAddNote() {
     setSubtasks((prevSubtasks) => {
       const newSubtasks = [...prevSubtasks];
-      newSubtasks[subtaskIndex].paragraphs.push('');
+      const newParagraphs = [...newSubtasks[subtaskIndex].paragraphs];
+      const newParagraph = {
+        ...newParagraphs[paragraphIndex],
+        maint_man_note: [
+          ...(newParagraphs[paragraphIndex]?.maint_man_note || []),
+          {
+            text: '',
+          },
+        ],
+      };
+      newParagraphs[paragraphIndex] = newParagraph;
+      newSubtasks[subtaskIndex].paragraphs = newParagraphs;
       return newSubtasks;
     });
   }
 
-  //add photo handler
+  // Add photo handler
   function handleAddPhoto(subtaskIndex, paragraphIndex, event) {
     const file = event.target.files[0];
     if (!file) return;
@@ -29,22 +42,62 @@ const FillTaskSubtaskPar = ({
     reader.onload = () => {
       setSubtasks((prevSubtasks) => {
         const newSubtasks = [...prevSubtasks];
-        const paragraph = newSubtasks[subtaskIndex].paragraphs[paragraphIndex];
-        newSubtasks[subtaskIndex].paragraphs[
-          paragraphIndex
-        ] = `${paragraph}\nPhoto: ${reader.result}`;
+        const newParagraphs = [...newSubtasks[subtaskIndex].paragraphs];
+        const newParagraph = {
+          ...newParagraphs[paragraphIndex],
+          links_to_photos: [
+            ...(newParagraphs[paragraphIndex]?.links_to_photos || []),
+            reader.result,
+          ],
+        };
+        newParagraphs[paragraphIndex] = newParagraph;
+        newSubtasks[subtaskIndex].paragraphs = newParagraphs;
         return newSubtasks;
       });
     };
     reader.readAsDataURL(file);
   }
 
-  //remove photo handler
+  // Remove photo handler
   const handleRemoveImage = (subtaskIndex, paragraphIndex, index) => {
-    console.log(subtaskIndex, paragraphIndex, index);
+    setSubtasks((prevSubtasks) => {
+      const newSubtasks = [...prevSubtasks];
+      const newParagraphs = [...newSubtasks[subtaskIndex].paragraphs];
+      const newParagraph = {
+        ...newParagraphs[paragraphIndex],
+        links_to_photos: newParagraphs[paragraphIndex].links_to_photos.filter(
+          (_, i) => i !== index
+        ),
+      };
+      newParagraphs[paragraphIndex] = newParagraph;
+      newSubtasks[subtaskIndex].paragraphs = newParagraphs;
+      return newSubtasks;
+    });
   };
 
   const subtaskPhotoHandler = () => {};
+
+  const handleNoteChange = (event, index) => {
+    const newNotes = [...paragraphNotes];
+    newNotes[index] = event.target.value;
+    setParagraphNotes(newNotes);
+  };
+
+  const handleDeleteNote = (index) => {
+    setSubtasks((prevSubtasks) => {
+      const newSubtasks = [...prevSubtasks];
+      const newParagraphs = [...newSubtasks[subtaskIndex].paragraphs];
+      const newParagraph = {
+        ...newParagraphs[paragraphIndex],
+        maint_man_note: newParagraphs[paragraphIndex].maint_man_note.filter(
+          (_, i) => i !== index
+        ),
+      };
+      newParagraphs[paragraphIndex] = newParagraph;
+      newSubtasks[subtaskIndex].paragraphs = newParagraphs;
+      return newSubtasks;
+    });
+  };
 
   return (
     <>
@@ -52,7 +105,29 @@ const FillTaskSubtaskPar = ({
         <div className="fillTaskPar">
           <div className="parNumber">{paragraphIndex + 1}.</div>
           <div className="fillTaskParDesc">
-            <p>{paragraph.text}</p>
+            <p>{paragraph?.text}</p>
+            {paragraph?.maint_man_note?.length > 0 &&
+              paragraph.maint_man_note.map((note, index) => {
+                return (
+                  <div key={index} className="noteContainer">
+                    <textarea
+                      className="fillTaskParNote"
+                      defaultValue={note.text}
+                      value={paragraphNotes[index]}
+                      onChange={(event) => handleNoteChange(event, index)}
+                    ></textarea>
+                    <Fab
+                      size="small"
+                      color="white"
+                      aria-label="delete note"
+                      className="deleteNoteButton"
+                      onClick={() => handleDeleteNote(index)}
+                    >
+                      <DeleteIcon />
+                    </Fab>
+                  </div>
+                );
+              })}
           </div>
         </div>
         <div className="fillTaskPhotosBox">
@@ -72,7 +147,7 @@ const FillTaskSubtaskPar = ({
                 className="addNoteButton"
                 onClick={() => handleAddNote(subtaskIndex)}
               >
-                <AddIcon type="button" />
+                <NoteAddIcon />
               </Fab>
             </div>
           </div>
@@ -96,7 +171,7 @@ const FillTaskSubtaskPar = ({
                           )
                         }
                       >
-                        <DeleteIcon type="button" />
+                        <DeleteIcon />
                       </Fab>
                     </div>
                     <img

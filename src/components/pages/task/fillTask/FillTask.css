@@ -69,7 +69,7 @@
     padding: 2rem;
     flex-direction: column;
     align-items: flex-start;
-    gap: 1.5rem
+    gap: 1.5rem;
 }
 
 .fillTaskParBox:first-child {
@@ -90,7 +90,6 @@
     font-size: 1.2rem;
     width: 100%;
     text-align: start;
-
 }
 
 .fillTaskTitle {
@@ -99,6 +98,15 @@
     gap: 1rem;
     width: 100%;
     padding: 0 2rem;
+}
+
+.fillTaskParDesc {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
 }
 
 .fillTaskParDesc p {
@@ -110,6 +118,20 @@
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     width: 100%;
+}
+
+.fillTaskParNote {
+    margin: 0;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 1rem;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    width: 100%;
+    color: white;
+    font-size: 1.2rem;
+    flex: 1;
 }
 
 .fillTaskStatusBox {
@@ -147,7 +169,8 @@
     height: 2rem;
     border-radius: 50%;
     margin: 0 auto;
-    box-shadow: 0 0px 4px rgba(0, 0, 0, 0.2), inset 0 2px 5px rgba(255, 255, 255, 0.619);
+    box-shadow: 0 0px 4px rgba(0, 0, 0, 0.2),
+        inset 0 2px 5px rgba(255, 255, 255, 0.619);
 }
 
 .parNumber {
@@ -193,4 +216,16 @@
 
 .fill-task-form .slick-slider {
     max-width: 26rem;
+}
+
+.noteContainer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%
+}
+
+.deleteNoteButton {
+    background-color: red;
+    color: white;
 }
