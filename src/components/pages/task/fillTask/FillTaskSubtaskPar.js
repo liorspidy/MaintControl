@@ -4,7 +4,7 @@ import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Slider from 'react-slick';
 
-const FillTaskSubtask = ({
+const FillTaskSubtaskPar = ({
   paragraphIndex,
   paragraph,
   subtask,
@@ -117,4 +117,4 @@ const FillTaskSubtask = ({
   );
 };
 
-export default FillTaskSubtask;
+export default FillTaskSubtaskPar;

@@ -6,7 +6,7 @@ import '../Subtasks/Subtasks.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { useParams } from 'react-router-dom';
-import FillTaskSubtask from './FillTaskSubtask';
+import FillTaskSubtaskPar from './FillTaskSubtaskPar';
 
 const FillTask = () => {
   const { taskId } = useParams();
@@ -67,59 +67,65 @@ const FillTask = () => {
       </div>
       <form className="fill-task-form-container">
         <div className="fill-task-form">
-          {subtasks.map((subtask, subtaskIndex) => {
-            const isActive = currentSubtask === subtaskIndex;
-            return (
-              <div
-                key={subtaskIndex}
-                className={`fill-task-form-group ${isActive ? 'active' : ''}`}
-              >
-                <div className="fillTaskTitleAndButton">
-                  <div className="fillTaskTitle">
-                    <h1>{subtask.title}</h1>
-                    <div className="fillTaskStatusBox">
-                      <select
-                        id="status"
-                        name="status"
-                        defaultValue={subtask.subtask_status}
-                        onChange={(event) =>
-                          handleStatusChange(subtaskIndex, event.target.value)
-                        }
-                        required
-                      >
-                        <option value="">Choose Status</option>
-                        <option value="Pending">Pending</option>
-                        <option value="InProgress">In Progress</option>
-                        <option value="Finished">Finished</option>
-                        <option value="Cancelled">Cancelled</option>
-                      </select>
-                      <div
-                        className="fillTaskStatus"
-                        style={{
-                          backgroundColor: getStatusColor(
-                            subtask.subtask_status
-                          ),
-                        }}
-                        title={subtask.subtask_status}
-                      ></div>
+          {!subtasks.length && (
+            <h2 style={{ color: 'white' }}>No Subtasks Found..</h2>
+          )}
+          {subtasks &&
+            subtasks.map((subtask, subtaskIndex) => {
+              const isActive = currentSubtask === subtaskIndex;
+              return (
+                <div
+                  key={subtaskIndex}
+                  className={`fill-task-form-group ${isActive ? 'active' : ''}`}
+                >
+                  <div className="fillTaskTitleAndButton">
+                    <div className="fillTaskTitle">
+                      <h1>{subtask.title}</h1>
+                      <div className="fillTaskStatusBox">
+                        <select
+                          id="status"
+                          name="status"
+                          defaultValue={subtask.subtask_status}
+                          onChange={(event) =>
+                            handleStatusChange(subtaskIndex, event.target.value)
+                          }
+                          required
+                        >
+                          <option value="">Choose Status</option>
+                          <option value="Pending">Pending</option>
+                          <option value="InProgress">In Progress</option>
+                          <option value="Finished">Finished</option>
+                          <option value="Cancelled">Cancelled</option>
+                        </select>
+                        <div
+                          className="fillTaskStatus"
+                          style={{
+                            backgroundColor: getStatusColor(
+                              subtask.subtask_status
+                            ),
+                          }}
+                          title={subtask.subtask_status}
+                        ></div>
+                      </div>
                     </div>
                   </div>
+                  <ul>
+                    {subtask.paragraphs.map((paragraph, paragraphIndex) => {
+                      return (
+                        <FillTaskSubtaskPar
+                          key={paragraphIndex}
+                          paragraphIndex={paragraphIndex}
+                          paragraph={paragraph}
+                          subtask={subtask}
+                          subtaskIndex={subtaskIndex}
+                          setSubtasks={setSubtasks}
+                        />
+                      );
+                    })}
+                  </ul>
                 </div>
-                <ul>
-                  {subtask.paragraphs.map((paragraph, paragraphIndex) => (
-                    <FillTaskSubtask
-                      key={paragraphIndex}
-                      paragraphIndex={paragraphIndex}
-                      paragraph={paragraph}
-                      subtask={subtask}
-                      subtaskIndex={subtaskIndex}
-                      setSubtasks={setSubtasks}
-                    />
-                  ))}
-                </ul>
-              </div>
-            );
-          })}
+              );
+            })}
         </div>
       </form>
     </div>

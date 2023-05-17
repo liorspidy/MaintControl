@@ -22,6 +22,7 @@
   margin: 1rem;
   margin-bottom: 1.5rem;
   gap: 1rem;
+  z-index: 10;
 }
 
 .taskItem {
@@ -29,7 +30,7 @@
   align-items: center;
   background-color: #173f5f;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  padding: 0.8rem 1.5rem;
+  padding: 1rem;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   min-height: 7rem;
 }
@@ -72,6 +73,14 @@
   font-size: 0.8rem;
 }
 
+.taskContent {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 1rem;
+  width: 100%;
+}
+
 .taskItem .product {
   display: flex;
   flex-direction: column;
@@ -93,26 +102,27 @@
   justify-content: flex-start;
   text-overflow: ellipsis;
   flex-direction: column;
-  width: 55rem;
+  max-width: 40rem;
 }
 
 .taskProblem {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 22rem;
+  width: 100%;
 }
 
 .taskProblemContent {
-  text-overflow: ellipsis;
-  width: 19rem;
+  max-width: 30rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   overflow: hidden;
-  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .taskProblemContent.open {
-  text-overflow: unset;
-  white-space: unset;
+  display: block;
 }
 
 .problemExpandArrow {
@@ -169,9 +179,11 @@
 
 .taskItem .status {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
+  gap: 1rem;
+  flex-wrap: wrap;
+  flex-direction: column-reverse;
   justify-content: center;
-  gap: 2rem;
 }
 
 .statusBall {
@@ -184,7 +196,7 @@
 
 .taskCard {
   display: flex;
-  gap: 2rem;
+  gap: 1rem;
   text-align: center;
   justify-content: space-between;
   width: 100%;
@@ -211,7 +223,7 @@
   align-items: center;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1070px) {
   .taskPageBox {
     flex-direction: column;
     height: auto;
@@ -219,5 +231,11 @@
 
   .tasksList {
     min-width: auto;
+  }
+}
+
+@media (max-width: 420px) {
+  .tasksList .actionBtns {
+    gap: 0.5rem;
   }
 }

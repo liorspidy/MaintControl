@@ -5,7 +5,7 @@ import Main from './components/pages/main/Main';
 import { useLocation } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
 import Forgot from './components/pages/login/forgot/Forgot';
-import Task from './components/pages/task/Task';
+import Tasks from './components/pages/task/Tasks';
 import ManagementMap from './components/pages/ManagementMap/ManagementMap';
 import Guides from './components/pages/guides/Guides';
 import AddGuide from './components/pages/guides/addGuide/AddGuide';
@@ -34,13 +34,13 @@ function App() {
           <Route path="/" element={<Main />} />
           <Route path="login" element={<Login />} />
           <Route path="forgot" element={<Forgot />} />
-          <Route path="task" element={<Task />} />
+          <Route path="task" element={<Tasks />} />
           <Route
             path="task/mission/:missionId/fill/:taskId"
             element={<FillTask />}
           />
           <Route path="map" element={<ManagementMap />} />
-          <Route path="task/mission/:missionId" element={<Task />} />
+          <Route path="task/mission/:missionId" element={<Tasks />} />
           <Route
             path="task/mission/:missionId/addTask"
             element={<TaskAddForm />}
