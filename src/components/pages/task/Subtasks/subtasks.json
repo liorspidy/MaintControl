@@ -6,22 +6,25 @@
                 "title": "Inspect door mechanism",
                 "paragraphs": [
                     {
-                        "text": "Check the door sensor and motor to determine the cause of the issue.",
+                        "text": "Check the door sensor and motor to determine the cause of the issue. Check the door sensor and motor to determine the cause of the issue. Check the door sensor and motor to determine the cause of the issue. Check the door sensor and motor to determine the cause of the issue. Check the door sensor and motor to determine the cause of the issue. Check the door sensor and motor to determine the cause of the issue. Check the door sensor and motor to determine the cause of the issue. Check the door sensor and motor to determine the cause of the issue. Check the door sensor and motor to determine the cause of the issue. Check the door sensor and motor to determine the cause of the issue. Check the door sensor and motor to determine the cause of the issue. Check the door sensor and motor to determine the cause of the issue. Check the door sensor and motor to determine the cause of the issue. Check the door sensor and motor to determine the cause of the issue. Check the door sensor and motor to determine the cause of the issue. Check the door sensor and motor to determine the cause of the issue. Check the door sensor and motor to determine the cause of the issue.  ",
                         "links_to_photos": [
                             "https://st.depositphotos.com/1013470/4525/i/950/depositphotos_45254269-stock-photo-stainless-steel-elevator-doors-closing.jpg",
                             "https://4.imimg.com/data4/KH/JC/MY-15076980/01-500x500.jpg"
-                        ]
+                        ],
+                        "maint_man_note": ""
                     },
                     {
                         "text": "If the door sensor or motor is faulty, replace it with a new one.",
                         "links_to_photos": [
                             "https://st4.depositphotos.com/1000291/23118/i/1600/depositphotos_231188134-stock-photo-lift-machinist-repairing-elevator-in.jpg",
                             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUL68mPiCKX0gvgZMR1Q_VsDwMDbfRYhT3fA&usqp=CAU"
-                        ]
+                        ],
+                        "maint_man_note": ""
                     }
                 ],
                 "date_created": "2023-03-20",
-                "date_updated": "2023-03-20"
+                "date_updated": "2023-03-20",
+                "subtask_status": "Finished"
             },
             {
                 "title": "Adjust door closing speed",
@@ -30,15 +33,18 @@
                         "text": "Check the speed settings on the door control panel.",
                         "links_to_photos": [
                             "https://live.staticflickr.com/2106/2588730933_37d9514f34_b.jpg"
-                        ]
+                        ],
+                        "maint_man_note": ""
                     },
                     {
                         "text": "Adjust the speed settings as needed to ensure smooth and safe operation.",
-                        "links_to_photos": []
+                        "links_to_photos": [],
+                        "maint_man_note": ""
                     }
                 ],
                 "date_created": "2023-03-20",
-                "date_updated": "2023-03-20"
+                "date_updated": "2023-03-20",
+                "subtask_status": "Pending"
             }
         ]
     },
@@ -53,18 +59,21 @@
                         "links_to_photos": [
                             "https://example.com/photos/elevator-motor.jpg",
                             "https://example.com/photos/elevator-cables.jpg"
-                        ]
+                        ],
+                        "maint_man_note": ""
                     },
                     {
                         "text": "If the motor or cables are faulty, replace them with new ones.",
                         "links_to_photos": [
                             "https://example.com/photos/new-motor.jpg",
                             "https://example.com/photos/new-cables.jpg"
-                        ]
+                        ],
+                        "maint_man_note": ""
                     }
                 ],
                 "date_created": "2023-03-20",
-                "date_updated": "2023-03-21"
+                "date_updated": "2023-03-21",
+                "subtask_status": "Cancelled"
             }
         ]
     },
@@ -78,17 +87,20 @@
                         "text": "Check the power supply to the elevator to determine if there is an issue.",
                         "links_to_photos": [
                             "https://example.com/photos/power-supply.jpg"
-                        ]
+                        ],
+                        "maint_man_note": ""
                     },
                     {
                         "text": "If there is an issue with the power supply, repair or replace it as needed.",
                         "links_to_photos": [
                             "https://example.com/photos/new-power-supply.jpg"
-                        ]
+                        ],
+                        "maint_man_note": ""
                     }
                 ],
                 "date_created": "2023-03-21",
-                "date_updated": "2023-03-21"
+                "date_updated": "2023-03-21",
+                "subtask_status": "In Progress"
             }
         ]
     },
@@ -99,52 +111,61 @@
                 "title": "Research",
                 "paragraphs": [
                     {
-                        "text": "Start by gathering information on the topic from reliable sources."
+                        "text": "Start by gathering information on the topic from reliable sources.",
+                        "links_to_photos": [
+                            "https://example.com/photo1.jpg",
+                            "https://example.com/photo2.jpg"
+                        ],
+                        "maint_man_note": ""
                     },
                     {
-                        "text": "Read articles, books, and academic papers to gain a deep understanding of the subject."
+                        "text": "Read articles, books, and academic papers to gain a deep understanding of the subject.",
+                        "links_to_photos": [],
+                        "maint_man_note": ""
                     }
                 ],
-                "links_to_photos": [
-                    "https://example.com/photo1.jpg",
-                    "https://example.com/photo2.jpg"
-                ],
                 "date_created": "2022-02-01T10:30:00Z",
-                "date_updated": "2022-02-02T15:45:00Z"
+                "date_updated": "2022-02-02T15:45:00Z",
+                "subtask_status": "Pending"
             },
             {
                 "title": "Outline",
                 "paragraphs": [
                     {
-                        "text": "Create an outline to organize your thoughts and ideas."
+                        "text": "Create an outline to organize your thoughts and ideas.",
+                        "links_to_photos": [
+                            "https://example.com/photo3.jpg",
+                            "https://example.com/photo4.jpg"
+                        ],
+                        "maint_man_note": ""
                     },
                     {
-                        "text": "Group related topics together and prioritize them based on importance."
+                        "text": "Group related topics together and prioritize them based on importance.",
+                        "links_to_photos": [],
+                        "maint_man_note": ""
                     }
                 ],
-                "links_to_photos": [
-                    "https://example.com/photo3.jpg",
-                    "https://example.com/photo4.jpg"
-                ],
                 "date_created": "2022-02-03T08:00:00Z",
-                "date_updated": "2022-02-04T11:20:00Z"
+                "date_updated": "2022-02-04T11:20:00Z",
+                "subtask_status": "Finished"
             },
             {
                 "title": "Write",
                 "paragraphs": [
                     {
-                        "text": "Use your outline to write the first draft of your paper."
+                        "text": "Use your outline to write the first draft of your paper.",
+                        "links_to_photos": [],
+                        "maint_man_note": ""
                     },
                     {
-                        "text": "Focus on expressing your ideas clearly and concisely."
+                        "text": "Focus on expressing your ideas clearly and concisely.",
+                        "links_to_photos": [],
+                        "maint_man_note": ""
                     }
                 ],
-                "links_to_photos": [
-                    "https://example.com/photo5.jpg",
-                    "https://example.com/photo6.jpg"
-                ],
                 "date_created": "2022-02-05T14:00:00Z",
-                "date_updated": "2022-02-06T16:30:00Z"
+                "date_updated": "2022-02-06T16:30:00Z",
+                "subtask_status": "Finished"
             }
         ]
     },
@@ -156,22 +177,26 @@
                 "paragraphs": [
                     {
                         "text": "Search for relevant books and articles on the topic.",
-                        "links_to_photos": []
+                        "links_to_photos": [],
+                        "maint_man_note": ""
                     },
                     {
                         "text": "Review materials and take detailed notes.",
-                        "links_to_photos": []
+                        "links_to_photos": [],
+                        "maint_man_note": ""
                     },
                     {
                         "text": "Organize notes by topic and create an outline.",
                         "links_to_photos": [
                             "https://example.com/photo5.jpg",
                             "https://example.com/photo6.jpg"
-                        ]
+                        ],
+                        "maint_man_note": ""
                     }
                 ],
                 "date_created": "2023-04-05T08:00:00Z",
-                "date_updated": "2023-04-05T08:30:00Z"
+                "date_updated": "2023-04-05T08:30:00Z",
+                "subtask_status": "Pending"
             },
             {
                 "title": "Write first draft",
@@ -181,22 +206,26 @@
                         "links_to_photos": [
                             "https://example.com/photo5.jpg",
                             "https://example.com/photo6.jpg"
-                        ]
+                        ],
+                        "maint_man_note": ""
                     },
                     {
                         "text": "Take breaks as needed to avoid burnout.",
                         "links_to_photos": [
                             "https://example.com/photo5.jpg",
                             "https://example.com/photo6.jpg"
-                        ]
+                        ],
+                        "maint_man_note": ""
                     },
                     {
                         "text": "Review and revise draft multiple times.",
-                        "links_to_photos": []
+                        "links_to_photos": [],
+                        "maint_man_note": ""
                     }
                 ],
                 "date_created": "2023-04-05T09:00:00Z",
-                "date_updated": "2023-04-05T11:30:00Z"
+                "date_updated": "2023-04-05T11:30:00Z",
+                "subtask_status": "Pending"
             }
         ]
     }
