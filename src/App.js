@@ -22,9 +22,11 @@ import EditMission from './components/pages/missions/EditMission';
 import TaskEditForm from './components/pages/task/TaskEditForm';
 import TaskAddForm from './components/pages/task/TaskAddForm';
 import FillTask from './components/pages/task/fillTask/FillTask';
+import { useState } from 'react';
 
 function App() {
   const location = useLocation().pathname.replace('/', '');
+  const [guides, setGuides] = useState([]);
 
   return (
     <CartProvider>
@@ -52,10 +54,16 @@ function App() {
           <Route path="missions" element={<Missions />} />
           <Route path="missions/newMission" element={<NewMission />} />
           <Route path="missions/edit/:missionId" element={<EditMission />} />
-          <Route path="guides" element={<Guides />} />
+          <Route
+            path="guides"
+            element={<Guides guides={guides} setGuides={setGuides} />}
+          />
           <Route path="guides/addGuide" element={<AddGuide />} />
           <Route path="guides/editGuide/:guideId" element={<EditGuide />} />
-          <Route path="guides/details/:guideId" element={<GuideDetails />} />
+          <Route
+            path="guides/details/:guideId"
+            element={<GuideDetails guides={guides} />}
+          />
           <Route path="admin" element={<Admin />} />
           <Route path="admin/addUser" element={<AddUser />} />
           <Route path="admin/editUser/:userId" element={<EditUser />} />

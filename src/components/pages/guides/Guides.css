@@ -108,6 +108,10 @@
   box-shadow: 0 2px 8px rgb(0 0 0 / 15%), inset 0 2px 15px rgb(0 0 0 / 20%);
 }
 
+.guideContainer h1 {
+  font-size: 1.1rem;
+}
+
 .guideContainer:hover,
 .guideBtn:hover {
   background-color: rgb(228, 228, 228);

@@ -3,9 +3,9 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: calc(100% - 6rem);
+    height: calc(100% - 7rem);
     width: 95%;
-    margin: 0 auto;
+    margin: 1rem auto;
 }
 
 .fill-task-form-container {

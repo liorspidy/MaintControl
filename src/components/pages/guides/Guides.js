@@ -1,14 +1,39 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import items from './guides.json';
 import './Guides.css';
+import Loading from '../../../UI/Loading';
 
-const Guides = () => {
+const Guides = ({ guides, setGuides }) => {
   const [isEditable, setIsEditable] = useState(false);
   const [isRemoving, setIsRemoving] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchGuides = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const response = await fetch(
+          'https://maint-control-docker-image-2n3aq2y4ja-zf.a.run.app/guides/getGuides?OFFSET=0&LIMIT=100',
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const data = await response.json();
+        setGuides(data.answer);
+        setIsLoading(false);
+      } catch (error) {
+        console.log('Error fetching guides:', error);
+        setIsLoading(false);
+      }
+    };
+
+    fetchGuides();
+  }, []);
 
   const handleIsEditable = () => {
     if (!isRemoving) {
@@ -22,30 +47,27 @@ const Guides = () => {
     }
   };
 
-  const guidesList = isEditable
-    ? items.map((item) => (
-        <Link to={`/guides/editGuide/${item.id}`} key={item.id}>
-          <div className="guideContainer">
-            <h1>{item.name}</h1>
-            <p>{item.description}</p>
-          </div>
-        </Link>
-      ))
-    : !isRemoving
-    ? items.map((item) => (
-        <Link to={`/guides/details/${item.id}`} key={item.id}>
-          <div className="guideContainer">
-            <h1>{item.name}</h1>
-            <p>{item.description}</p>
-          </div>
-        </Link>
-      ))
-    : items.map((item) => (
-        <div className="guideContainer" key={item.id}>
-          <h1>{item.name}</h1>
-          <p>{item.description}</p>
-        </div>
-      ));
+  const GuidesList = () => {
+    return (
+      <>
+        {guides.map((item) => (
+          <Link
+            to={
+              isEditable
+                ? `/guides/editGuide/${item.guide_id}`
+                : `/guides/details/${item.guide_id}`
+            }
+            key={item.guide_id}
+          >
+            <div className="guideContainer">
+              <h1>{item.title}</h1>
+              <p>{item.description}</p>
+            </div>
+          </Link>
+        ))}
+      </>
+    );
+  };
 
   return (
     <div className="guideBox">
@@ -64,7 +86,7 @@ const Guides = () => {
           {!isRemoving && <DeleteIcon className="deleteIconRemovingOff" />}
         </div>
       </div>
-      <div className="items">{guidesList}</div>
+      <div className="items">{isLoading ? <Loading /> : <GuidesList />}</div>
     </div>
   );
 };

@@ -59,3 +59,9 @@ td:nth-child(3) {
   text-align: left;
   max-width: 25rem;
 }
+
+@media (max-width: 1070px) {
+  .prevTasksTable {
+    height: 22rem;
+  }
+}
