@@ -5,8 +5,12 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import './Guides.css';
 import Loading from '../../../UI/Loading';
+import { useContext } from 'react';
+import CartContext from '../../../store/cart-context';
 
-const Guides = ({ guides, setGuides }) => {
+const Guides = () => {
+  // const [guides, setGuides] = useState([]);
+  const { allGuides, setAllGuides } = useContext(CartContext);
   const [isEditable, setIsEditable] = useState(false);
   const [isRemoving, setIsRemoving] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -24,7 +28,10 @@ const Guides = ({ guides, setGuides }) => {
           }
         );
         const data = await response.json();
-        setGuides(data.answer);
+        // setGuides((prev) => {
+        //   return [...prev, data.answer];
+        // });
+        setAllGuides([data.answer]);
         setIsLoading(false);
       } catch (error) {
         console.log('Error fetching guides:', error);
@@ -50,22 +57,26 @@ const Guides = ({ guides, setGuides }) => {
   const GuidesList = () => {
     return (
       <>
-        {guides ? (
-          guides.map((item) => (
-            <Link
-              to={
-                isEditable
-                  ? `/guides/editGuide/${item.guide_id}`
-                  : `/guides/details/${item.guide_id}`
-              }
-              key={item.guide_id}
-            >
-              <div className="guideContainer">
-                <h1>{item.title}</h1>
-                <p>{item.description}</p>
-              </div>
-            </Link>
-          ))
+        {/* {guides && guides.length > 0 ? (
+          guides.map((item) => { */}
+        {allGuides && allGuides.length > 0 ? (
+          allGuides.map((item) => {
+            return (
+              <Link
+                to={
+                  isEditable
+                    ? `/guides/editGuide/${item?.guide_id}`
+                    : `/guides/details/${item?.guide_id}`
+                }
+                key={item?.guide_id}
+              >
+                <div className="guideContainer">
+                  <h1>{item?.title}</h1>
+                  <p>{item?.description}</p>
+                </div>
+              </Link>
+            );
+          })
         ) : (
           <div>
             <h2 style={{ padding: '0.5rem' }}>No guides found...</h2>
@@ -84,12 +95,18 @@ const Guides = ({ guides, setGuides }) => {
           </div>
         </Link>
         <div className="guideBtn" onClick={handleIsEditable}>
-          {isEditable && <EditIcon className="editIconEditOn" />}
-          {!isEditable && <EditIcon className="editIconEditOff" />}
+          {isEditable ? (
+            <EditIcon className="editIconEditOn" />
+          ) : (
+            <EditIcon className="editIconEditOff" />
+          )}
         </div>
         <div className="guideBtn" onClick={handleIsRemoving}>
-          {isRemoving && <DeleteIcon className="deleteIconRemovingOn" />}
-          {!isRemoving && <DeleteIcon className="deleteIconRemovingOff" />}
+          {isRemoving ? (
+            <DeleteIcon className="deleteIconRemovingOn" />
+          ) : (
+            <DeleteIcon className="deleteIconRemovingOff" />
+          )}
         </div>
       </div>
       <div className="items">{isLoading ? <Loading /> : <GuidesList />}</div>

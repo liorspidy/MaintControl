@@ -1,24 +1,31 @@
-import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import { Document, Page } from 'react-pdf';
-import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
+import { useParams, Link } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
+import CartContext from '../../../store/cart-context';
+import { Worker, Viewer } from '@react-pdf-viewer/core';
+import '@react-pdf-viewer/core/lib/styles/index.css';
 
-const GuideDetails = ({ guides }) => {
+// Your render function
+const GuideDetails = () => {
   const { guideId } = useParams();
-  const guide = guides?.find((item) => item.guide_id === parseInt(guideId));
-  console.log(guide.file_path);
+  const { allGuides } = useContext(CartContext);
+  const [guide, setGuide] = useState({});
+
+  useEffect(() => {
+    const currGuide = allGuides?.find(
+      (item) => item.guide_id === parseInt(guideId)
+    );
+    setGuide(currGuide);
+  }, [allGuides, guideId]);
+
   return (
     <div>
       <h3>{guide?.title}</h3>
       <p>{guide?.description}</p>
       {guide?.file_path && (
         <div className="pdfViewer">
-          <Document
-            file={guide.file_path}
-            options={{ workerSrc: '/pdf.worker.js' }}
-          >
-            <Page pageNumber={1} />
-          </Document>
+          <Worker workerUrl="/pdf.worker.min.js">
+            <Viewer fileUrl={guide.file_path} />
+          </Worker>
         </div>
       )}
       <Link to="../guides">

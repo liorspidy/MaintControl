@@ -4,7 +4,7 @@ const CartContext = React.createContext({
   user: null,
   class: null,
   token: null,
-  allGuides: {},
+  allGuides: [],
   setToken: (token) => {},
   setUser: (userDetails) => {},
   setClass: (userClass) => {},
