@@ -5,7 +5,7 @@ const CartProvider = (props) => {
   const [userDetails, setUserDetails] = useState(null);
   const [userClassDetails, setUserClassDetails] = useState(null);
   const [tokenDetails, setTokenDetails] = useState(null);
-  const [allGuides, setAllGuides] = useState({});
+  const [allGuides, setAllGuides] = useState([]);
 
   const userHandler = (userDetails) => {
     setUserDetails(userDetails);
