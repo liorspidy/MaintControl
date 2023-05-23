@@ -10,10 +10,12 @@
 .btnPrevious {
   position: absolute;
   left: 4px;
-  background-color: #173f5f;
-  color: white;
+  background-color: white;
+  color: #173f5f;
   cursor: pointer;
   border-radius: 20%;
+  bottom: 31.8rem;
+  z-index: 9999;
 }
 
 .list {
@@ -32,10 +34,12 @@
 .btnNext {
   position: absolute;
   left: 689px;
-  background-color: #173f5f;
-  color: white;
+  background-color: white;
+  color: #173f5f;
   cursor: pointer;
   border-radius: 20%;
+  bottom: 31.8rem;
+  z-index: 9999;
 }
 
 .btnPrevious:hover {
@@ -193,7 +197,7 @@ a {
 
 @media (max-width: 900px) {
   .userBtn {
-    margin: 1rem 0rem;
+    margin: -0.85rem 0rem;
   }
 
   .users {
@@ -217,12 +221,20 @@ a {
   }
 
   .btnNext {
-    left: 97%;
-    transform: translateX(-50%);
+    left: calc(100% - 2px);
+    transform: translateX(-100%);
   }
 
   .btnPrevious {
-    position: absolute;
-    top: 28rem;
+    top: -4.55rem;
   }
+
+    label.MuiFormControlLabel-root.MuiFormControlLabel-labelPlacementEnd.formControlLabel.css-14qnuji-MuiFormControlLabel-root {
+      margin-bottom: 0rem;
+    }
+
+    .MuiFormGroup-root.css-2n2v8f-MuiFormGroup-root {
+     flex-direction: COLUMN;
+    }
+
 }
