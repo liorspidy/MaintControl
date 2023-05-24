@@ -223,18 +223,30 @@ a {
   .btnNext {
     left: calc(100% - 2px);
     transform: translateX(-100%);
+    z-index: 1;
   }
 
   .btnPrevious {
     top: -4.55rem;
+    z-index: 1;
   }
 
-    label.MuiFormControlLabel-root.MuiFormControlLabel-labelPlacementEnd.formControlLabel.css-14qnuji-MuiFormControlLabel-root {
-      margin-bottom: 0rem;
-    }
+  label.MuiFormControlLabel-root.MuiFormControlLabel-labelPlacementEnd.formControlLabel.css-14qnuji-MuiFormControlLabel-root {
+    margin-bottom: 0rem;
+  }
 
-    .MuiFormGroup-root.css-2n2v8f-MuiFormGroup-root {
-     flex-direction: COLUMN;
-    }
+  .MuiFormGroup-root.css-2n2v8f-MuiFormGroup-root {
+    flex-direction: COLUMN;
+  }
+
+  .listContainer {
+    margin: 2rem auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    max-width: 90%;
+  }
 
 }

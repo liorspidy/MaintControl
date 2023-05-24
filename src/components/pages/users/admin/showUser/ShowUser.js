@@ -1,18 +1,18 @@
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import "./ShowUser.css";
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import './ShowUser.css';
 
-const token = localStorage.getItem("token");
+const token = localStorage.getItem('token');
 
 async function getUsers() {
   try {
     const response = await fetch(
-      "https://maint-control-docker-image-2n3aq2y4ja-zf.a.run.app/users/getUsers?OFFSET=0&LIMIT=100",
+      'https://maint-control-docker-image-2n3aq2y4ja-zf.a.run.app/users/getUsers?OFFSET=0&LIMIT=100',
       {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
       }
@@ -21,7 +21,6 @@ async function getUsers() {
       throw new Error(response.statusText);
     }
     const data = await response.json();
-    console.log(data);
     return data.answer;
   } catch (err) {
     console.error(err);
@@ -41,7 +40,6 @@ const ShowUser = () => {
       .then((data) => {
         setUsers(data);
         setLoading(false);
-        console.log(data);
       })
       .catch((err) => console.error(err));
   }, []);
@@ -78,7 +76,7 @@ const ShowUser = () => {
                     <input
                       id="pass"
                       className="showUserInput"
-                      type={showPassword ? "text" : "password"}
+                      type={showPassword ? 'text' : 'password'}
                       value={displayedUser.password}
                       readOnly={true}
                     />
@@ -178,6 +176,9 @@ const ShowUser = () => {
                   />
                 </label>
               </div>
+              <button className="userButton" type="submit">
+                Save User
+              </button>
             </form>
           </div>
         )}
