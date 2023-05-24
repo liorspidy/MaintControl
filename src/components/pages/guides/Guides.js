@@ -31,7 +31,9 @@ const Guides = () => {
         // setGuides((prev) => {
         //   return [...prev, data.answer];
         // });
-        setAllGuides([data.answer]);
+        if (data) {
+          setAllGuides([data.answer]);
+        }
         setIsLoading(false);
       } catch (error) {
         console.log('Error fetching guides:', error);
@@ -59,7 +61,7 @@ const Guides = () => {
       <>
         {/* {guides && guides.length > 0 ? (
           guides.map((item) => { */}
-        {allGuides && allGuides.length > 0 ? (
+        {allGuides[0] !== undefined ? (
           allGuides.map((item) => {
             return (
               <Link

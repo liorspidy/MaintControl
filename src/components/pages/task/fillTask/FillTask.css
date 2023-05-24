@@ -58,7 +58,7 @@
 
 .fillTaskTitle {
     color: white;
-    font-size: 0.8rem;
+    font-size: 1rem;
 }
 
 .fillTaskParBox {
@@ -118,6 +118,7 @@
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     width: 100%;
+    border: 2px solid white;
 }
 
 .fillTaskParNote {
@@ -228,4 +229,29 @@
 .deleteNoteButton {
     background-color: red;
     color: white;
+}
+
+@media (max-width: 767px) {
+    .fill-task-form-container {
+        background: #173f5f;
+        padding: 1.5rem;
+        border-radius: 0 0 1rem 1rem;
+        width: 95%;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        font-family: Arial, sans-serif;
+        height: calc(100vh - 10rem);
+    }
+
+    .fillTaskTitle {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        width: 100%;
+        padding: 0px 0rem;
+    }
+
+    .fillTaskTitle {
+        color: white;
+        font-size: 0.8rem;
+    }
 }

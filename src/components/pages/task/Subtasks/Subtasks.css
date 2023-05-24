@@ -31,6 +31,7 @@
     height: 42rem;
     overflow: auto;
     display: block;
+    overflow-x: hidden;
 }
 
 .subtask-fill-form-container .form-group:last-child {
@@ -237,4 +238,87 @@
 
 .subtasksPhotosSlider:hover .removeImageButton {
     display: block;
+}
+
+@media (max-width: 1119px) {
+
+    .tasksListBox {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .task-fill-form-container {
+        background: #173f5f;
+        padding: 2rem;
+        border-radius: 1rem;
+        width: 95%;
+        margin: 2rem 0;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        font-family: Arial, sans-serif;
+        height: 40rem;
+        margin-bottom: 0;
+    }
+
+    .editTasksBox {
+        display: flex;
+        flex-direction: row;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+
+    .subtasksListBox {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        margin: 2rem 0;
+    }
+
+    .subtask-fill-form-container {
+        background: #173f5f;
+        padding: 1rem;
+        border-radius: 0 0 1rem 1rem;
+        width: 90%;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        font-family: Arial, sans-serif;
+        height: 49rem;
+    }
+
+    .subtaskTitleAndButton {
+        display: flex;
+        gap: 0.2rem;
+        align-items: center;
+        justify-content: start;
+        margin-bottom: 1rem;
+    }
+
+
+
+    .subtask-fill-form-container .form-group.active {
+        margin-bottom: 1.5rem;
+        padding: 1.5rem;
+        height: 42rem;
+        overflow: auto;
+        display: block;
+        overflow-x: hidden;
+    }
+
+    .slick-prev:before,
+    .slick-next:before {
+        display: none;
+    }
+}
+
+@media (max-width: 767px) {
+    .subtasksPhotos {
+        width: 15rem;
+        object-fit: contain;
+        margin: 0 auto;
+        height: 22rem;
+        cursor: pointer;
+    }
 }
