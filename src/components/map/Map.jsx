@@ -14,6 +14,7 @@ import L from "leaflet";
 import icon from "../../assets/placeholder.png";
 
 const Map = (props) => {
+  const [points, setPoints] = useState([]);
   const purpleOptions = { color: "purple" };
 
   const ResetsCenterView = ({ selectedPosition }) => {
@@ -30,6 +31,24 @@ const Map = (props) => {
     return null;
   };
 
+  const LocationMarker = () => {
+    const [position, setPosition] = useState(null);
+    const map = useMapEvents({
+      click(clickEvent) {
+        setPoints((prevPoints) => [
+          ...prevPoints,
+          [clickEvent.latlng.lat, clickEvent.latlng.lng],
+        ]);
+      },
+    });
+    console.log("pos", position, points);
+    return position === null ? null : (
+      <Marker position={points[0]}>
+        <Popup>You are here</Popup>
+      </Marker>
+    );
+  };
+
   return (
     <MapContainer
       center={
@@ -44,7 +63,7 @@ const Map = (props) => {
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      {/* <LocationMarker />  */}
+      <LocationMarker />
 
       {props?.sites.map((site) => {
         const points = site.points[0].latlngs.map((latlng) => [
@@ -56,7 +75,9 @@ const Map = (props) => {
           (points.length * points[0].length);
 
         return (
-          <Polygon key={avg} pathOptions={purpleOptions} positions={points} />
+          <Polygon key={avg} pathOptions={purpleOptions} positions={points}>
+            <Popup>{site.siteName}</Popup>
+          </Polygon>
         );
       })}
       <ResetsCenterView selectedPosition={props.selectedPosition} />

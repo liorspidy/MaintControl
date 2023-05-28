@@ -6,10 +6,12 @@ import ConstructionIcon from "@mui/icons-material/Construction";
 import HistoryIcon from "@mui/icons-material/History";
 import Map from "../../map/Map";
 import NewSite from "../../../forms/NewStie/NewSite";
+import NewEquipment from "../../../forms/NewEquipment/NewEquipment";
 
 const TaskPage = (props) => {
-  const [sites, SetSites] = useState([])
+  const [sites, SetSites] = useState([]);
   const [isNewSiteFormOpen, setIsNewSiteFormOpen] = useState(false);
+  const [isNewEquipmentFormOpen, setIsNewEquipmentFormOpen] = useState(false);
   const addArea = () => {
     console.log("add area");
   };
@@ -21,14 +23,34 @@ const TaskPage = (props) => {
     setIsNewSiteFormOpen(false);
   };
 
+  const openNewEquipmentForm = () => {
+    setIsNewEquipmentFormOpen(true);
+  };
+  const closeNewEquipmentForm = () => {
+    setIsNewEquipmentFormOpen(false);
+  };
+
   const addSite = (newSite) => {
-    SetSites(prev => [...prev, newSite])
-  }
+    SetSites((prev) => [...prev, newSite]);
+  };
+  const addEquipment = (newEquipment) => {
+    console.log("equipment to add is:", newEquipment);
+  };
 
   return (
     <div className="task-container">
       <Map sites={sites} />
-      <NewSite isOpen={isNewSiteFormOpen} closeForm={closeNewSiteForm} addSite={addSite} />
+      <NewSite
+        isOpen={isNewSiteFormOpen}
+        closeForm={closeNewSiteForm}
+        addSite={addSite}
+      />
+      <NewEquipment
+        isOpen={isNewEquipmentFormOpen}
+        closeForm={closeNewEquipmentForm}
+        addEquipment={addEquipment}
+        allSites={sites}
+      />
       <div className="floating-actions">
         <Fab
           color="primary"
@@ -43,7 +65,7 @@ const TaskPage = (props) => {
           color="primary"
           aria-label="add"
           className="floating-button"
-          onClick={addArea}
+          onClick={openNewEquipmentForm}
         >
           <ConstructionIcon />
         </Fab>
