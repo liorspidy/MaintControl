@@ -4,12 +4,14 @@ var db = require('../../../../db/index')
 getUsers = (decodedToken, query) => {
   return new Promise((resolve, reject) => {
     try {
-      result = db.query(`SELECT * FROM dim_users
-                         WHERE company_id = ${decodedToken.companyId} AND
-                         user_id != ${decodedToken.userId}
-                         ORDER BY user_id
-                         OFFSET ${query.OFFSET}
-                         LIMIT ${query.LIMIT}`)
+      result = db.query(`SELECT dim_users.*, dim_locations.* FROM dim_users
+                         JOIN dim_locations ON dim_users.location_id = dim_locations.location_id
+                         WHERE dim_users.company_id = $1 AND
+                         dim_users.user_id != $2
+                         ORDER BY dim_users.user_id
+                         OFFSET $3
+                         LIMIT $4`, 
+                         [decodedToken.companyId, decodedToken.userId, query.OFFSET, query.LIMIT])
 
       result.then((answer) => {
           resolve({
@@ -20,7 +22,7 @@ getUsers = (decodedToken, query) => {
         .catch((err) => {
           reject({
             httpCode: 500,
-            answer: `Error during recieving users: ${err}`
+            answer: `Error during receiving users: ${err}`
           })
         })
     } catch (error) {
@@ -31,6 +33,7 @@ getUsers = (decodedToken, query) => {
     }
   })
 }
+
 
 module.exports = {
   getUsers: getUsers
