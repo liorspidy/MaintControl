@@ -44,3 +44,55 @@ CREATE TABLE IF NOT EXISTS fact_guides (
   file_path TEXT NOT NULL,
   company_id INTEGER NOT NULL REFERENCES public.dim_companies(company_id)
 );
+
+/*###########################*/
+/*######## missions #########*/
+/*###########################*/
+CREATE TABLE IF NOT EXISTS fact_missions (
+  mission_id SERIAL PRIMARY KEY,
+  mission_title VARCHAR(255) NOT NULL,
+  mission_description TEXT,
+  status VARCHAR(50) NOT NULL DEFAULT 'incomplete' CHECK (status IN ('incomplete', 'finished')),
+  priority VARCHAR(50) NOT NULL DEFAULT 'low' CHECK (status IN ('low','medium', 'high')),
+  start_mission_date TIMESTAMP,
+  end_mission_date TIMESTAMP,
+  company_id INTEGER NOT NULL REFERENCES dim_companies(company_id)
+);
+
+/*###########################*/
+/*######## location #########*/
+/*###########################*/
+CREATE TABLE IF NOT EXISTS dim_locations (
+  location_id SERIAL PRIMARY KEY,
+  address_name TEXT DEFAULT '',
+  city TEXT DEFAULT '',
+  country TEXT DEFAULT '',
+  latitude DOUBLE PRECISION DEFAULT 0.0,
+  longitude DOUBLE PRECISION DEFAULT 0.0,
+  zone_name VARCHAR(10) DEFAULT 'north' CHECK (zone_name IN ('north', 'center', 'south')) NOT NULL
+);
+
+ALTER TABLE fact_missions
+ADD COLUMN location_id INTEGER NOT NULL REFERENCES dim_locations(location_id);
+
+-- Step 1: Add the column without NOT NULL constraint
+ALTER TABLE dim_users
+ADD COLUMN location_id INTEGER REFERENCES dim_locations(location_id);
+
+-- Step 2: Create a default location and get its ID
+INSERT INTO dim_locations(address_name, city, country, latitude, longitude, work_zone) 
+VALUES('Default Address', 'Default City', 'Default Country', 0.0, 0.0, 'north')
+RETURNING location_id;
+
+-- Assume you get a location_id of 1 from the above statement
+
+-- Step 3: Set a default location_id for all existing rows
+UPDATE dim_users
+SET location_id = 1
+WHERE location_id IS NULL;
+
+-- Step 4: Now add the NOT NULL constraint
+ALTER TABLE dim_users
+ALTER COLUMN location_id SET NOT NULL;
+
+
