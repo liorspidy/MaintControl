@@ -4,14 +4,16 @@ var db = require('../../../../db/index')
 searchUser = (decodedToken, data) => {
   return new Promise((resolve, reject) => {
     try {
-      result = db.query(`SELECT * FROM dim_users
-                         WHERE company_id = ${decodedToken.companyId}
-                         AND user_id != ${decodedToken.userId}
-                         AND (first_name ILIKE '%${data.search_term}%' 
-                              OR last_name ILIKE '%${data.search_term}%' 
-                              OR email ILIKE '%${data.search_term}%' 
-                              OR phone ILIKE '%${data.search_term}%')
-                         ORDER BY user_id`)
+      result = db.query(`SELECT dim_users.*, dim_locations.* FROM dim_users
+                         JOIN dim_locations ON dim_users.location_id = dim_locations.location_id
+                         WHERE dim_users.company_id = $1
+                         AND dim_users.user_id != $2
+                         AND (dim_users.first_name ILIKE $3 
+                              OR dim_users.last_name ILIKE $4 
+                              OR dim_users.email ILIKE $5 
+                              OR dim_users.phone ILIKE $6)
+                         ORDER BY dim_users.user_id`,
+                         [decodedToken.companyId, decodedToken.userId, '%' + data.search_term + '%', '%' + data.search_term + '%', '%' + data.search_term + '%', '%' + data.search_term + '%'])
 
       result.then((answer) => {
           resolve({
@@ -33,6 +35,7 @@ searchUser = (decodedToken, data) => {
     }
   })
 }
+
 
 module.exports = {
   searchUser: searchUser
