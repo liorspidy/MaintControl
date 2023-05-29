@@ -4,23 +4,44 @@ var db = require('../../../../db/index')
 deleteUser = (data) => {
   return new Promise((resolve, reject) => {
     try {
-      result = db.query(`DELETE FROM dim_users 
-                         WHERE user_name = '${data.user_name}' AND
-						                   email = '${data.email}' AND
-						                   company_id = ${data.company_id}`)
-
-      result.then(() => {
+      db.query('BEGIN')
+        .then(() => {
+          return db.query(`SELECT location_id FROM dim_users 
+                           WHERE user_name = $1 AND
+                                 email = $2 AND
+                                 company_id = $3`, [data.user_name, data.email, data.company_id])
+        })
+        .then((result) => {
+          if(result.rows.length == 0) {
+            throw new Error('User not found');
+          }
+          const locationId = result.rows[0].location_id;
+          return db.query(`DELETE FROM dim_users 
+                           WHERE user_name = $1 AND
+                                 email = $2 AND
+                                 company_id = $3`, [data.user_name, data.email, data.company_id])
+            .then(() => {
+              return db.query(`DELETE FROM dim_locations WHERE location_id = $1`, [locationId])
+            })
+        })
+        .then(() => {
+          return db.query('COMMIT')
+        })
+        .then(() => {
           resolve({
             httpCode: 200,
-            answer: "deleted user succesfuly"
+            answer: "Deleted user successfully"
           })
         })
-        .catch((err) => {
-          reject({
-            httpCode: 500,
-            answer: `Error during deleting user: ${err}`
+      .catch((err) => {
+        db.query('ROLLBACK')
+          .then(() => {
+            reject({
+              httpCode: 500,
+              answer: `Error during deleting user: ${err}`
+            })
           })
-        })
+      })
     } catch (error) {
       reject({
         httpCode: 500,
