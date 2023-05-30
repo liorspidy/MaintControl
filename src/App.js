@@ -22,11 +22,13 @@ import EditMission from './components/pages/missions/EditMission';
 import TaskEditForm from './components/pages/task/TaskEditForm';
 import TaskAddForm from './components/pages/task/TaskAddForm';
 import FillTask from './components/pages/task/fillTask/FillTask';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import CartContext from './store/cart-context';
 
 function App() {
   const location = useLocation().pathname.replace('/', '');
   const [guides, setGuides] = useState([]);
+  const { user } = useContext(CartContext);
 
   return (
     <CartProvider>
