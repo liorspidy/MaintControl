@@ -42,6 +42,7 @@ CREATE TABLE IF NOT EXISTS fact_guides (
   description TEXT NOT NULL,
   file_name TEXT NOT NULL,
   file_path TEXT NOT NULL,
+  added_date TEXT NOT NULL,
   company_id INTEGER NOT NULL REFERENCES public.dim_companies(company_id)
 );
 
@@ -75,24 +76,16 @@ CREATE TABLE IF NOT EXISTS dim_locations (
 ALTER TABLE fact_missions
 ADD COLUMN location_id INTEGER NOT NULL REFERENCES dim_locations(location_id);
 
--- Step 1: Add the column without NOT NULL constraint
 ALTER TABLE dim_users
 ADD COLUMN location_id INTEGER REFERENCES dim_locations(location_id);
 
--- Step 2: Create a default location and get its ID
 INSERT INTO dim_locations(address_name, city, country, latitude, longitude, work_zone) 
 VALUES('Default Address', 'Default City', 'Default Country', 0.0, 0.0, 'north')
 RETURNING location_id;
 
--- Assume you get a location_id of 1 from the above statement
-
--- Step 3: Set a default location_id for all existing rows
 UPDATE dim_users
 SET location_id = 1
 WHERE location_id IS NULL;
 
--- Step 4: Now add the NOT NULL constraint
 ALTER TABLE dim_users
 ALTER COLUMN location_id SET NOT NULL;
-
-
