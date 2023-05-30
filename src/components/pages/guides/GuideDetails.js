@@ -2,6 +2,7 @@ import { useParams, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Worker, Viewer } from '@react-pdf-viewer/core';
 import '@react-pdf-viewer/core/lib/styles/index.css';
+import kis from '../../../images/kis.pdf';
 
 const GuideDetails = () => {
   const { guideId } = useParams();
@@ -37,6 +38,8 @@ const GuideDetails = () => {
 
     fetchGuide();
   }, []);
+
+  console.log(guide);
 
   return (
     <div>

@@ -25,6 +25,7 @@ const Guides = () => {
           }
         );
         const data = await response.json();
+        console.log(data);
         setGuides(data.answer);
         setIsLoading(false);
       } catch (error) {
