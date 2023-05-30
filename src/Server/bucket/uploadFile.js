@@ -77,11 +77,15 @@ uploadFileToFolder = (storage, bucketName, pathToFile, folderName, fileName, mim
     }
     bucket.upload(pathToFile, options)
       .then(() => {
-        console.log(`File ${fileName} uploaded to folder ${folderName} in bucket ${bucketName}`)        
-        return getSignedUrl(bucketName, `${folderName}/${fileName}`, secretName)
+        console.log(`File ${fileName} uploaded to folder ${folderName} in bucket ${bucketName}`)
+        // Make the file public after uploading it
+        return file.makePublic()
       })
-      .then(signedUrl => {
-        resolve(signedUrl.fileUrl);
+      .then(() => {
+        console.log(`File ${fileName} made public`)
+        // Now we generate the public URL of the file
+        const publicUrl = `https://storage.googleapis.com/${bucketName}/${folderName}/${fileName}`
+        resolve(publicUrl)
       })
       .catch((err) => {
         console.error(`Error uploading file ${fileName} to folder ${folderName} in bucket ${bucketName}: ${err}`)
@@ -89,6 +93,7 @@ uploadFileToFolder = (storage, bucketName, pathToFile, folderName, fileName, mim
       })
   })
 }
+
 
 module.exports = {
   uploadFile: uploadFile
