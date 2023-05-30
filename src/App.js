@@ -30,6 +30,8 @@ function App() {
   const [guides, setGuides] = useState([]);
   const { user } = useContext(CartContext);
 
+  const token = localStorage.getItem('token');
+
   return (
     <CartProvider>
       <div className="App">
