@@ -56,7 +56,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJOYW1lIjoidGVtcEFkbWluIiwiY29tcGFueUlkIjoxLCJpYXQiOjE2ODEyMTAyMTcsImV4cCI6MTY4MTIxMzgxN30.oqDH0nTJsXvXL5jTZbR1AKQgN311yMn-PjVcykGv30Y",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsInVzZXJOYW1lIjoibmF2ZXNoIiwiY29tcGFueUlkIjoxLCJpYXQiOjE2ODUzNTg5NTIsImV4cCI6MTY4NTM2MjU1Mn0.-I6YGngjHy3Kf4al8WRbqahT2W0NbKB_ly2gzWjDZA8",
 											"type": "string"
 										}
 									]
@@ -64,12 +64,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/users/getUserSettings",
-									"protocol": "http",
+									"raw": "https://maint-control-docker-image-dev-2n3aq2y4ja-zf.a.run.app/users/getUserSettings",
+									"protocol": "https",
 									"host": [
-										"localhost"
+										"maint-control-docker-image-dev-2n3aq2y4ja-zf",
+										"a",
+										"run",
+										"app"
 									],
-									"port": "8080",
 									"path": [
 										"users",
 										"getUserSettings"
@@ -91,7 +93,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInVzZXJOYW1lIjoidGVtcEFkbWluIiwiY29tcGFueUlkIjoyLCJpYXQiOjE2ODQyNjA5OTYsImV4cCI6MTY4NDI2NDU5Nn0.3EC1M5FNMgWoCaJEkyG_LsmPftNpRP_qb9jiYScbCgc",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsInVzZXJOYW1lIjoibmF2ZXNoIiwiY29tcGFueUlkIjoxLCJpYXQiOjE2ODU0NDg3NTcsImV4cCI6MTY4NTQ1MjM1N30.5VrhihdDQsylDe2WM6cYLmJriSBp4MijOvyj2wzLqwI",
 											"type": "string"
 										}
 									]
@@ -124,6 +126,47 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "getSingleGuide",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsInVzZXJOYW1lIjoibmF2ZXNoIiwiY29tcGFueUlkIjoxLCJpYXQiOjE2ODU0NDg3NTcsImV4cCI6MTY4NTQ1MjM1N30.5VrhihdDQsylDe2WM6cYLmJriSBp4MijOvyj2wzLqwI",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"guide_id\": 3\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://maint-control-docker-image-dev-2n3aq2y4ja-zf.a.run.app/guides/getSingleGuide",
+									"protocol": "https",
+									"host": [
+										"maint-control-docker-image-dev-2n3aq2y4ja-zf",
+										"a",
+										"run",
+										"app"
+									],
+									"path": [
+										"guides",
+										"getSingleGuide"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				}
@@ -143,7 +186,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJOYW1lIjoidGVtcEFkbWluIiwiY29tcGFueUlkIjoxLCJpYXQiOjE2ODIyNTA0NDMsImV4cCI6MTY4MjI1NDA0M30.ui2TJjibHCvhrq_Va2bBxPSpIULqFUFQzMpUCHw_zzc",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsInVzZXJOYW1lIjoibmF2ZXNoIiwiY29tcGFueUlkIjoxLCJpYXQiOjE2ODUzNjMwMzgsImV4cCI6MTY4NTM2NjYzOH0.HC6hFdFA1abBbDMWyfqItkLqA1tuNVAsigpbzXzgIQg",
 											"type": "string"
 										}
 									]
@@ -152,7 +195,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"user_name\":\"temp9\",\r\n\t\"first_name\":\"firstName_temp9\",\r\n\t\"last_name\":\"lastName_temp9\",\r\n\t\"email\": \"temp9@temp_company.com\",\r\n\t\"password\": \"temp9Password\",\r\n\t\"phone\": \"052-518-5874\",\r\n\t\"role\":\"maintainance\",\r\n\t\"company_id\":1\r\n}",
+									"raw": "{\r\n    \"user_name\":\"temp9_location\",\r\n\t\"first_name\":\"firstName_temp9_location\",\r\n\t\"last_name\":\"lastName_temp9_location\",\r\n\t\"email\": \"temp9_location@temp_company.com\",\r\n\t\"password\": \"temp9Password_location\",\r\n\t\"phone\": \"052-518-5874444\",\r\n\t\"role\":\"maintenance\",\r\n\t\"company_id\":1,\r\n    \"location\": {\r\n        \"address_name\": \"123 Main St\",\r\n        \"city\": \"Anytown\",\r\n        \"country\": \"USA\",\r\n        \"latitude\": 34.052235,\r\n        \"longitude\": -118.243683,\r\n        \"zone_name\": \"north\"\r\n    }\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -160,12 +203,14 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:9000/users/addUser",
-									"protocol": "http",
+									"raw": "https://maint-control-docker-image-dev-2n3aq2y4ja-zf.a.run.app/users/addUser",
+									"protocol": "https",
 									"host": [
-										"localhost"
+										"maint-control-docker-image-dev-2n3aq2y4ja-zf",
+										"a",
+										"run",
+										"app"
 									],
-									"port": "9000",
 									"path": [
 										"users",
 										"addUser"
@@ -182,7 +227,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJOYW1lIjoidGVtcEFkbWluIiwiY29tcGFueUlkIjoxLCJpYXQiOjE2Nzk2NjA5MjIsImV4cCI6MTY3OTY2NDUyMn0.mT_GmNENZgc7YX5bju-q3IS3VLw07C6TvDsFnEx33Ok",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsInVzZXJOYW1lIjoibmF2ZXNoIiwiY29tcGFueUlkIjoxLCJpYXQiOjE2ODUzNjQzNTcsImV4cCI6MTY4NTM2Nzk1N30.PCUa-HHMR_M89vO_Al2QfwDmIiQYdQPwaJjHWGQ0LjM",
 											"type": "string"
 										}
 									]
@@ -191,7 +236,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"user_id\": 3,\r\n    \"user_name\":\"temp3Updated\",\r\n\t\"first_name\":\"firstName_temp3Updated\",\r\n\t\"last_name\":\"lastName_temp3Updated\",\r\n\t\"email\": \"temp3Updated@temp_company.com\",\r\n\t\"password\": \"temp3UpdatedPassword\",\r\n\t\"phone\": \"052-269-9877\",\r\n\t\"role\":\"administrator\"\r\n}",
+									"raw": "{\r\n    \"user_id\": 43,\r\n    \"user_name\":\"temp9_location_Updated\",\r\n\t\"first_name\":\"firstName_temp9_location_Updated\",\r\n\t\"last_name\":\"lastName_temp9_location_Updated\",\r\n\t\"email\": \"temp9_location_Updated@temp_company.com\",\r\n\t\"password\": \"temp9_location_UpdatedPassword\",\r\n\t\"phone\": \"052-269-987721\",\r\n\t\"role\":\"administrator\",\r\n    \"location\": {\r\n        \"address_name\": \"123 Updated 9 St\",\r\n        \"city\": \"UpdatedCity 9\",\r\n        \"country\": \"UpdatedCountry isr\",\r\n        \"latitude\": 20.712776,\r\n        \"longitude\": -174.005974,\r\n        \"zone_name\": \"center\"\r\n    }\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -199,12 +244,14 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:9000/users/updateUser",
-									"protocol": "http",
+									"raw": "https://maint-control-docker-image-dev-2n3aq2y4ja-zf.a.run.app/users/updateUser",
+									"protocol": "https",
 									"host": [
-										"localhost"
+										"maint-control-docker-image-dev-2n3aq2y4ja-zf",
+										"a",
+										"run",
+										"app"
 									],
-									"port": "9000",
 									"path": [
 										"users",
 										"updateUser"
@@ -221,7 +268,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJOYW1lIjoidGVtcEFkbWluIiwiY29tcGFueUlkIjoxLCJpYXQiOjE2Nzk2NjA5MjIsImV4cCI6MTY3OTY2NDUyMn0.mT_GmNENZgc7YX5bju-q3IS3VLw07C6TvDsFnEx33Ok",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsInVzZXJOYW1lIjoibmF2ZXNoIiwiY29tcGFueUlkIjoxLCJpYXQiOjE2ODUzNjY5MzksImV4cCI6MTY4NTM3MDUzOX0.5wfu9zFG_jPlGJd9lJjyP34_ChWZKaQhiay7nyYb_kg",
 											"type": "string"
 										}
 									]
@@ -230,7 +277,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"user_name\": \"temp2Updated\",\r\n    \"email\": \"temp2Updated@temp_company.com\",\r\n    \"company_id\": 1\r\n}",
+									"raw": "{\r\n    \"user_name\": \"temp9_location_Updated\",\r\n    \"email\": \"temp9_location_Updated@temp_company.com\",\r\n    \"company_id\": 1\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -238,12 +285,14 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:9000/users/deleteUser",
-									"protocol": "http",
+									"raw": "https://maint-control-docker-image-dev-2n3aq2y4ja-zf.a.run.app/users/deleteUser",
+									"protocol": "https",
 									"host": [
-										"localhost"
+										"maint-control-docker-image-dev-2n3aq2y4ja-zf",
+										"a",
+										"run",
+										"app"
 									],
-									"port": "9000",
 									"path": [
 										"users",
 										"deleteUser"
@@ -260,7 +309,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJOYW1lIjoidGVtcEFkbWluIiwiY29tcGFueUlkIjoxLCJpYXQiOjE2ODAxMTk0NTEsImV4cCI6MTY4MDEyMzA1MX0.iGzAlnYAh4A9KEY4cLhQZw91Tg6oHsnesWanEt5iSJM",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsInVzZXJOYW1lIjoibmF2ZXNoIiwiY29tcGFueUlkIjoxLCJpYXQiOjE2ODUzNjY5MzksImV4cCI6MTY4NTM3MDUzOX0.5wfu9zFG_jPlGJd9lJjyP34_ChWZKaQhiay7nyYb_kg",
 											"type": "string"
 										}
 									]
@@ -268,12 +317,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:9000/users/getUsers?OFFSET=0&LIMIT=3",
-									"protocol": "http",
+									"raw": "https://maint-control-docker-image-dev-2n3aq2y4ja-zf.a.run.app/users/getUsers?OFFSET=0&LIMIT=20",
+									"protocol": "https",
 									"host": [
-										"localhost"
+										"maint-control-docker-image-dev-2n3aq2y4ja-zf",
+										"a",
+										"run",
+										"app"
 									],
-									"port": "9000",
 									"path": [
 										"users",
 										"getUsers"
@@ -285,7 +336,7 @@
 										},
 										{
 											"key": "LIMIT",
-											"value": "3"
+											"value": "20"
 										}
 									]
 								}
@@ -300,7 +351,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJOYW1lIjoidGVtcEFkbWluIiwiY29tcGFueUlkIjoxLCJpYXQiOjE2ODIyNjc3OTMsImV4cCI6MTY4MjI3MTM5M30.70fSoCTlscStZ3lZLREaRKblELPgmtdArNxEaRnesyA",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsInVzZXJOYW1lIjoibmF2ZXNoIiwiY29tcGFueUlkIjoxLCJpYXQiOjE2ODUzNjYxMDMsImV4cCI6MTY4NTM2OTcwM30.l_ldkQcMmMHeLq6EAjaV7lU-QpO2PZNpiHxXnVR_vtw",
 											"type": "string"
 										}
 									]
@@ -309,7 +360,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"search_term\": \"052\"\r\n}",
+									"raw": "{\r\n    \"search_term\": \"temp\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -317,10 +368,10 @@
 									}
 								},
 								"url": {
-									"raw": "https://maint-control-docker-image-2n3aq2y4ja-zf.a.run.app/users/searchUser",
+									"raw": "https://maint-control-docker-image-dev-2n3aq2y4ja-zf.a.run.app/users/searchUser",
 									"protocol": "https",
 									"host": [
-										"maint-control-docker-image-2n3aq2y4ja-zf",
+										"maint-control-docker-image-dev-2n3aq2y4ja-zf",
 										"a",
 										"run",
 										"app"
@@ -351,7 +402,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInVzZXJOYW1lIjoidGVtcEFkbWluIiwiY29tcGFueUlkIjoyLCJpYXQiOjE2ODQyNTc2NzIsImV4cCI6MTY4NDI2MTI3Mn0.fYPgdEM4tI0qZEY5cTTjTcBXq51eHkHKQmlAOvhOopA",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsInVzZXJOYW1lIjoibmF2ZXNoIiwiY29tcGFueUlkIjoxLCJpYXQiOjE2ODU0NDg3NTcsImV4cCI6MTY4NTQ1MjM1N30.5VrhihdDQsylDe2WM6cYLmJriSBp4MijOvyj2wzLqwI",
 											"type": "string"
 										}
 									]
@@ -364,16 +415,16 @@
 										{
 											"key": "",
 											"type": "file",
-											"src": "/D:/משתמשים/poster2.pdf"
+											"src": "/D:/משתמשים/HIT/לימודים/שנה השלמה/סמסטר א/פרויקט עם התעשייה/מסמכים להגשה/poster.jpg"
 										},
 										{
 											"key": "title",
-											"value": "poster 2 title",
+											"value": "poster 3 title",
 											"type": "text"
 										},
 										{
 											"key": "description",
-											"value": "poster 2 description",
+											"value": "poster 3 description",
 											"type": "text"
 										}
 									]
@@ -444,7 +495,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInVzZXJOYW1lIjoidGVtcEFkbWluIiwiY29tcGFueUlkIjoyLCJpYXQiOjE2ODQyNjA2MTMsImV4cCI6MTY4NDI2NDIxM30.IAVBNlttOfo54ECMuLPN-fEWKVcmj3O-dLnov00pGhY",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsInVzZXJOYW1lIjoibmF2ZXNoIiwiY29tcGFueUlkIjoxLCJpYXQiOjE2ODU0MzU4ODIsImV4cCI6MTY4NTQzOTQ4Mn0.hZOCBlKcQjqjQtIbNurhpwu2nEWAy9nVSoxdbe2_rv8",
 											"type": "string"
 										}
 									]
@@ -453,7 +504,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"file_name\": \"poster2.pdf - 16.5.2023 - 19:35:03\",\r\n    \"guide_id\": \"4\"\r\n}",
+									"raw": "{\r\n    \"file_name\": \"poster.jpg - 30.5.2023 - 11:44:39\",\r\n    \"guide_id\": 1\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
