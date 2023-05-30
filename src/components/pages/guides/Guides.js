@@ -5,12 +5,9 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import './Guides.css';
 import Loading from '../../../UI/Loading';
-import { useContext } from 'react';
-import CartContext from '../../../store/cart-context';
 
 const Guides = () => {
-  // const [guides, setGuides] = useState([]);
-  const { allGuides, setAllGuides } = useContext(CartContext);
+  const [guides, setGuides] = useState([]);
   const [isEditable, setIsEditable] = useState(false);
   const [isRemoving, setIsRemoving] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -28,12 +25,7 @@ const Guides = () => {
           }
         );
         const data = await response.json();
-        // setGuides((prev) => {
-        //   return [...prev, data.answer];
-        // });
-        if (data) {
-          setAllGuides([data.answer]);
-        }
+        setGuides(data.answer);
         setIsLoading(false);
       } catch (error) {
         console.log('Error fetching guides:', error);
@@ -59,10 +51,8 @@ const Guides = () => {
   const GuidesList = () => {
     return (
       <>
-        {/* {guides && guides.length > 0 ? (
-          guides.map((item) => { */}
-        {allGuides[0] !== undefined ? (
-          allGuides.map((item) => {
+        {guides && guides.length > 0 ? (
+          guides.map((item) => {
             return (
               <Link
                 to={

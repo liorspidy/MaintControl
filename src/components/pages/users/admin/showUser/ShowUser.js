@@ -21,6 +21,7 @@ async function getUsers() {
       throw new Error(response.statusText);
     }
     const data = await response.json();
+    console.log(data.answer);
     return data.answer;
   } catch (err) {
     console.error(err);
@@ -139,7 +140,7 @@ const ShowUser = () => {
                     id="Address"
                     className="showUserInput"
                     type="text"
-                    //value={displayedUser.address}
+                    value={displayedUser.address_name}
                     readOnly={true}
                   />
                 </label>
@@ -150,7 +151,7 @@ const ShowUser = () => {
                     name="Area"
                     className="showUserInput"
                     type="text"
-                    //value={displayedUser.area}
+                    value={displayedUser.zone_name}
                     readOnly={true}
                   />
                 </label>
