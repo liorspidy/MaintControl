@@ -1,8 +1,8 @@
 import { useParams, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Worker, Viewer } from '@react-pdf-viewer/core';
+import './GuideDetails.css';
 import '@react-pdf-viewer/core/lib/styles/index.css';
-import kis from '../../../images/kis.pdf';
 
 const GuideDetails = () => {
   const { guideId } = useParams();
@@ -42,9 +42,16 @@ const GuideDetails = () => {
   console.log(guide);
 
   return (
-    <div>
-      <h3>{guide[0]?.title}</h3>
-      <p>{guide[0]?.description}</p>
+    <div className="guideDetail">
+      <div className="guideDetailBox">
+        <div className="guideDetailContent">
+          <h1>{guide[0]?.title}</h1>
+          <p>{guide[0]?.description}</p>
+        </div>
+        <Link to="../guides">
+          <button className="backBtn">Back</button>
+        </Link>
+      </div>
       {guide[0]?.file_path && (
         <div className="pdfViewer">
           <Worker workerUrl="/pdf.worker.min.js">
@@ -52,9 +59,6 @@ const GuideDetails = () => {
           </Worker>
         </div>
       )}
-      <Link to="../guides">
-        <button className="backBtn">Back</button>
-      </Link>
     </div>
   );
 };

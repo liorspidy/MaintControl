@@ -48,9 +48,6 @@ const Login = () => {
     } else if (companyId.trim().length === 0) {
       setError('Company ID must not be empty');
     } else {
-      // submit the form
-      console.log('submitted!');
-
       // create the request body
       const requestBody = {
         user_name: username.trim(),
@@ -74,6 +71,11 @@ const Login = () => {
         setUser(data.answer);
         localStorage.setItem('token', data.answer.token);
         localStorage.setItem('role', data.answer.role);
+
+        var currentDate = new Date();
+        var currentDateWithoutTime = currentDate.toISOString().split('T')[0];
+        localStorage.setItem('day', currentDateWithoutTime);
+
         if (data.answer.token) {
           navigate('../missions');
         }

@@ -13,6 +13,8 @@ import './AccountMenu.css';
 
 export default function AccountMenu(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const token = localStorage.getItem('token');
+
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -20,6 +22,13 @@ export default function AccountMenu(props) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const handleLinkClick = (event) => {
+    if (!token) {
+      event.preventDefault();
+    }
+  };
+
   return (
     <React.Fragment>
       <Box
@@ -78,13 +87,13 @@ export default function AccountMenu(props) {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <Link className="link" to="/admin">
+        <Link className="link" to="/admin" onClick={handleLinkClick}>
           <MenuItem>
             <Avatar />
             Admin
           </MenuItem>
         </Link>
-        <Link className="link" to="/guides">
+        <Link className="link" to="/guides" onClick={handleLinkClick}>
           <MenuItem>
             <Avatar />
             Guides
@@ -93,18 +102,18 @@ export default function AccountMenu(props) {
         <MenuItem>
           <Avatar /> My account
         </MenuItem>
-        <Link to="/missions">
+        <Link to="/missions" onClick={handleLinkClick}>
           <MenuItem>
             <Avatar /> Daily Missions
           </MenuItem>
         </Link>
-        <Link to="/map">
+        <Link to="/map" onClick={handleLinkClick}>
           <MenuItem>
             <Avatar /> Management Map
           </MenuItem>
         </Link>
         <Divider />
-        <Link to="admin/addUser">
+        <Link to="admin/addUser" onClick={handleLinkClick}>
           <MenuItem>
             <ListItemIcon>
               <PersonAdd fontSize="small" />
@@ -112,7 +121,7 @@ export default function AccountMenu(props) {
             Add account
           </MenuItem>
         </Link>
-        <Link to="login">
+        <Link to="login" onClick={handleLinkClick}>
           <MenuItem>
             <ListItemIcon>
               <Logout fontSize="small" />

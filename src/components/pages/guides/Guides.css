@@ -17,7 +17,7 @@
   flex-wrap: wrap;
   margin: 0 auto;
   margin-bottom: 5rem;
-  background-color: lightblue;
+  background: #173f5f;
   border-radius: 15px;
   box-shadow: 0 2px 8px rgb(0 0 0 / 25%);
 }
@@ -93,20 +93,26 @@
 }
 
 .guideContainer {
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc; */
   display: flex;
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
   margin: 2rem 2rem;
-  background-color: white;
+  /* background-color: white; */
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 15px;
   padding: 0 2rem;
   width: 13rem;
   height: 9rem;
   gap: 1rem;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgb(0 0 0 / 15%), inset 0 2px 15px rgb(0 0 0 / 20%);
+  color: white;
+  /* box-shadow: 0 2px 8px rgb(0 0 0 / 15%), inset 0 2px 15px rgb(0 0 0 / 20%); */
 }
 
 .guideContainer h1 {
@@ -119,9 +125,13 @@
   margin: 0;
 }
 
-.guideContainer:hover,
+.guideContainer:hover {
+  background: rgba(255, 255, 255, 0.413);
+  transition: 0.3s all;
+}
+
 .guideBtn:hover {
-  background-color: rgb(228, 228, 228);
+  background: rgba(106, 106, 106, 0.139);
   transition: 0.3s all;
 }
 

@@ -54,10 +54,9 @@ const EditGuide = () => {
         </label>
         <label className="addGuideLabel" htmlFor="guideDetails">
           Guide's details:
-          <input
+          <textarea
             id="guideDetails"
             className="addGuideInput"
-            type="text"
             value={guideDetails}
             onChange={handleGuideDetailsChange}
           />
