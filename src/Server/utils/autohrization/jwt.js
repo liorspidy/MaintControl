@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken")
 generateAccessToken = (payload) => {
   return new Promise((resolve, reject) => {
     const options = {
-      expiresIn: '1h'
+      expiresIn: '12h'
     }
 
     jwt.sign(payload, process.env.TOKEN_SECRET_KEY, options, (err, token) => {
