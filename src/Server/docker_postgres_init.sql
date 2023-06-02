@@ -53,11 +53,14 @@ CREATE TABLE IF NOT EXISTS fact_missions (
   mission_id SERIAL PRIMARY KEY,
   mission_title VARCHAR(255) NOT NULL,
   mission_description TEXT,
-  status VARCHAR(50) NOT NULL DEFAULT 'incomplete' CHECK (status IN ('incomplete', 'finished')),
+  status VARCHAR(50) NOT NULL DEFAULT 'unfinished' CHECK (status IN ('unfinished', 'finished')),
   priority VARCHAR(50) NOT NULL DEFAULT 'low' CHECK (status IN ('low','medium', 'high')),
   start_mission_date TIMESTAMP,
   end_mission_date TIMESTAMP,
-  company_id INTEGER NOT NULL REFERENCES dim_companies(company_id)
+  latitudes DOUBLE PRECISION[] NOT NULL,
+  longitudes DOUBLE PRECISION[] NOT NULL,
+  company_id INTEGER NOT NULL REFERENCES dim_companies(company_id),
+  location_id INTEGER NOT NULL REFERENCES dim_locations(location_id)
 );
 
 /*###########################*/
