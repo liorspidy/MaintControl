@@ -68,15 +68,18 @@ const Login = () => {
           }
         );
         const data = await response.json();
-        setUser(data.answer);
-        localStorage.setItem('token', data.answer.token);
-        localStorage.setItem('role', data.answer.role);
+        if (response.status === 401) {
+          setError('Unauthorized user');
+        }
 
-        var currentDate = new Date();
-        var currentDateWithoutTime = currentDate.toISOString().split('T')[0];
-        localStorage.setItem('day', currentDateWithoutTime);
+        if (response.status === 201) {
+          setUser(data.answer);
+          localStorage.setItem('token', data.answer.token);
+          localStorage.setItem('role', data.answer.role);
 
-        if (data.answer.token) {
+          var currentDate = new Date();
+          var currentDateWithoutTime = currentDate.toISOString().split('T')[0];
+          localStorage.setItem('day', currentDateWithoutTime);
           navigate('../missions');
         }
       } catch (error) {
