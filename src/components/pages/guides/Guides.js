@@ -5,17 +5,20 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import './Guides.css';
 import Loading from '../../../UI/Loading';
+import ConfirmGuideDeleteModal from '../../../UI/ConfirmGuideDeleteModal';
 
 const Guides = () => {
   const [guides, setGuides] = useState([]);
   const [isEditable, setIsEditable] = useState(false);
   const [isRemoving, setIsRemoving] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [pickedGuideForDelete, setPickGuideForDelete] = useState(null);
+  const token = localStorage.getItem('token');
 
   useEffect(() => {
     const fetchGuides = async () => {
       try {
-        const token = localStorage.getItem('token');
         const response = await fetch(
           'https://maint-control-docker-image-2n3aq2y4ja-zf.a.run.app/guides/getGuides?OFFSET=0&LIMIT=100',
           {
@@ -25,7 +28,6 @@ const Guides = () => {
           }
         );
         const data = await response.json();
-        console.log(data);
         setGuides(data.answer);
         setIsLoading(false);
       } catch (error) {
@@ -50,6 +52,13 @@ const Guides = () => {
   };
 
   const GuidesList = () => {
+    const handleClick = (event, item) => {
+      if (isRemoving) {
+        event.preventDefault(); // Prevent the default navigation behavior
+        openModalHandler(item);
+      }
+    };
+
     return (
       <>
         {guides && guides.length > 0 ? (
@@ -59,8 +68,11 @@ const Guides = () => {
                 to={
                   isEditable
                     ? `/guides/editGuide/${item?.guide_id}`
-                    : `/guides/details/${item?.guide_id}`
+                    : !isRemoving
+                    ? `/guides/details/${item?.guide_id}`
+                    : null
                 }
+                onClick={(event) => handleClick(event, item)}
                 key={item?.guide_id}
               >
                 <div className="guideContainer">
@@ -72,11 +84,29 @@ const Guides = () => {
           })
         ) : (
           <div>
-            <h2 style={{ padding: '0.5rem' }}>No guides found...</h2>
+            <h2 style={{ padding: '0.5rem', color: 'white' }}>
+              No guides found...
+            </h2>
           </div>
         )}
       </>
     );
+  };
+
+  const openModalHandler = (pickedGuide) => {
+    if (!isModalOpen) {
+      document.querySelector('.backdrop').classList.add('show');
+    }
+    console.log(pickedGuide);
+    setPickGuideForDelete(pickedGuide);
+    setIsModalOpen(true);
+  };
+
+  const closeModalHandler = () => {
+    if (isModalOpen) {
+      document.querySelector('.backdrop').classList.remove('show');
+    }
+    setIsModalOpen(false);
   };
 
   return (
@@ -103,6 +133,11 @@ const Guides = () => {
         </div>
       </div>
       <div className="items">{isLoading ? <Loading /> : <GuidesList />}</div>
+      <ConfirmGuideDeleteModal
+        token={token}
+        closeModal={closeModalHandler}
+        currentPickedGuide={pickedGuideForDelete}
+      />
     </div>
   );
 };

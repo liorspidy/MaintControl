@@ -6,7 +6,7 @@ const AddGuide = () => {
   const navigate = useNavigate();
   const [guideName, setGuideName] = useState('');
   const [guideDetails, setGuideDetails] = useState('');
-  const [guideFile, setGuideFile] = useState('');
+  const [guideFile, setGuideFile] = useState(null);
   const [error, setError] = useState('');
 
   const handleGuideNameChange = (event) => {
@@ -18,10 +18,10 @@ const AddGuide = () => {
   };
 
   const handleGuideFileChange = (event) => {
-    setGuideFile(event.target.value);
+    setGuideFile(event.target.files[0]);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (guideName.length === 0 && guideDetails.length === 0) {
       setError("Must enter Guide's name and details");
@@ -30,9 +30,38 @@ const AddGuide = () => {
     } else if (guideDetails.length < 4) {
       setError("Guide's details must be at least 4 characters");
     } else {
-      // submit the form
-      setError('');
-      navigate('../guides');
+      try {
+        const token = localStorage.getItem('token'); // Retrieve the token from localStorage
+
+        const formData = new FormData();
+        formData.append('title', guideName);
+        formData.append('description', guideDetails);
+        formData.append('guideFile', guideFile);
+
+        const response = await fetch(
+          'https://maint-control-docker-image-2n3aq2y4ja-zf.a.run.app/guides/addGuide',
+          {
+            method: 'POST',
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+            body: formData,
+          }
+        );
+
+        console.log(response);
+
+        if (response.ok) {
+          // Guide added successfully
+          // You can redirect or show a success message here
+          navigate('../guides');
+        } else {
+          console.error('Failed to add guide');
+          // Handle the error case
+        }
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
@@ -52,7 +81,7 @@ const AddGuide = () => {
         <br />
         <label className="addGuideLabel" htmlFor="guideDetails">
           Guide's details:
-          <input
+          <textarea
             id="guideDetails"
             className="addGuideInput"
             value={guideDetails}
@@ -66,7 +95,6 @@ const AddGuide = () => {
             type="file"
             id="guideFile"
             className="guideFileInput"
-            value={guideFile}
             onChange={handleGuideFileChange}
           />
         </label>

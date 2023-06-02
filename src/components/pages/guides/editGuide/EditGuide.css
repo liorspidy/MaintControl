@@ -1,4 +1,4 @@
-.addGuideBox {
+.editGuideBox {
     background: #173f5f;
     padding: 2rem;
     border-radius: 1rem;
@@ -9,14 +9,14 @@
     height: calc(100% - 10rem);
 }
 
-.addGuideForm {
-    margin: 0 auto;
+
+.editGuideForm {
     width: 90%;
     margin: 2rem auto;
     min-width: 20rem;
 }
 
-.addGuideForm label {
+.editGuideForm label {
     display: block;
     font-size: 1.2rem;
     font-weight: bold;
@@ -24,10 +24,10 @@
     color: #fff;
 }
 
-.addGuideForm input[type="text"],
-.addGuideForm textarea {
+.editGuideForm input[type="text"],
+.editGuideForm textarea {
     width: 100%;
-    padding: 0.5rem;
+    pediting: 0.5rem;
     border-radius: 0.5rem;
     border: none;
     background-color: rgba(255, 255, 255, 0.1);
@@ -36,20 +36,21 @@
     color: white;
 }
 
-.addGuideForm textarea {
+.editGuideForm textarea {
     height: 17rem;
+    font-family: sans-serif;
 }
 
-.addGuideLabel {
+.editGuideLabel {
     font-size: 1.4rem;
     font-weight: bold;
     display: block;
-    padding: 0 1rem;
+    pediting: 0 1rem;
     margin-bottom: 0.8rem;
 
 }
 
-.addGuideInput {
+.editGuideInput {
     display: block;
     min-width: 100%;
     border: 1px solid #ccc;
@@ -58,18 +59,18 @@
     margin-top: 0.8rem;
     font-size: 1.2rem;
     font-weight: bold;
-    padding: 0.5rem;
+    pediting: 0.5rem;
     text-align: center;
     width: 100%;
 }
 
 
-.addGuideError {
+.editGuideError {
     color: red;
     font-weight: bold;
 }
 
-.addGuideButton {
+.editGuideButton {
     border: none;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
     background-color: rgb(131, 131, 131);
@@ -83,11 +84,11 @@
     cursor: pointer;
 }
 
-.addGuideButton:hover {
+.editGuideButton:hover {
     background-color: rgb(94, 94, 94);
 }
 
-.addGuideButton:active {
+.editGuideButton:active {
     animation: 0.05s clicked forwards ease-in-out;
 }
 
@@ -101,7 +102,7 @@
     text-align-last: center;
 }
 
-.addGuideBtn {
+.editGuideBtn {
     border: none;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
     background-color: rgb(131, 131, 131);
@@ -115,11 +116,11 @@
     cursor: pointer;
 }
 
-.addGuideBtn:hover {
+.editGuideBtn:hover {
     background-color: rgb(94, 94, 94);
 }
 
-.addGuideBtn:active {
+.editGuideBtn:active {
     animation: 0.05s clicked forwards ease-in-out;
 }
 
@@ -134,11 +135,11 @@
 }
 
 @media screen and (max-width: 900px) {
-    .addGuideBox {
+    .editGuideBox {
         width: 80%;
     }
 
-    .addGuideForm {
+    .editGuideForm {
         min-width: 16rem;
     }
 }

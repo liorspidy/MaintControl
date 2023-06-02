@@ -40,7 +40,6 @@ const EditUser = () => {
         throw new Error(response.statusText);
       }
       const data = await response.json();
-      console.log(data);
       return data.answer;
     } catch (err) {
       console.error(err);
@@ -64,6 +63,7 @@ const EditUser = () => {
       const editedUser = users.find(
         (user) => user.user_id === parseInt(userId)
       );
+
       setUsername(editedUser.user_name);
       setPassword(editedUser.password);
       setCompanyId(editedUser.company_id);

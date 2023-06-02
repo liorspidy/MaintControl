@@ -21,7 +21,6 @@ async function getUsers() {
       throw new Error(response.statusText);
     }
     const data = await response.json();
-    console.log(data.answer);
     return data.answer;
   } catch (err) {
     console.error(err);
@@ -53,6 +52,8 @@ const ShowUser = () => {
     const displayedUser = users.find(
       (user) => user.user_id === parseInt(userId)
     );
+
+    console.log(displayedUser);
 
     return (
       <div>

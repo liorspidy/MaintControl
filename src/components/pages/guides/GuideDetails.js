@@ -7,6 +7,7 @@ import '@react-pdf-viewer/core/lib/styles/index.css';
 const GuideDetails = () => {
   const { guideId } = useParams();
   const [guide, setGuide] = useState({});
+  const [noGuide, setNoGuide] = useState(false);
 
   useEffect(() => {
     const fetchGuide = async () => {
@@ -30,6 +31,7 @@ const GuideDetails = () => {
           setGuide(data.answer);
         } else {
           console.error('Failed to fetch guide');
+          setNoGuide(true);
         }
       } catch (error) {
         console.error(error);
@@ -39,15 +41,16 @@ const GuideDetails = () => {
     fetchGuide();
   }, []);
 
-  console.log(guide);
-
   return (
     <div className="guideDetail">
       <div className="guideDetailBox">
-        <div className="guideDetailContent">
-          <h1>{guide[0]?.title}</h1>
-          <p>{guide[0]?.description}</p>
-        </div>
+        {!noGuide && (
+          <div className="guideDetailContent">
+            <h1>{guide[0]?.title}</h1>
+            <p>{guide[0]?.description}</p>
+          </div>
+        )}
+        {noGuide && <h2>No guide data found...</h2>}
         <Link to="../guides">
           <button className="backBtn">Back</button>
         </Link>

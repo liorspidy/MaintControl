@@ -138,7 +138,6 @@ const Admin = () => {
           <FormControlLabel
             control={
               <Checkbox
-                defaultChecked
                 sx={{
                   color: '#173f5f',
                   '&.Mui-checked': {
@@ -161,7 +160,6 @@ const Admin = () => {
           <FormControlLabel
             control={
               <Checkbox
-                defaultChecked
                 sx={{
                   color: '#173f5f',
                   '&.Mui-checked': {
@@ -184,7 +182,6 @@ const Admin = () => {
           <FormControlLabel
             control={
               <Checkbox
-                defaultChecked
                 sx={{
                   color: '#173f5f',
                   '&.Mui-checked': {
