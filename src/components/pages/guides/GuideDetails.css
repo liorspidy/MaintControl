@@ -61,3 +61,7 @@
 .backBtn:active {
     animation: 0.05s clicked forwards ease-in-out;
 }
+
+.pdfViewer {
+    height: calc(100%);
+}

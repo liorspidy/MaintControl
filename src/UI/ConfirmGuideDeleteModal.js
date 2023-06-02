@@ -37,7 +37,7 @@ const ConfirmGuideDeleteModal = ({ token, closeModal, currentPickedGuide }) => {
   const handleDeleteGuide = () => {
     deleteGuide();
     closeModal();
-    window.location.reload();
+    // window.location.reload();
   };
 
   return (
