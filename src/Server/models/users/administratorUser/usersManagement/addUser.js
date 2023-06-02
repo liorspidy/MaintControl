@@ -7,7 +7,7 @@ addUser = (data) => {
       .then(() => {
         return db.query(`INSERT INTO dim_locations (address_name, city, country, latitude, longitude, zone_name) VALUES (
           $1, $2, $3, $4, $5, $6) RETURNING location_id`, 
-          [data.location.address_name, data.location.city, data.location.country, data.location.latitude, data.location.longitude, data.location.work_zone])
+          [data.location.address_name, data.location.city, data.location.country, data.location.latitude, data.location.longitude, data.location.zone_name])
       })
       .then((res) => {
         const locationId = res.rows[0].location_id;
