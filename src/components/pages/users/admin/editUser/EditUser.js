@@ -1,37 +1,37 @@
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import { useNavigate } from "react-router-dom";
-import "./EditUser.css";
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import { useNavigate } from 'react-router-dom';
+import './EditUser.css';
 
 const EditUser = () => {
   const { userId } = useParams();
   const [users, setUsers] = useState([]);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false); // new state to track whether to show or hide the password
-  const [companyId, setCompanyId] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [area, setArea] = useState("");
-  const [address, setAddress] = useState("");
-  const [authorization, setAuthorization] = useState("");
-  const [error, setError] = useState("");
+  const [companyId, setCompanyId] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [area, setArea] = useState('');
+  const [address, setAddress] = useState('');
+  const [authorization, setAuthorization] = useState('');
+  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem('token');
 
   async function getUsers() {
     try {
       const response = await fetch(
-        "https://maint-control-docker-image-2n3aq2y4ja-zf.a.run.app/users/getUsers?OFFSET=0&LIMIT=100",
+        'https://maint-control-docker-image-2n3aq2y4ja-zf.a.run.app/users/getUsers?OFFSET=0&LIMIT=100',
         {
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
           },
         }
@@ -72,17 +72,19 @@ const EditUser = () => {
       setEmail(editedUser.email);
       setPhoneNumber(editedUser.phone);
       setAuthorization(editedUser.role);
+      setAddress(editedUser.address_name);
+      setArea(editedUser.zone_name);
     }
   }, [users]);
 
   async function editUserFetch() {
     try {
       const response = await fetch(
-        "https://maint-control-docker-image-2n3aq2y4ja-zf.a.run.app/users/updateUser",
+        'https://maint-control-docker-image-2n3aq2y4ja-zf.a.run.app/users/updateUser',
         {
-          method: "PUT",
+          method: 'PUT',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
@@ -93,21 +95,21 @@ const EditUser = () => {
             email: email,
             password: password,
             phone: phoneNumber,
-            //address: address,
-            //area: area,
+            address: address,
+            area: area,
             role: authorization,
             company_id: companyId,
           }),
         }
       );
       if (!response.ok) {
-        if (response.statusText === "Unauthorized") {
-          setError("Please login again");
+        if (response.statusText === 'Unauthorized') {
+          setError('Please login again');
         }
         throw new Error(response.statusText);
       }
       console.log(response);
-      navigate("/admin");
+      navigate('/admin');
       return true;
     } catch (err) {
       console.error(err);
@@ -162,23 +164,23 @@ const EditUser = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (password.length < 8) {
-      setError("Password must be at least 8 characters");
+      setError('Password must be at least 8 characters');
     } else if (username.length < 4) {
-      setError("Username must be at least 4 characters");
+      setError('Username must be at least 4 characters');
     } else if (companyId.length === 0) {
-      setError("Must enter company ID");
+      setError('Must enter company ID');
     } else if (firstName.length < 2) {
-      setError("First name must be at least 2 characters");
+      setError('First name must be at least 2 characters');
     } else if (lastName.length < 2) {
-      setError("Last name must be at least 2 characters");
+      setError('Last name must be at least 2 characters');
     } else if (phoneNumber.length !== 10) {
-      setError("Must enter a valid phone number");
-    } else if (document.getElementById("authorization").value === "choose") {
-      setError("Must choose an authorization");
-    } else if (document.getElementById("Area").value === "choose") {
-      setError("Must enter a geographic area");
-    } else if (address === "") {
-      setError("Must enter an address");
+      setError('Must enter a valid phone number');
+    } else if (document.getElementById('authorization').value === 'choose') {
+      setError('Must choose an authorization');
+    } else if (document.getElementById('Area').value === 'choose') {
+      setError('Must enter a geographic area');
+    } else if (address === '') {
+      setError('Must enter an address');
     } else {
       // submit the form
       editUserFetch();
@@ -211,7 +213,7 @@ const EditUser = () => {
                   <input
                     id="pass"
                     className="editUserInput"
-                    type={showPassword ? "text" : "password"} // show text if showPassword is true, otherwise show password
+                    type={showPassword ? 'text' : 'password'} // show text if showPassword is true, otherwise show password
                     value={password}
                     onChange={handlePasswordChange}
                     required

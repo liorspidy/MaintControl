@@ -22,11 +22,24 @@ import EditMission from './components/pages/missions/EditMission';
 import TaskEditForm from './components/pages/task/TaskEditForm';
 import TaskAddForm from './components/pages/task/TaskAddForm';
 import FillTask from './components/pages/task/fillTask/FillTask';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function App() {
   const location = useLocation().pathname.replace('/', '');
   const [guides, setGuides] = useState([]);
+
+  const token = localStorage.getItem('token');
+
+  useEffect(() => {
+    var currentDate = new Date();
+    var currentDateWithoutTime = currentDate.toISOString().split('T')[0];
+
+    const day = localStorage.getItem('day');
+    if (day !== currentDateWithoutTime) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('role');
+    }
+  }, []);
 
   return (
     <CartProvider>
@@ -37,37 +50,59 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="forgot" element={<Forgot />} />
           <Route path="task" element={<Tasks />} />
-          <Route
-            path="task/mission/:missionId/fill/:taskId"
-            element={<FillTask />}
-          />
+          {token && (
+            <Route
+              path="task/mission/:missionId/fill/:taskId"
+              element={<FillTask />}
+            />
+          )}
           <Route path="map" element={<ManagementMap />} />
-          <Route path="task/mission/:missionId" element={<Tasks />} />
-          <Route
-            path="task/mission/:missionId/addTask"
-            element={<TaskAddForm />}
-          />
-          <Route
-            path="task/mission/:missionId/edit/:taskId"
-            element={<TaskEditForm />}
-          />
-          <Route path="missions" element={<Missions />} />
-          <Route path="missions/newMission" element={<NewMission />} />
-          <Route path="missions/edit/:missionId" element={<EditMission />} />
-          <Route
-            path="guides"
-            element={<Guides guides={guides} setGuides={setGuides} />}
-          />
-          <Route path="guides/addGuide" element={<AddGuide />} />
-          <Route path="guides/editGuide/:guideId" element={<EditGuide />} />
-          <Route
-            path="guides/details/:guideId"
-            element={<GuideDetails guides={guides} />}
-          />
-          <Route path="admin" element={<Admin />} />
-          <Route path="admin/addUser" element={<AddUser />} />
-          <Route path="admin/editUser/:userId" element={<EditUser />} />
-          <Route path="admin/showUser/:userId" element={<ShowUser />} />
+          {token && (
+            <Route path="task/mission/:missionId" element={<Tasks />} />
+          )}
+          {token && (
+            <Route
+              path="task/mission/:missionId/addTask"
+              element={<TaskAddForm />}
+            />
+          )}
+          {token && (
+            <Route
+              path="task/mission/:missionId/edit/:taskId"
+              element={<TaskEditForm />}
+            />
+          )}
+          {token && <Route path="missions" element={<Missions />} />}
+          {token && (
+            <Route path="missions/newMission" element={<NewMission />} />
+          )}
+          {token && (
+            <Route path="missions/edit/:missionId" element={<EditMission />} />
+          )}
+          {token && (
+            <Route
+              path="guides"
+              element={<Guides guides={guides} setGuides={setGuides} />}
+            />
+          )}
+          {token && <Route path="guides/addGuide" element={<AddGuide />} />}
+          {token && (
+            <Route path="guides/editGuide/:guideId" element={<EditGuide />} />
+          )}
+          {token && (
+            <Route
+              path="guides/details/:guideId"
+              element={<GuideDetails guides={guides} />}
+            />
+          )}
+          {token && <Route path="admin" element={<Admin />} />}
+          {token && <Route path="admin/addUser" element={<AddUser />} />}
+          {token && (
+            <Route path="admin/editUser/:userId" element={<EditUser />} />
+          )}
+          {token && (
+            <Route path="admin/showUser/:userId" element={<ShowUser />} />
+          )}
         </Routes>
       </div>
     </CartProvider>

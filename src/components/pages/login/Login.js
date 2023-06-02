@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import './Login.css';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import CartContext from '../../../store/cart-context';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -13,6 +14,14 @@ const Login = () => {
 
   const [showPassword, setShowPassword] = useState(false); // new state to track whether to show or hide the password
   const [error, setError] = useState('');
+  const { setUser } = useContext(CartContext);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token !== null) {
+      navigate('../missions');
+    }
+  }, []);
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -39,15 +48,40 @@ const Login = () => {
     } else if (companyId.trim().length === 0) {
       setError('Company ID must not be empty');
     } else {
-      // submit the form
-      console.log('submitted!');
+      // create the request body
+      const requestBody = {
+        user_name: username.trim(),
+        password: password.trim(),
+        company_id: parseInt(companyId.trim()),
+      };
 
-      // get all users from 'users'
+      // send the POST request
       try {
-        const response = await fetch('http://localhost:9000/users/details');
+        const response = await fetch(
+          'https://maint-control-docker-image-2n3aq2y4ja-zf.a.run.app/users/login',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestBody),
+          }
+        );
         const data = await response.json();
-        console.log(data);
-        navigate('../missions');
+        if (response.status === 401) {
+          setError('Unauthorized user');
+        }
+
+        if (response.status === 201) {
+          setUser(data.answer);
+          localStorage.setItem('token', data.answer.token);
+          localStorage.setItem('role', data.answer.role);
+
+          var currentDate = new Date();
+          var currentDateWithoutTime = currentDate.toISOString().split('T')[0];
+          localStorage.setItem('day', currentDateWithoutTime);
+          navigate('../missions');
+        }
       } catch (error) {
         console.error(error);
       }
