@@ -7,10 +7,16 @@ const CryptoJS = require("crypto-js");
 
 function encryptPassword(i_Name, i_Password) 
 {
-  const key = CryptoJS.enc.Hex.parse(i_Name);
-  const iv = CryptoJS.enc.Hex.parse('0123456789abcdef0123456789abcdef');
-  const encrypted = CryptoJS.AES.encrypt(i_Password, key, { iv: iv });
-  return (encrypted.ciphertext.toString(CryptoJS.enc.Base64));
+  return new Promise((resolve, reject) => {
+    try {
+      const key = CryptoJS.enc.Hex.parse(i_Name);
+      const iv = CryptoJS.enc.Hex.parse('0123456789abcdef0123456789abcdef');
+      const encrypted = CryptoJS.AES.encrypt(i_Password, key, { iv: iv });
+      resolve(encrypted.ciphertext.toString(CryptoJS.enc.Base64));      
+    } catch (error) {
+      reject(error)
+    }
+  })
 }
 
 function login(data) {
