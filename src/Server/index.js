@@ -35,6 +35,6 @@ directories.forEach((directory) => {
 db.connectMaintControlDB()
 
 //start server
-app.listen(process.env.PORT, () => {
-  console.log(`Server listening on port ${process.env.PORT}`)
+app.listen(process.env.APP_PORT, () => {
+  console.log(`Server listening on port ${process.env.APP_PORT}`)
 })
