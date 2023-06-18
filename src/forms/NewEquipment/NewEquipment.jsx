@@ -103,7 +103,7 @@ const NewEquipment = ({ isOpen, closeForm, allSites, addEquipment }) => {
             </Button>
           </div>
           <div className="new-equipment-modal-map">
-            <Map
+            <Map type={"equip"}
               sites={allSites.filter((site) => site.siteName === equipmentSite)}
             />
           </div>

@@ -31,23 +31,43 @@ const Map = (props) => {
     return null;
   };
 
-  const LocationMarker = () => {
+  const SetMarkerLocation = (polygonPoints, equipmentName) => {
     const [position, setPosition] = useState(null);
     const map = useMapEvents({
       click(clickEvent) {
-        setPoints((prevPoints) => [
-          ...prevPoints,
-          [clickEvent.latlng.lat, clickEvent.latlng.lng],
-        ]);
+        if (polygonPoints.polygonPoints !== undefined) {
+          if (getIsPointInsidePolygon([clickEvent.latlng.lat, clickEvent.latlng.lng], polygonPoints.polygonPoints))
+            setPosition([clickEvent.latlng.lat, clickEvent.latlng.lng])
+        }
       },
     });
-    console.log("pos", position, points);
     return position === null ? null : (
-      <Marker position={points[0]}>
-        <Popup>You are here</Popup>
+      <Marker position={position}>
+        <Popup>equipmentName</Popup>
       </Marker>
     );
+
+
   };
+
+  const getIsPointInsidePolygon = (point, vertices) => {
+    const x = point[0]
+    const y = point[1]
+
+    let inside = false
+    for (let i = 0, j = vertices.length - 1; i < vertices.length; j = i++) {
+      const xi = vertices[i][0],
+        yi = vertices[i][1]
+      const xj = vertices[j][0],
+        yj = vertices[j][1]
+
+      const intersect = yi > y != yj > y && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi
+      if (intersect) inside = !inside
+    }
+
+    return inside
+  }
+
 
   return (
     <MapContainer
@@ -63,7 +83,8 @@ const Map = (props) => {
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <LocationMarker />
+
+      {props.type === "equip" ? <SetMarkerLocation /> : null}
 
       {props?.sites.map((site) => {
         const points = site.points[0].latlngs.map((latlng) => [
@@ -73,10 +94,12 @@ const Map = (props) => {
         const avg =
           points.flat().reduce((acc, curr) => acc + curr) /
           (points.length * points[0].length);
-
+        console.log("poi", site)
         return (
-          <Polygon key={avg} pathOptions={purpleOptions} positions={points}>
-            <Popup>{site.siteName}</Popup>
+
+          <Polygon key={avg} pathOptions={purpleOptions} positions={points} >
+            {/* <Popup>{site.siteName}</Popup> */}
+            <SetMarkerLocation polygonPoints={points} />
           </Polygon>
         );
       })}
