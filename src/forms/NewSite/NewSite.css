@@ -1,0 +1,98 @@
+.new-site-modal-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70em;
+  height: 80vh;
+  text-align: center;
+  background-color: white;
+  border: 2px solid #000;
+  display: flex;
+  flex-direction: row;
+}
+
+.new-site-modal-form {
+  width: 30%;
+  position: relative;
+}
+
+.new-site-modal-map {
+  width: 70%;
+}
+
+.new-site-form-button {
+  position: absolute !important;
+  bottom: 1em;
+  right: 1em;
+  left: 1em;
+}
+
+.new-site-form-body {
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin: 2em;
+}
+
+/* .new-site-modal-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70em;
+  height: 80vh;
+  text-align: center;
+  background-color: white;
+  border: 2px solid #000;
+  display: flex;
+  flex-direction: row;
+}
+
+.new-site-modal-form {
+  flex: 1;
+  padding: 20px;
+  background-color: #ffe0fc29;
+}
+
+.right-side {
+  flex: 2;
+  height: 400px;
+  position: relative;
+  background-color: aqua;
+}
+
+.new-site-modal h2 {
+  margin-top: 0;
+}
+
+.new-site-form-body {
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin: 2em;
+} */
+
+/* .new-site-modal .MuiTextField-root {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.new-site-modal .MuiButton-root {
+  margin-top: 20px;
+}
+
+.new-site-modal .leaflet-container {
+  width: 100%;
+  height: 100%;
+}
+
+.new-site-modal .leaflet-draw-draw-polygon {
+  cursor: crosshair;
+}
+
+.new-site-modal .leaflet-draw-draw-polygon:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+} */
