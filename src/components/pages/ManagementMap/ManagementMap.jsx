@@ -44,7 +44,7 @@
 //   useEffect(() => {
 //     const mockSites = [
 //       {
-//         sitename: "Site 1",
+//         siteName: "Site 1",
 //         siteDescription: "Description for Site 1",
 //         sitePolygonPoints: [
 //           [32.0231, 34.7749],
@@ -64,7 +64,7 @@
 //         ],
 //       },
 //       {
-//         sitename: "Site 2",
+//         siteName: "Site 2",
 //         siteDescription: "Description for Site 2",
 //         sitePolygonPoints: [
 //           [32.0225, 34.7648],
@@ -147,7 +147,7 @@ const ManagementMap = () => {
   useEffect(() => {
     const mockSites = [
       {
-        sitename: "Site 1",
+        siteName: "Site 1",
         siteDescription: "Description for Site 1",
         sitePolygonPoints: [
           [32.0231, 34.7749],
@@ -167,7 +167,7 @@ const ManagementMap = () => {
         ],
       },
       {
-        sitename: "Site 2",
+        siteName: "Site 2",
         siteDescription: "Description for Site 2",
         sitePolygonPoints: [
           [32.0225, 34.7648],
@@ -221,12 +221,7 @@ const ManagementMap = () => {
           <ConstructionIcon />
         </Fab>
       </div>
-      <NewSite open={isNewSiteFormOpen} onClose={closeNewSiteForm} onSave={handleSaveNewSite} />
-      {/* <NewSite
-        isOpen={isNewSiteFormOpen}
-        closeForm={closeNewSiteForm}
-        // addSite={addSite}
-      /> */}
+      {/* <NewSite open={isNewSiteFormOpen} onClose={closeNewSiteForm} onSave={handleSaveNewSite} /> */}
 
       <Modal open={isNewEquipmentFormOpen} onClose={closeNewEquipmentForm}>
         <div>
