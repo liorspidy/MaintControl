@@ -112,6 +112,7 @@ const ManagementMap = () => {
         </Fab>
       </div>
       <NewSite
+        sites={sites}
         open={isNewSiteFormOpen}
         onClose={closeNewSiteForm}
         onSave={handleSaveNewSite}

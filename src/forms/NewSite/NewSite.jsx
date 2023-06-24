@@ -1,10 +1,10 @@
-import { Button, Modal, TextField } from "@mui/material";
+import { Button, Modal, TextField, Alert, AlertTitle } from "@mui/material";
 import React, { useState } from "react";
 import { SketchPicker } from "react-color";
 import DrawableMap from "../../components/drawableMap/DrawableMap";
 import "./NewSite.css";
 
-const NewSite = ({ open, onClose, onSave }) => {
+const NewSite = ({ sites, open, onClose, onSave }) => {
   const [siteName, setSiteName] = useState("asdas");
   const [siteDescription, setSiteDescription] = useState("aaaa");
   const [sitePolygonPoints, setSitePolygonPoints] = useState([
@@ -13,9 +13,14 @@ const NewSite = ({ open, onClose, onSave }) => {
     [32.017235352368665, 34.76677519811213],
   ]);
   const [siteColor, setSiteColor] = useState("#ff0000");
+  const [isDuplicatedSiteName, setIsDuplicatedSiteName] = useState(false);
 
   const handleSiteNameChange = (event) => {
-    setSiteName(event.target.value);
+    const newName = event.target.value;
+    setSiteName(newName);
+    setIsDuplicatedSiteName(
+      sites.some((site) => site.siteName === newName.trim())
+    );
   };
 
   const handleSiteDescriptionChange = (event) => {
@@ -24,7 +29,7 @@ const NewSite = ({ open, onClose, onSave }) => {
 
   const handleSave = () => {
     const newSite = {
-      siteName,
+      siteName: siteName.trim(),
       siteDescription,
       sitePolygonPoints,
       siteMarkers: [],
@@ -70,12 +75,23 @@ const NewSite = ({ open, onClose, onSave }) => {
               onClick={handleSave}
               className="new-site-form-button"
               disabled={
-                !siteName || !siteDescription || sitePolygonPoints.length < 3
+                !siteName ||
+                !siteDescription ||
+                sitePolygonPoints.length < 3 ||
+                isDuplicatedSiteName
               }
             >
               Save
             </Button>
           </div>
+          {isDuplicatedSiteName && (
+            <div className="alert-container">
+              <Alert severity="error">
+                <AlertTitle>Error</AlertTitle>
+                The site name already exists. Please choose a different name.
+              </Alert>
+            </div>
+          )}
         </div>
         <div className="new-site-modal-map">
           <DrawableMap
