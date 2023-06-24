@@ -221,7 +221,7 @@ const ManagementMap = () => {
           <ConstructionIcon />
         </Fab>
       </div>
-      {/* <NewSite open={isNewSiteFormOpen} onClose={closeNewSiteForm} onSave={handleSaveNewSite} /> */}
+      <NewSite open={isNewSiteFormOpen} onClose={closeNewSiteForm} onSave={handleSaveNewSite} />
 
       <Modal open={isNewEquipmentFormOpen} onClose={closeNewEquipmentForm}>
         <div>

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { Modal, TextField, Button } from "@mui/material";
 import Map from "../../components/map/Map";
+import DrawableMap from "../../components/drawableMap/DrawableMap";
 import "./NewSite.css";
 
 const NewSite = ({ open, onClose, onSave }) => {
-  const [siteName, setSiteName] = useState("amit");
-  const [siteDescription, setSiteDescription] = useState("desc");
+  const [siteName, setSiteName] = useState("asdas");
+  const [siteDescription, setSiteDescription] = useState("aaaa");
   const [sitePolygonPoints, setSitePolygonPoints] = useState([]);
 
   const handleSiteNameChange = (event) => {
@@ -22,14 +23,17 @@ const NewSite = ({ open, onClose, onSave }) => {
       siteDescription,
       sitePoints: sitePolygonPoints,
     };
-    onSave(newSite);
+    // onSave(newSite);
     // onClose();
     console.log("save site", newSite);
   };
 
-  const handlePolygonPointsChange = (newPolygonPoints) => {
-    console.log("new point in polygon", newPolygonPoints);
-    setSitePolygonPoints(newPolygonPoints);
+  const handleSavePolygon = (lat, lng) => {
+    setSitePolygonPoints([...sitePolygonPoints, [lat, lng]]);
+  };
+
+  const removePoint = () => {
+    setSitePolygonPoints(sitePolygonPoints.slice(0, -1));
   };
 
   return (
@@ -61,7 +65,12 @@ const NewSite = ({ open, onClose, onSave }) => {
           </div>
         </div>
         <div className="new-site-modal-map">
-          <Map editable onPolygonPointsChange={handlePolygonPointsChange} />
+          <DrawableMap
+            onSave={handleSavePolygon}
+            polygon={sitePolygonPoints}
+            setPolygon={handleSavePolygon}
+            removePoint={removePoint}
+          />
         </div>
       </div>
     </Modal>
