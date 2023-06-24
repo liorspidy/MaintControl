@@ -1,6 +1,6 @@
 import { Button, Modal, TextField } from "@mui/material";
 import React, { useState } from "react";
-import { ChromePicker } from "react-color";
+import { SketchPicker } from "react-color";
 import DrawableMap from "../../components/drawableMap/DrawableMap";
 import "./NewSite.css";
 
@@ -43,10 +43,6 @@ const NewSite = ({ open, onClose, onSave }) => {
     setSitePolygonPoints(sitePolygonPoints.slice(0, -1));
   };
 
-  const handleColorChange = (color) => {
-    setSiteColor(color.hex);
-  };
-
   return (
     <Modal open={open} onClose={onClose}>
       <div className="new-site-modal-container">
@@ -64,10 +60,9 @@ const NewSite = ({ open, onClose, onSave }) => {
               onChange={handleSiteDescriptionChange}
               multiline
             />
-            Color
-            <ChromePicker
+            <SketchPicker
               color={siteColor}
-              onChangeComplete={handleColorChange}
+              onChange={(color) => setSiteColor(color.hex)}
             />
             <Button
               variant="contained"
