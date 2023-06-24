@@ -8,6 +8,7 @@ import {
   Popup,
   TileLayer,
   useMapEvents,
+  useMap,
 } from "react-leaflet";
 
 import markerShadowUrl from "leaflet/dist/images/marker-shadow.png";
@@ -48,7 +49,12 @@ const getIsPointInsidePolygon = (point, vertices) => {
   return inside;
 };
 
-const MarkerMap = ({ site, equipmentName, selectedLocation, setSelectedLocation }) => {
+const MarkerMap = ({
+  site,
+  equipmentName,
+  selectedLocation,
+  setSelectedLocation,
+}) => {
   const createMarkerIcon = (color) => {
     return L.icon({
       iconUrl: `https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|${color.slice(
@@ -61,9 +67,31 @@ const MarkerMap = ({ site, equipmentName, selectedLocation, setSelectedLocation 
     });
   };
 
-  useEffect(() => {
-    setSelectedLocation(null);
-  }, [site]);
+  const ResetsCenterView = ({ selectedSitePolygon }) => {
+    const map = useMap();
+
+    useEffect(() => {
+      if (selectedSitePolygon) {
+        let sumLat = 0;
+        let sumLon = 0;
+
+        selectedSitePolygon.forEach(([lat, lon]) => {
+          sumLat += lat;
+          sumLon += lon;
+        });
+
+        const avgLat = sumLat / selectedSitePolygon.length;
+        const avgLon = sumLon / selectedSitePolygon.length;
+        const avgPoint = [avgLat, avgLon];
+
+        map.flyTo(avgPoint, 17, {
+          animate: true,
+        });
+      }
+    }, [selectedSitePolygon]);
+    return null;
+  };
+
 
   return (
     <MapContainer
@@ -106,6 +134,7 @@ const MarkerMap = ({ site, equipmentName, selectedLocation, setSelectedLocation 
             polygonPoints={site.sitePolygonPoints}
             setSelectedLocation={setSelectedLocation}
           />
+          <ResetsCenterView selectedSitePolygon={site.sitePolygonPoints} />
         </>
       )}
     </MapContainer>
