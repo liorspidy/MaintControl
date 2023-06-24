@@ -1,13 +1,18 @@
+import { Button, Modal, TextField } from "@mui/material";
 import React, { useState } from "react";
-import { Modal, TextField, Button } from "@mui/material";
-import Map from "../../components/map/Map";
+import { ChromePicker } from "react-color";
 import DrawableMap from "../../components/drawableMap/DrawableMap";
 import "./NewSite.css";
 
 const NewSite = ({ open, onClose, onSave }) => {
   const [siteName, setSiteName] = useState("asdas");
   const [siteDescription, setSiteDescription] = useState("aaaa");
-  const [sitePolygonPoints, setSitePolygonPoints] = useState([]);
+  const [sitePolygonPoints, setSitePolygonPoints] = useState([
+    [32.020475541187324, 34.77642883295172],
+    [32.02262346836834, 34.76722570107131],
+    [32.017235352368665, 34.76677519811213],
+  ]);
+  const [siteColor, setSiteColor] = useState("#ff0000");
 
   const handleSiteNameChange = (event) => {
     setSiteName(event.target.value);
@@ -21,19 +26,25 @@ const NewSite = ({ open, onClose, onSave }) => {
     const newSite = {
       siteName,
       siteDescription,
-      sitePoints: sitePolygonPoints,
+      sitePolygonPoints,
+      siteMarkers: [],
+      siteColor,
     };
-    // onSave(newSite);
-    // onClose();
+    onSave(newSite);
+    onClose();
     console.log("save site", newSite);
   };
 
-  const handleSavePolygon = (lat, lng) => {
+  const addPoint = (lat, lng) => {
     setSitePolygonPoints([...sitePolygonPoints, [lat, lng]]);
   };
 
   const removePoint = () => {
     setSitePolygonPoints(sitePolygonPoints.slice(0, -1));
+  };
+
+  const handleColorChange = (color) => {
+    setSiteColor(color.hex);
   };
 
   return (
@@ -53,12 +64,19 @@ const NewSite = ({ open, onClose, onSave }) => {
               onChange={handleSiteDescriptionChange}
               multiline
             />
+            Color
+            <ChromePicker
+              color={siteColor}
+              onChangeComplete={handleColorChange}
+            />
             <Button
               variant="contained"
               color="primary"
               onClick={handleSave}
               className="new-site-form-button"
-              // disabled={!siteName || !siteDescription || sitePolygonPoints.length === 0}
+              disabled={
+                !siteName || !siteDescription || sitePolygonPoints.length < 3
+              }
             >
               Save
             </Button>
@@ -66,10 +84,10 @@ const NewSite = ({ open, onClose, onSave }) => {
         </div>
         <div className="new-site-modal-map">
           <DrawableMap
-            onSave={handleSavePolygon}
             polygon={sitePolygonPoints}
-            setPolygon={handleSavePolygon}
+            addPoint={addPoint}
             removePoint={removePoint}
+            siteColor={siteColor}
           />
         </div>
       </div>

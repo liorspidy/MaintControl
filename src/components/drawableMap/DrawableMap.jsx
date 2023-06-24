@@ -1,10 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { MapContainer, TileLayer, CircleMarker, useMapEvents, Polygon } from "react-leaflet";
 import UndoOutlinedIcon from "@mui/icons-material/UndoOutlined";
-import L from "leaflet";
+import React from "react";
+import {
+  CircleMarker,
+  MapContainer,
+  Polygon,
+  TileLayer,
+  useMapEvents,
+} from "react-leaflet";
 import "./DrawableMap.css";
 
-const DrawableMap = ({ onSave, polygon, setPolygon, removePoint }) => {
+const DrawableMap = ({ onSave, polygon, addPoint, removePoint, siteColor }) => {
   const handleMapClick = (event) => {
     const { latlng, originalEvent } = event;
     const { lat, lng } = latlng;
@@ -13,14 +18,13 @@ const DrawableMap = ({ onSave, polygon, setPolygon, removePoint }) => {
       target.classList.contains("back-polygon") ||
       target.classList.contains("MuiSvgIcon-root");
 
-    if (!isButtonClicked) setPolygon(lat, lng);
+    if (!isButtonClicked) addPoint(lat, lng);
     else {
       if (!target.classList.contains("back-polygon")) {
         event.originalEvent.stopPropagation();
         removePoint();
       }
     }
-
   };
 
   const MapClickHandler = () => {
@@ -31,10 +35,8 @@ const DrawableMap = ({ onSave, polygon, setPolygon, removePoint }) => {
   };
 
   const cornerPointOptions = {
-    radius: 4,
-    fillColor: "red",
-    color: "red",
-    weight: 5,
+    fillColor: siteColor,
+    color: siteColor,
   };
 
   return (
@@ -50,10 +52,7 @@ const DrawableMap = ({ onSave, polygon, setPolygon, removePoint }) => {
       <MapClickHandler />
 
       {polygon.length > 0 && (
-        <div
-          onClick={() => removePoint()}
-          className="back-polygon"
-        >
+        <div onClick={() => removePoint()} className="back-polygon">
           <UndoOutlinedIcon />
         </div>
       )}
@@ -62,16 +61,24 @@ const DrawableMap = ({ onSave, polygon, setPolygon, removePoint }) => {
         <PolygonWithCornerPoints
           positions={polygon}
           cornerPointOptions={cornerPointOptions}
+          siteColor={siteColor}
         />
       )}
     </MapContainer>
   );
 };
 
-const PolygonWithCornerPoints = ({ positions, cornerPointOptions }) => {
+const PolygonWithCornerPoints = ({
+  positions,
+  cornerPointOptions,
+  siteColor,
+}) => {
   return (
     <>
-      <Polygon positions={positions} />
+      <Polygon
+        positions={positions}
+        pathOptions={{ fillColor: siteColor, color: siteColor }}
+      />
       {positions.map(([lat, lng], index) => (
         <CircleMarker
           key={index}

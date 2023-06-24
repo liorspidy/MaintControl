@@ -1,25 +1,25 @@
-import React, { useState } from "react";
+import L from "leaflet";
+import markerShadowUrl from "leaflet/dist/images/marker-shadow.png";
+import React from "react";
 import {
   MapContainer,
-  TileLayer,
-  Polygon,
   Marker,
+  Polygon,
   Popup,
-  useMapEvents,
+  TileLayer
 } from "react-leaflet";
 
-import L from "leaflet";
-import markerIconUrl from "leaflet/dist/images/marker-icon.png";
-import markerShadowUrl from "leaflet/dist/images/marker-shadow.png";
-
 const Map = ({ sites }) => {
-  const defaultIcon = L.icon({
-    iconUrl: markerIconUrl,
-    shadowUrl: markerShadowUrl,
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    shadowSize: [41, 41],
-  });
+  const createMarkerIcon = (color) => {
+
+    return L.icon({
+      iconUrl: `https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|${color.slice(1)}&chf=a,s,ee00FFFF`,
+      shadowUrl: markerShadowUrl,
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      shadowSize: [41, 41],
+    });
+  };
 
   return (
     <MapContainer
@@ -34,14 +34,14 @@ const Map = ({ sites }) => {
       {sites?.map((site) => (
         <Polygon
           positions={site.sitePolygonPoints}
-          color="orange"
+          color={site.siteColor}
           key={site.siteName}
         >
           {site.siteMarkers.map((marker) => (
             <Marker
               position={marker.markerPoints}
               key={marker.markerName}
-              icon={defaultIcon}
+              icon={createMarkerIcon(site.siteColor)}
             >
               <Popup>{marker.markerName}</Popup>
             </Marker>
