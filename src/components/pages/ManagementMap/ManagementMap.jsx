@@ -5,12 +5,13 @@ import "./ManagementMap.css";
 
 import ConstructionIcon from "@mui/icons-material/Construction";
 import PolylineIcon from "@mui/icons-material/Polyline";
-import { Fab, Modal } from "@mui/material";
+import { Fab } from "@mui/material";
+import NewEquipment from "../../../forms/NewEquipment/NewEquipment";
 
 const ManagementMap = () => {
   const [sites, setSites] = useState([]);
   const [isNewSiteFormOpen, setIsNewSiteFormOpen] = useState(false);
-  const [isNewEquipmentFormOpen, setIsNewEquipmentFormOpen] = useState(false);
+  const [isNewEquipmentFormOpen, setIsNewEquipmentFormOpen] = useState(true);
 
   useEffect(() => {
     const mockSites = [
@@ -50,7 +51,7 @@ const ManagementMap = () => {
             markerPoints: [32.021, 34.766],
           },
         ],
-        siteColor:"#ddba2b"
+        siteColor: "#ddba2b",
       },
     ];
 
@@ -74,8 +75,29 @@ const ManagementMap = () => {
   };
 
   const handleSaveNewSite = (newSiteData) => {
-    console.log("New Site Data:", newSiteData, sites);
+    console.log("New Site Data:", newSiteData);
     setSites((prevSites) => [...prevSites, newSiteData]);
+  };
+
+  const handleSaveNewEquipment = (newEquipmentData) => {
+    console.log("New Equipment Data:", newEquipmentData);
+
+    const updatedSites = sites.map((site) => {
+      if (site.siteName === newEquipmentData.selectedSite) {
+        const newMarker = {
+          markerName: newEquipmentData.equipmentName,
+          markerPoints: newEquipmentData.selectedLocation,
+        };
+        const updatedSiteMarkers = [...site.siteMarkers, newMarker];
+        return {
+          ...site,
+          siteMarkers: updatedSiteMarkers,
+        };
+      }
+      return site;
+    });
+
+    setSites(updatedSites);
   };
 
   return (
@@ -94,12 +116,12 @@ const ManagementMap = () => {
         onClose={closeNewSiteForm}
         onSave={handleSaveNewSite}
       />
-
-      <Modal open={isNewEquipmentFormOpen} onClose={closeNewEquipmentForm}>
-        <div>
-          <h2>Edit Modal</h2>
-        </div>
-      </Modal>
+      <NewEquipment
+        open={isNewEquipmentFormOpen}
+        onClose={closeNewEquipmentForm}
+        onSave={handleSaveNewEquipment}
+        sites={sites}
+      />
     </div>
   );
 };

@@ -1,49 +1,52 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
-  Modal,
   Button,
-  TextField,
   FormControl,
   InputLabel,
   MenuItem,
+  Modal,
   Select,
+  TextField,
 } from "@mui/material";
 import MarkerMap from "../../components/markerMap/markerMap";
 import "./NewEquipment.css";
 
-const NewEquipment = ({ isOpen, closeForm, allSites, addEquipment }) => {
-  const [mapLayers, setMapLayers] = useState([]);
-  const [equipmentName, setEquipmentName] = useState("equipment");
-  const [equipmentSite, setEquipmentSite] = useState("");
+const NewEquipment = ({ open, onClose, onSave, sites }) => {
+  const [selectedSite, setSelectedSite] = useState("");
+  const [equipmentName, setEquipmentName] = useState("");
+  const [selectedLocation, setSelectedLocation] = useState(null);
 
   useEffect(() => {
-    if (isOpen) {
-      setMapLayers([]);
-      setEquipmentName("");
-      setEquipmentSite("");
-    }
-  }, [isOpen]);
+    setSelectedSite("");
+    setEquipmentName("");
+    setSelectedLocation(null);
+  }, [open]);
 
-  const saveData = () => {
-    const newEquipment = {
-      equipmentName,
-      site: equipmentSite,
-      points: mapLayers,
-    };
-    addEquipment(newEquipment);
-    closeForm();
+  const handleSelectedSiteChange = (event) => {
+    setSelectedSite(event.target.value);
   };
 
   const handleEquipmentNameChange = (event) => {
     setEquipmentName(event.target.value);
   };
 
-  const handleEquipmentSiteChange = (event) => {
-    setEquipmentSite(event.target.value);
+  const handleSave = () => {
+    const newEquipment = {
+      selectedSite,
+      equipmentName,
+      selectedLocation,
+    };
+    onSave(newEquipment);
+    onClose();
+    console.log("Save equipment:", newEquipment);
   };
 
+  useEffect(() => {
+    setSelectedLocation(null);
+  }, [selectedSite]);
+
   return (
-    <Modal open={isOpen} onClose={closeForm}>
+    <Modal open={open} onClose={onClose}>
       <div className="new-equipment-modal-container">
         <div className="new-equipment-modal-form">
           <h2>New Equipment Form</h2>
@@ -53,11 +56,11 @@ const NewEquipment = ({ isOpen, closeForm, allSites, addEquipment }) => {
               <Select
                 labelId="equipment-site-label"
                 id="equipment-site"
-                value={equipmentSite}
+                value={selectedSite}
                 label="Equipment Site"
-                onChange={handleEquipmentSiteChange}
+                onChange={handleSelectedSiteChange}
               >
-                {allSites.map((site) => (
+                {sites.map((site) => (
                   <MenuItem key={site.siteName} value={site.siteName}>
                     {site.siteName}
                   </MenuItem>
@@ -75,17 +78,19 @@ const NewEquipment = ({ isOpen, closeForm, allSites, addEquipment }) => {
           </div>
           <Button
             variant="contained"
-            onClick={saveData}
+            onClick={handleSave}
             className="new-equipment-form-button"
-            disabled={!equipmentName || !equipmentSite || mapLayers.length !== 0}
+            disabled={!selectedSite || !equipmentName || !selectedLocation}
           >
             Save Data
           </Button>
         </div>
         <div className="new-equipment-modal-map">
           <MarkerMap
-            site={allSites.find((site) => site.siteName === equipmentSite)}
+            site={sites.find((site) => site.siteName === selectedSite)}
             equipmentName={equipmentName}
+            selectedLocation={selectedLocation}
+            setSelectedLocation={setSelectedLocation}
           />
         </div>
       </div>

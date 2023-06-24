@@ -1,20 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
 import {
   MapContainer,
+  Marker,
+  Polygon,
+  Popup,
   TileLayer,
   useMapEvents,
-  Marker,
-  Popup,
-  Polygon,
 } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
-import L from "leaflet";
 
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
-  iconUrl: require("leaflet/dist/images/marker-icon.png"),
-  shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
-});
+import markerShadowUrl from "leaflet/dist/images/marker-shadow.png";
 
 const SetMarkerLocation = ({ polygonPoints, setSelectedLocation }) => {
   useMapEvents({
@@ -25,7 +21,6 @@ const SetMarkerLocation = ({ polygonPoints, setSelectedLocation }) => {
           polygonPoints
         )
       ) {
-        console.log([clickEvent.latlng.lat, clickEvent.latlng.lng]); // Log the click event
         setSelectedLocation([clickEvent.latlng.lat, clickEvent.latlng.lng]);
       }
     },
@@ -53,30 +48,27 @@ const getIsPointInsidePolygon = (point, vertices) => {
   return inside;
 };
 
-const MarkerMap = ({ selectedPosition, site, equipmentName }) => {
-  const [sitePoints, setSitePoints] = useState([]);
-  const [selectedLocation, setSelectedLocation] = useState(null);
-
-  const purpleOptions = { color: "purple" };
+const MarkerMap = ({ site, equipmentName, selectedLocation, setSelectedLocation }) => {
+  const createMarkerIcon = (color) => {
+    return L.icon({
+      iconUrl: `https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|${color.slice(
+        1
+      )}&chf=a,s,ee00FFFF`,
+      shadowUrl: markerShadowUrl,
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      shadowSize: [41, 41],
+    });
+  };
 
   useEffect(() => {
-    if (site && site.points && site.points.length > 0) {
-      const latlngs = site.points[0].latlngs.map((latlng) => [
-        latlng.lat,
-        latlng.lng,
-      ]);
-      setSitePoints(latlngs);
-    }
+    setSelectedLocation(null);
   }, [site]);
 
   return (
     <MapContainer
-      center={
-        selectedPosition
-          ? selectedPosition
-          : [32.014371281588524, 34.773672250580155]
-      }
-      zoom={17}
+      center={[32.020167, 34.77118]}
+      zoom={16}
       style={{ width: "100%", height: "100%" }}
     >
       <TileLayer
@@ -85,17 +77,37 @@ const MarkerMap = ({ selectedPosition, site, equipmentName }) => {
       />
 
       {selectedLocation && (
-        <Marker position={selectedLocation}>
+        <Marker
+          position={selectedLocation}
+          icon={site ? createMarkerIcon(site.siteColor) : null}
+        >
           <Popup>{equipmentName}</Popup>
         </Marker>
       )}
 
-      <Polygon pathOptions={purpleOptions} positions={sitePoints} />
+      {site && (
+        <>
+          <Polygon
+            pathOptions={{ color: site.siteColor }}
+            positions={site.sitePolygonPoints}
+          >
+            {site.siteMarkers.map((marker) => (
+              <Marker
+                position={marker.markerPoints}
+                key={marker.markerName}
+                icon={createMarkerIcon(site.siteColor)}
+              >
+                <Popup>{marker.markerName}</Popup>
+              </Marker>
+            ))}
+          </Polygon>
 
-      <SetMarkerLocation
-        polygonPoints={sitePoints}
-        setSelectedLocation={setSelectedLocation}
-      />
+          <SetMarkerLocation
+            polygonPoints={site.sitePolygonPoints}
+            setSelectedLocation={setSelectedLocation}
+          />
+        </>
+      )}
     </MapContainer>
   );
 };

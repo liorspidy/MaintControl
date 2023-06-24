@@ -1,4 +1,4 @@
-.new-equipment-modal-container {
+   .new-equipment-modal-container {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -14,13 +14,11 @@
   
   .new-equipment-modal-form {
     width: 30%;
-    /* background-color: antiquewhite; */
     position: relative;
   }
   
   .new-equipment-modal-map {
     width: 70%;
-    /* background-color: lightcoral; */
   }
   
   .new-equipment-form-button {
