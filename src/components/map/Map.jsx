@@ -1,30 +1,25 @@
 import React, { useState } from "react";
-import { MapContainer, TileLayer, Polygon, Marker, Popup, useMapEvents } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  Polygon,
+  Marker,
+  Popup,
+  useMapEvents,
+} from "react-leaflet";
 
 import L from "leaflet";
+import markerIconUrl from "leaflet/dist/images/marker-icon.png";
+import markerShadowUrl from "leaflet/dist/images/marker-shadow.png";
 
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png").default,
-  iconUrl: require("leaflet/dist/images/marker-icon.png").default,
-  shadowUrl: require("leaflet/dist/images/marker-shadow.png").default,
-});
-
-const Map = ({ sites, editable = true, onClick }) => {
-  const [polygonPoints, setPolygonPoints] = useState([]);
-
-  const handleMapClick = (event) => {
-    if (editable && onClick) {
-      const { lat, lng } = event.latlng;
-      setPolygonPoints((prevPoints) => [...prevPoints, [lat, lng]]);
-    }
-  };
-
-  const MapEvents = () => {
-    useMapEvents({
-      click: handleMapClick,
-    });
-    return null;
-  };
+const Map = ({ sites }) => {
+  const defaultIcon = L.icon({
+    iconUrl: markerIconUrl,
+    shadowUrl: markerShadowUrl,
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    shadowSize: [41, 41],
+  });
 
   return (
     <MapContainer
@@ -43,13 +38,16 @@ const Map = ({ sites, editable = true, onClick }) => {
           key={site.siteName}
         >
           {site.siteMarkers.map((marker) => (
-            <Marker position={marker.markerPoints} key={marker.markerName}>
+            <Marker
+              position={marker.markerPoints}
+              key={marker.markerName}
+              icon={defaultIcon}
+            >
               <Popup>{marker.markerName}</Popup>
             </Marker>
           ))}
         </Polygon>
       ))}
-      <MapEvents />
     </MapContainer>
   );
 };
