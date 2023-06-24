@@ -30,15 +30,6 @@ const DrawableMap = ({ onSave, polygon, setPolygon, removePoint }) => {
     return null;
   };
 
-  const SaveButtonControl = L.Control.extend({
-    onAdd: (map) => {
-      const button = L.DomUtil.create("button", "leaflet-bar leaflet-control");
-      button.innerHTML = "Save Polygon";
-      button.title = "Save Polygon";
-      return button;
-    },
-  });
-
   const cornerPointOptions = {
     radius: 4,
     fillColor: "red",
