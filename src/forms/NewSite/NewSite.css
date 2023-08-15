@@ -14,13 +14,11 @@
 
 .new-site-modal-form {
   width: 30%;
-  /* background-color: antiquewhite; */
   position: relative;
 }
 
 .new-site-modal-map {
   width: 70%;
-  /* background-color: lightcoral; */
 }
 
 .new-site-form-button {
@@ -36,4 +34,10 @@
   flex-direction: column;
   justify-content: space-evenly;
   margin: 2em;
+}
+.alert-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
 }

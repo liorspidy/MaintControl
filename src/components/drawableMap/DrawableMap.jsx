@@ -1,103 +1,92 @@
-import React, { useEffect, useState } from "react";
+import UndoOutlinedIcon from "@mui/icons-material/UndoOutlined";
+import React from "react";
+import {
+  CircleMarker,
+  MapContainer,
+  Polygon,
+  TileLayer,
+  useMapEvents,
+} from "react-leaflet";
+import "./DrawableMap.css";
 
-import { TileLayer, FeatureGroup, MapContainer } from "react-leaflet";
-import { EditControl } from "react-leaflet-draw";
-import osm from "./osm-providers";
-import { useRef } from "react";
-import "leaflet/dist/leaflet.css";
-import "leaflet-draw/dist/leaflet.draw.css";
+const DrawableMap = ({ onSave, polygon, addPoint, removePoint, siteColor }) => {
+  const handleMapClick = (event) => {
+    const { latlng, originalEvent } = event;
+    const { lat, lng } = latlng;
+    const target = originalEvent.target;
+    const isButtonClicked =
+      target.classList.contains("back-polygon") ||
+      target.classList.contains("MuiSvgIcon-root");
 
-const DrawableMap = ({ mapLayers, setMapLayers }) => {
-  const [center, setCenter] = useState({
-    lat: 32.014371281588524,
-    lng: 34.773672250580155,
-  });
-
-  const ZOOM_LEVEL = 17;
-  const mapRef = useRef();
-
-  const _onCreate = (e) => {
-    console.log(e);
-
-    const { layerType, layer } = e;
-    if (layerType === "polygon") {
-      const { _leaflet_id, options } = layer;
-
-      setMapLayers((layers) => [
-        ...layers,
-        {
-          id: _leaflet_id,
-          latlngs: layer.getLatLngs()[0],
-        },
-      ]);
+    if (!isButtonClicked) addPoint(lat, lng);
+    else {
+      if (!target.classList.contains("back-polygon")) {
+        event.originalEvent.stopPropagation();
+        removePoint();
+      }
     }
   };
 
-  const _onEdited = (e) => {
-    console.log(e);
-    const {
-      layers: { _layers },
-    } = e;
-
-    Object.values(_layers).map(({ _leaflet_id, editing }) => {
-      setMapLayers((layers) =>
-        layers.map((l) =>
-          l.id === _leaflet_id
-            ? { ...l, latlngs: { ...editing.latlngs[0] } }
-            : l
-        )
-      );
+  const MapClickHandler = () => {
+    useMapEvents({
+      click: handleMapClick,
     });
+    return null;
   };
 
-  const _onDeleted = (e) => {
-    console.log(e);
-    const {
-      layers: { _layers },
-    } = e;
-
-    Object.values(_layers).map(({ _leaflet_id }) => {
-      setMapLayers((layers) => layers.filter((l) => l.id !== _leaflet_id));
-    });
+  const cornerPointOptions = {
+    fillColor: siteColor,
+    color: siteColor,
   };
 
   return (
     <MapContainer
-      center={center}
-      zoom={ZOOM_LEVEL}
-      ref={mapRef}
+      center={[32.020167, 34.77118]}
+      zoom={16}
       style={{ width: "100%", height: "100%" }}
     >
-      <FeatureGroup>
-        <EditControl
-          position="topright"
-          onCreated={_onCreate}
-          onEdited={_onEdited}
-          onDeleted={_onDeleted}
-          draw={{
-            polygon:
-              mapLayers.length >= 1
-                ? false
-                : {
-                    enable: false,
-                    shapeOptions: {
-                      color: "red",
-                    },
-                  },
-            rectangle: false,
-            polyline: false,
-            circle: false,
-            circlemarker: false,
-            marker: false,
-          }}
-        />
-      </FeatureGroup>
-
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
+      <MapClickHandler />
+
+      {polygon.length > 0 && (
+        <div onClick={() => removePoint()} className="back-polygon">
+          <UndoOutlinedIcon />
+        </div>
+      )}
+
+      {polygon.length > 0 && (
+        <PolygonWithCornerPoints
+          positions={polygon}
+          cornerPointOptions={cornerPointOptions}
+          siteColor={siteColor}
+        />
+      )}
     </MapContainer>
+  );
+};
+
+const PolygonWithCornerPoints = ({
+  positions,
+  cornerPointOptions,
+  siteColor,
+}) => {
+  return (
+    <>
+      <Polygon
+        positions={positions}
+        pathOptions={{ fillColor: siteColor, color: siteColor }}
+      />
+      {positions.map(([lat, lng], index) => (
+        <CircleMarker
+          key={index}
+          center={[lat, lng]}
+          pathOptions={cornerPointOptions}
+        />
+      ))}
+    </>
   );
 };
 
