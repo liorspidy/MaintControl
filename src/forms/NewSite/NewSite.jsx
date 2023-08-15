@@ -5,13 +5,9 @@ import DrawableMap from "../../components/drawableMap/DrawableMap";
 import "./NewSite.css";
 
 const NewSite = ({ sites, open, onClose, onSave }) => {
-  const [siteName, setSiteName] = useState("asdas");
-  const [siteDescription, setSiteDescription] = useState("aaaa");
-  const [sitePolygonPoints, setSitePolygonPoints] = useState([
-    [32.020475541187324, 34.77642883295172],
-    [32.02262346836834, 34.76722570107131],
-    [32.017235352368665, 34.76677519811213],
-  ]);
+  const [siteName, setSiteName] = useState("");
+  const [siteDescription, setSiteDescription] = useState("");
+  const [sitePolygonPoints, setSitePolygonPoints] = useState([]);
   const [siteColor, setSiteColor] = useState("#ff0000");
   const [isDuplicatedSiteName, setIsDuplicatedSiteName] = useState(false);
 
